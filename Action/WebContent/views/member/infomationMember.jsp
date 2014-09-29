@@ -43,7 +43,7 @@
 	            		</tr>
 	            		<tr>
 	            		    <td><input type="submit" name="register" value="수정"></td>
-	            			<td></td>
+	            			<td><input type="submit" name="register" value="탈퇴"></td>
 	            		</tr>
 	            		
 	            	</table>
