@@ -4,6 +4,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
+<link rel="stylesheet" href="../action.css">
 <title>Action</title>
 </head>
 <body>
@@ -18,8 +19,7 @@
         </div>
         
         <div class="tableRow">
-            <div class="tableCell">
-            </div>
+
             <div class="tableCell">
                 <c:import url="foter.jsp" />
             </div>
