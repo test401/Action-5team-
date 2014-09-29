@@ -1,13 +1,13 @@
 package action.business.domain;
 
-public class AutionBoardReply extends Reply {
+public class AuctionBoardReply extends Reply {
 
 	private int freeBoardNum;
 	private String memberID;
 	private int replyPwd;
 	private int isMember;
 
-	public AutionBoardReply(int replyNum, String memberID, int masterNum, int replyOrder,
+	public AuctionBoardReply(int replyNum, String memberID, int masterNum, int replyOrder,
 			int replyStep, String replyContent, int freeBoardNum, int replyPwd, int isMember) {
 		super(replyNum, masterNum, replyOrder, replyStep, replyContent);
 		this.freeBoardNum = freeBoardNum;
