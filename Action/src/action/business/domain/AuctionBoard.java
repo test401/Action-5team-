@@ -15,7 +15,7 @@ public class AuctionBoard extends Board {
 	private String image;
 	private BLOB contents;
 	private Date startTime;
-	private Date endTiem;
+	private Date endTime;
 	private int catagoryID;
 	private int isImmediately;
 	private int startPrice;
@@ -25,11 +25,11 @@ public class AuctionBoard extends Board {
 	
 	// 경매 리스트 조회용
 	public AuctionBoard(int boardNum, String title, String memberID,
-			String image, Date endTiem, int catagoryID,
+			String image, Date endTime, int catagoryID,
 			int immediatelyPrice, int currentPrice) {
 		super(boardNum, title, memberID);
 		this.image = image;
-		this.endTiem = endTiem;
+		this.endTime = endTime;
 		this.catagoryID = catagoryID;
 		this.immediatelyPrice = immediatelyPrice;
 		this.currentPrice = currentPrice;
@@ -44,7 +44,7 @@ public class AuctionBoard extends Board {
 		this.image = image;
 		this.contents = contents;
 		this.startTime = startTime;
-		this.endTiem = endTiem;
+		this.endTime = endTime;
 		this.catagoryID = catagoryID;
 		this.isImmediately = isImmediately;
 		this.startPrice = startPrice;
@@ -60,7 +60,7 @@ public class AuctionBoard extends Board {
 		this.image = image;
 		this.contents = contents;
 		this.startTime = startTime;
-		this.endTiem = endTiem;
+		this.endTime = endTime;
 		this.catagoryID = catagoryID;
 		this.isImmediately = isImmediately;
 		this.startPrice = startPrice;
@@ -105,12 +105,12 @@ public class AuctionBoard extends Board {
 		this.startTime = startTime;
 	}
 
-	public Date getEndTiem() {
-		return endTiem;
+	public Date getEndTime() {
+		return endTime;
 	}
 
-	public void setEndTiem(Date endTiem) {
-		this.endTiem = endTiem;
+	public void setEndTime(Date endTime) {
+		this.endTime = endTime;
 	}
 
 	public int getCatagoryID() {
