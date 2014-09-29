@@ -13,7 +13,10 @@
             <c:import url="/views/banner.jsp"/>
         </div>
         <div class="tableRow">
-            <c:import url="/views/side-bar.jsp" />
+        <div class="tableCell">
+        		<c:import url="/views/side-bar.jsp" />
+
+        	
             <div class="main">
 	            <form action="" method="POST">
 	            	<table>
@@ -53,6 +56,7 @@
         	</div>
 	            <div class="tableCell">
 	        		<img alt="" src="../images/registerimg.gif">
+	       		</div>
 	       		</div>
         </div>
 

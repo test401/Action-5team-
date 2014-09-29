@@ -5,14 +5,24 @@ body {
 	margin: 0px;
 }
 
+.tableRow{
+	display:table-row;
+	
+}
+
+
+
 .tableCell{
-	display: table-cell;
 	vertical-align: top;
+	margin-left: 25px;
+	
 }
 
 .main{
-	display: table-cell;
+	
 	vertical-align: top;
+	height: 150px;
+	width: 200px;
 }
 
 header{
@@ -103,7 +113,7 @@ section#auction {
 div.sidebar{
 	background-color: #675c47;
 	color: #efe5d0;
-	display:table-cell; 
+	
 	margin-left: 15px;
 	width: 290px;
 	height: 500px;
