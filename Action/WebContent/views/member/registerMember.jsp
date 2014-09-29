@@ -48,16 +48,14 @@
 	            		    <td><input type="submit" name="register" value="가입신청"></td>
 	            			<td><input type="button" name="cancle" value="취소"></td>
 	            		</tr>
-	            		
 	            	</table>
 	            </form>
         	</div>
+	            <div class="tableCell">
+	        		<img alt="" src="../images/registerimg.gif">
+	       		</div>
         </div>
-        
-        <div class="tableCell">
-        	<img alt="" src="../images/registerimg.gif">
-        </div>
-        
+
         <div class="tableRow">
 
             <div class="tableCell">
