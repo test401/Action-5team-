@@ -2,11 +2,12 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
 <div class="sidebar">
+	<br>
     <c:if test="${empty sessionScope.loginMember}">
-        <c:import url="member/login.jsp" />
+        <c:import url="/views/member/login.jsp" />
     </c:if>
     <c:if test="${not empty sessionScope.loginMember}">     
-        <c:import url="member/logout.jsp" />        
+        <c:import url="/views/member/logout.jsp" />        
     </c:if>
     
     <table id="sidebartable">
