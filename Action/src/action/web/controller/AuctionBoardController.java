@@ -11,7 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import oracle.sql.BLOB;
-import casestudy.business.service.BoardServiceImpl;
+
 import action.business.domain.board.AuctionBoard;
 import action.business.domain.board.Board;
 import action.business.service.BoardService;
@@ -88,7 +88,7 @@ public class AuctionBoardController extends HttpServlet {
 				searchInfo.put("searchText", searchText); 
 				
 		//  BoardService 객체로부터 모든 게시글 리스트를 구해온다.
-		BoardService service = new AuctionBoardServiceImpl();
+		ActionBoardBoardService service = new AuctionBoardServiceImpl();
 		
 		// 전체 게시글 개수
 		int totalBoardCount = service.getBoardCount(searchInfo);
@@ -290,14 +290,14 @@ public class AuctionBoardController extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
+		processRequest(request, response);
 	}
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
+		processRequest(request, response);
 	}
 
 }

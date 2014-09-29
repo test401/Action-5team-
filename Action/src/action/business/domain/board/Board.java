@@ -1,5 +1,7 @@
 package action.business.domain.board;
 
+import oracle.sql.BLOB;
+
 /**게시판 공통 요소
  * 게시글 번호, 회원ID, 제목, 작성자, 내용
  * 
@@ -14,7 +16,7 @@ public abstract class Board {
 	/** 제목*/
 	private String title;
 	/** 내용*/
-	private String content;
+	private BLOB contents;
 	
 	public Board() {
 		
@@ -39,11 +41,11 @@ public abstract class Board {
 		this.memberID = memberID;
 	}
 	
-	public Board(String title, String memberID, String content) {
+	public Board(String title, String memberID, BLOB contents) {
 		super();
 		this.title = title;
 		this.memberID = memberID;
-		this.content = content;
+		this.contents = contents;
 	}
 	
 	public Board(int boardNum, String title, String memberID) {
@@ -53,12 +55,12 @@ public abstract class Board {
 		this.memberID = memberID;
 	}
 	
-	public Board(int boardNum, String title, String memberID, String content) {
+	public Board(int boardNum, String title, String memberID, BLOB contents) {
 		super();
 		this.boardNum = boardNum;
 		this.title = title;
 		this.memberID = memberID;
-		this.content = content;
+		this.contents = contents;
 	}
 
 	public int getBoardNum() {
@@ -79,11 +81,11 @@ public abstract class Board {
 	public void setTitle(String title) {
 		this.title = title;
 	}
-	public String getContent() {
-		return content;
+	public BLOB getcontents() {
+		return contents;
 	}
-	public void setContent(String content) {
-		this.content = content;
+	public void setcontents(BLOB contents) {
+		this.contents = contents;
 	}
 	
 	
