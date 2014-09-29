@@ -23,7 +23,7 @@ public class AuctionBoard extends Board {
 	private int currentPrice;
 	
 	
-	// 경매 리스트 조회용
+	/** 경매 리스트 조회용 */
 	public AuctionBoard(int boardNum, String title, String memberID,
 			String image, Date endTime, int catagoryID,
 			int immediatelyPrice, int currentPrice) {
@@ -35,7 +35,7 @@ public class AuctionBoard extends Board {
 		this.currentPrice = currentPrice;
 	}
 	
-	// 경매  상세 조회용
+	/** 경매 상세 조회용 */
 	public AuctionBoard(int boardNum, String title, String memberID, 
 			String image, BLOB contents, Date startTime,
 			Date endTime, int catagoryID, int isImmediately, int startPrice,
@@ -52,7 +52,7 @@ public class AuctionBoard extends Board {
 		this.currentPrice = currentPrice;
 	}
 	
-	// 경매 작성용
+	/** 경매 작성용 */
 	public AuctionBoard(String title, String memberID, String image, BLOB contents, Date startTime,
 			Date endTime, int catagoryID, int isImmediately, int startPrice,
 			int immediatelyPrice, int currentPrice) {
@@ -68,7 +68,7 @@ public class AuctionBoard extends Board {
 		this.currentPrice = currentPrice;
 	}
 	
-	// 경매 수정용
+	/** 경매 수정용 */
 	public AuctionBoard(String title, String image, BLOB contents, int catagoryID,
 			int isImmediately, int immediatelyPrice) {
 		super(title);
@@ -79,11 +79,11 @@ public class AuctionBoard extends Board {
 		this.immediatelyPrice = immediatelyPrice;
 	}
 
+	
+	
 	public String getImage() {
 		return image;
 	}
-
-	
 
 	public void setImage(String image) {
 		this.image = image;
