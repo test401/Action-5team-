@@ -4,6 +4,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
+<link rel="stylesheet" href="../../action.css">
 <title>Action Register Member</title>
 </head>
 <body>
