@@ -1,4 +1,4 @@
-package action.business.domain;
+package action.business.domain.board;
 
 
 /**2. 카테고리테이블 테이블

@@ -1,4 +1,4 @@
-package action.business.domain;
+package action.business.domain.member;
 
 /**
  * 사이트 등록되는 모든 회원과 관리자 계정 도메인 

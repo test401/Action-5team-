@@ -1,4 +1,4 @@
-package action.business.domain;
+package action.business.domain.board;
 
 import java.util.Date;
 

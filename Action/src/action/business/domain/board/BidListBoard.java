@@ -1,4 +1,4 @@
-package action.business.domain;
+package action.business.domain.board;
 
 /**4. 입찰목록 테이블
  * 입찰번호, 

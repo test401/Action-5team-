@@ -1,4 +1,4 @@
-package action.business.domain;
+package action.business.domain.board;
 
 /**6. 문의 게시판 테이블
  * 문의게시글 번호(게시판 공통), 제목(게시판 공통), 작성자(게시판 공통), 내용(게시판 공통) */

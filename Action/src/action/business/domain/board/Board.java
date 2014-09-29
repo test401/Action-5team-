@@ -1,4 +1,4 @@
-package action.business.domain;
+package action.business.domain.board;
 
 /**게시판 공통 요소
  * 게시글 번호, 회원ID, 제목, 작성자, 내용

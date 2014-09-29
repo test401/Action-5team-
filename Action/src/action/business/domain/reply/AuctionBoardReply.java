@@ -1,4 +1,4 @@
-package action.business.domain;
+package action.business.domain.reply;
 
 public class AuctionBoardReply extends Reply {
 

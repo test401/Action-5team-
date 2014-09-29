@@ -12,8 +12,8 @@ import javax.servlet.http.HttpServletResponse;
 
 import oracle.sql.BLOB;
 import casestudy.business.service.BoardServiceImpl;
-import action.business.domain.AuctionBoard;
-import action.business.domain.Board;
+import action.business.domain.board.AuctionBoard;
+import action.business.domain.board.Board;
 import action.business.service.BoardService;
 import action.business.service.AuctionBoardServiceImpl;
 import action.business.service.DataNotFoundException;
@@ -243,7 +243,7 @@ public class AuctionBoardController extends HttpServlet {
 	private void updateBoard(HttpServletRequest request, HttpServletResponse response) 
             throws ServletException, IOException, DataNotFoundException {
 		// 1. 요청 파라미터로 부터 글 번호(num), 작성자(writer), 제목(title), 내용(contents)을 구한다.
-		String boardNum = request.getParameter("boardNum");
+		String image = request.getParameter("image");
 		String memberID = request.getParameter("memberID");
 		String title = request.getParameter("title");
 		String contents = request.getParameter("contents");
@@ -272,11 +272,11 @@ public class AuctionBoardController extends HttpServlet {
 	private void removeBoard(HttpServletRequest request, HttpServletResponse response) 
             throws ServletException, IOException, DataNotFoundException {
 		// 1. 요청 파라미터로 부터 글 번호(num)를 구한다.
-		String num = request.getParameter("num");
+		String boardNum = request.getParameter("boardNum");
 	
 		// 2. BoardService 객체를 통해 해당 번호의 게시글을 삭제한다.
-		BoardService service = new BoardServiceImpl();
-		service.removeBoard(Integer.parseInt(num));
+		AuctionBoardService service = new AuctionBoardServiceImpl();
+		service.removeBoard(Integer.parseInt(boardNum));
 
         // 3. RequestDispatcher 객체를 통해 목록 보기(board?action=list)로 요청을 전달한다.
 		RequestDispatcher dispatcher = request.getRequestDispatcher("list");

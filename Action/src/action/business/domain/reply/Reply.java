@@ -1,4 +1,4 @@
-package action.business.domain;
+package action.business.domain.reply;
 
 /**댓글 공통 요소
  * 댓글 번호, 마스터 댓글 번호, 댓글의 댓글 번호, 댓글의 스탭, 댓글 내용
