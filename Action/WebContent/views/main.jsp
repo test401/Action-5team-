@@ -8,20 +8,19 @@
 </head>
 <body>
      <div class="tableContainer">
-        <div class="tableRow">		
-            <c:import url="banner.jsp" />
+        <div class="tableRow">
+            <c:import url="/views/banner.jsp"/>
         </div>
         
         <div class="tableRow">
-            <c:import url="side-bar.jsp" />
-            <c:import url="mainContent.jsp" />
+            <c:import url="/views/side-bar.jsp" />
+            <c:import url="/views/mainContent.jsp" />
         </div>
-        
         <div class="tableRow">
             <div class="tableCell">
             </div>
             <div class="tableCell">
-                <c:import url="foter.jsp" />
+                <c:import url="/views/foter.jsp"/>
             </div>
         </div>
     </div>
