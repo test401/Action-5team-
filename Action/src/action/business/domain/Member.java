@@ -1,56 +1,56 @@
 package action.business.domain;
 
 /**
- * »çÀÌÆ® µî·ÏµÇ´Â ¸ğµç È¸¿ø°ú °ü¸®ÀÚ °èÁ¤ µµ¸ŞÀÎ 
+ * ì‚¬ì´íŠ¸ ë“±ë¡ë˜ëŠ” ëª¨ë“  íšŒì›ê³¼ ê´€ë¦¬ì ê³„ì • ë„ë©”ì¸ 
  * @author Sin-eon
  */
 public class Member {
 	
-	/** À¯È¿ÇÑ È¸¿øÀÓÀ» ³ªÅ¸³»´Â »ó¼ö */
+	/** ìœ íš¨í•œ íšŒì›ì„ì„ ë‚˜íƒ€ë‚´ëŠ” ìƒìˆ˜ */
 	public static final int VALID_MEMBER = 1;
 	
-	/** memberID°¡ Á¸ÀçÇÏÁö ¾Ê´Â È¸¿øÀÓÀ» ³ªÅ¸³»´Â »ó¼ö */
+	/** memberIDê°€ ì¡´ì¬í•˜ì§€ ì•ŠëŠ” íšŒì›ì„ì„ ë‚˜íƒ€ë‚´ëŠ” ìƒìˆ˜ */
 	public static final int INVALID_ID = 0; 
 	
-	/** password°¡ ÀÏÄ¡ÇÏÁö ¾Ê´Â È¸¿øÀÓÀ» ³ªÅ¸³»´Â »ó¼ö */
+	/** passwordê°€ ì¼ì¹˜í•˜ì§€ ì•ŠëŠ” íšŒì›ì„ì„ ë‚˜íƒ€ë‚´ëŠ” ìƒìˆ˜ */
 	public static final int INVALID_PASSWORD = -1;
 	
 	
-	/** È¸¿ø ID */
+	/** íšŒì› ID */
 	private String id;
 	
-	/** È¸¿ø ºñ¹Ğ¹øÈ£ */
+	/** íšŒì› ë¹„ë°€ë²ˆí˜¸ */
 	private String password;
 	
-	/** È¸¿ø ÀÌ¸§ */
+	/** íšŒì› ì´ë¦„ */
 	private String name;
 	
-	/** È¸¿ø ÁÖ¼Ò */
+	/** íšŒì› ì£¼ì†Œ */
 	private String address;
 	
-	/** È¸¿ø ¿¬¶ôÃ³ */
+	/** íšŒì› ì—°ë½ì²˜ */
 	private String tel;
 	
-	/** È¸¿ø °æ°í È¸¼ö */
+	/** íšŒì› ê²½ê³  íšŒìˆ˜ */
 	private int warningCount;
 	
 	/**
-	 * È¸¿ø µî±Ş
-	 * 0Àº ÀÏ¹İ È¸¿ø, 1Àº °ü¸®ÀÚ·Î ±¸ºĞÇÑ´Ù.
+	 * íšŒì› ë“±ê¸‰
+	 * 0ì€ ì¼ë°˜ íšŒì›, 1ì€ ê´€ë¦¬ìë¡œ êµ¬ë¶„í•œë‹¤.
 	 */
 	private int memberClass;
 	
-	/** È¸¿øÀÇ ·Î±×ÀÎ À¯È¿¼º Ã¼Å© */
+	/** íšŒì›ì˜ ë¡œê·¸ì¸ ìœ íš¨ì„± ì²´í¬ */
 	private int loginCheck;
 	
 	
-	/** ±âº» »ı¼ºÀÚ */
+	/** ê¸°ë³¸ ìƒì„±ì */
 	public Member(){
 		
 	}	
 	
 	/** 
-	 * È¸¿ø µî·Ï¿ë »ı¼ºÀÚ 
+	 * íšŒì› ë“±ë¡ìš© ìƒì„±ì 
 	 * 
 	 */
 	public Member(String id, String password, String name, String address,
@@ -64,13 +64,13 @@ public class Member {
 		this.memberClass = memberClass;
 	}
 		
-	/** È¸¿ø ·Î±×ÀÎ¿ë »ı¼ºÀÚ */
+	/** íšŒì› ë¡œê·¸ì¸ìš© ìƒì„±ì */
 	public Member(String id, String password) {		
 		this.id = id;
 		this.password = password;
 	}	
 	
-	/** È¸¿ø Á¤º¸¼öÁ¤¿ë »ı¼ºÀÚ */
+	/** íšŒì› ì •ë³´ìˆ˜ì •ìš© ìƒì„±ì */
 	public Member(String password, String name, String address, String tel) {		
 		this.password = password;
 		this.name = name;
