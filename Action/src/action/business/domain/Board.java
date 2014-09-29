@@ -28,6 +28,11 @@ public abstract class Board {
 		this.memberID = memberID;
 	}
 	
+	public Board(String title) {
+		super();
+		this.title = title;		
+	}
+	
 	public Board(String title, String memberID) {
 		super();
 		this.title = title;
