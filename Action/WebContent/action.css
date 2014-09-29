@@ -18,15 +18,12 @@ header{
 } 
 
 #actionTitle{
-	position :fixed;
+	position :absolute;
 	text-align: left;
 	margin-left:20px;
  	
 }
 
-
-
-	
 footer {
 	
 	width: 1200px;
@@ -93,34 +90,29 @@ section#auction {
 }
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-side-bar.jsp {
-	width: 500px;
-	display:table-cell;
-	
-	background: #efe5d0 url(images/background.gif) bottom right;
-	font-size: 105%;
-	padding: 15px;
-	margin: 0px 10px 10px 10px;
-	vertical-align: top;
-	
-	/* position :absolute;
-	top: 128px;
-	right:0px;
-		
-	width: 280px; */
+div.sidebar{
+	background-color: #675c47;
+	color: #efe5d0;
+	display:table; 
+	margin-left: 15px;
+	width: 290px;
+	height: 500px;
+	font-size: 110%;
 	
 }
+
+#sidebartable{
+	
+	border-spacing: 15px;
+	display: table-row;
+	
+}
+
+
+#menulabel{
+	
+	
+}
+
+
 
