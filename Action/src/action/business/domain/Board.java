@@ -21,14 +21,6 @@ public abstract class Board {
 	}
 	
 	
-	public Board(int boardNum, String memberID, String title, String writer,
-			String content) {
-		super();
-		this.boardNum = boardNum;
-		this.memberID = memberID;
-		this.title = title;
-		this.content = content;
-	}
 	
 	public Board(int boardNum, String memberID) {
 		super();
@@ -36,14 +28,14 @@ public abstract class Board {
 		this.memberID = memberID;
 	}
 	
-	public Board(int boardNum, String title, String writer) {
+	public Board(int boardNum, String title, String memberID) {
 		super();
 		this.boardNum = boardNum;
 		this.title = title;
 		this.memberID = memberID;
 	}
 	
-	public Board(int boardNum, String title, String writer, String content) {
+	public Board(int boardNum, String title, String memberID, String content) {
 		super();
 		this.boardNum = boardNum;
 		this.title = title;
