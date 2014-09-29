@@ -11,16 +11,6 @@
   </welcome-file-list>
   <servlet>
     <description></description>
-    <display-name>MemberController</display-name>
-    <servlet-name>MemberController</servlet-name>
-    <servlet-class>action.web.controller.MemberController</servlet-class>
-  </servlet>
-  <servlet-mapping>
-    <servlet-name>MemberController</servlet-name>
-    <url-pattern>/MemberController</url-pattern>
-  </servlet-mapping>
-  <servlet>
-    <description></description>
     <display-name>BoardController</display-name>
     <servlet-name>BoardController</servlet-name>
     <servlet-class>action.web.controller.BoardController</servlet-class>
@@ -31,12 +21,12 @@
   </servlet-mapping>
   <servlet>
     <description></description>
-    <display-name>AuctionBoardController</display-name>
-    <servlet-name>AuctionBoardController</servlet-name>
-    <servlet-class>action.web.controller.AuctionBoardController</servlet-class>
+    <display-name>MemberController</display-name>
+    <servlet-name>MemberController</servlet-name>
+    <servlet-class>action.web.controller.MemberController</servlet-class>
   </servlet>
   <servlet-mapping>
-    <servlet-name>AuctionBoardController</servlet-name>
-    <url-pattern>/AuctionBoard</url-pattern>
+    <servlet-name>MemberController</servlet-name>
+    <url-pattern>/MemberController</url-pattern>
   </servlet-mapping>
 </web-app>

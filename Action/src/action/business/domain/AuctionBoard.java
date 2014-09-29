@@ -1,6 +1,7 @@
 package action.business.domain;
 
 import java.util.Date;
+
 import oracle.sql.BLOB;
 
 
@@ -21,6 +22,20 @@ public class AuctionBoard extends Board {
 	private int immediatelyPrice;
 	private int currentPrice;
 	
+	
+	// 경매 리스트 조회용
+	public AuctionBoard(int boardNum, String title, String memberID,
+			String image, Date endTiem, int catagoryID,
+			int immediatelyPrice, int currentPrice) {
+		super(boardNum, title, memberID);
+		this.image = image;
+		this.endTiem = endTiem;
+		this.catagoryID = catagoryID;
+		this.immediatelyPrice = immediatelyPrice;
+		this.currentPrice = currentPrice;
+	}
+	
+	// 경매  상세 조회용
 	public AuctionBoard(int boardNum, String title, String memberID, 
 			String image, BLOB contents, Date startTime,
 			Date endTiem, int catagoryID, int isImmediately, int startPrice,
@@ -36,10 +51,39 @@ public class AuctionBoard extends Board {
 		this.immediatelyPrice = immediatelyPrice;
 		this.currentPrice = currentPrice;
 	}
+	
+	// 경매 작성용
+	public AuctionBoard(String title, String memberID, String image, BLOB contents, Date startTime,
+			Date endTiem, int catagoryID, int isImmediately, int startPrice,
+			int immediatelyPrice, int currentPrice) {
+		super(title, memberID);
+		this.image = image;
+		this.contents = contents;
+		this.startTime = startTime;
+		this.endTiem = endTiem;
+		this.catagoryID = catagoryID;
+		this.isImmediately = isImmediately;
+		this.startPrice = startPrice;
+		this.immediatelyPrice = immediatelyPrice;
+		this.currentPrice = currentPrice;
+	}
+	
+	// 경매 수정용
+	public AuctionBoard(String image, BLOB contents, int catagoryID,
+			int isImmediately, int immediatelyPrice) {
+		super();
+		this.image = image;
+		this.contents = contents;
+		this.catagoryID = catagoryID;
+		this.isImmediately = isImmediately;
+		this.immediatelyPrice = immediatelyPrice;
+	}
 
 	public String getImage() {
 		return image;
 	}
+
+	
 
 	public void setImage(String image) {
 		this.image = image;

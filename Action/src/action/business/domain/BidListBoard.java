@@ -8,6 +8,7 @@ public class BidListBoard extends Board {
 	private int bidNum;
 	private int price;
 
+	//입찰 목록
 	public BidListBoard(int bidNum, int boardNum, String memberID, int price) {
 		super(boardNum, memberID);
 		this.price = price;

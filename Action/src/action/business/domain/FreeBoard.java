@@ -6,8 +6,27 @@ public class FreeBoard extends Board{
 	
 	private int isNotice;
 
+	//게시판 목록 조회
+	public FreeBoard(int boardNum, String title, String memberID, int isNotice) {
+		super(boardNum, title, memberID);
+		this.isNotice = isNotice;
+	}
+
+	//게시판 상세 조회
 	public FreeBoard(int boardNum, String title, String memberID, String content, int isNotice) {
 		super(boardNum, title, memberID, content);
+		this.isNotice = isNotice;
+	}
+	
+	//게시글 작성
+	public FreeBoard(String title, String memberID, String content, int isNotice) {
+		super(title, memberID, content);
+		this.isNotice = isNotice;
+	}
+	
+	//게시글 수정
+	public FreeBoard(String title, String content, int isNotice) {
+		super(title, content);
 		this.isNotice = isNotice;
 	}
 

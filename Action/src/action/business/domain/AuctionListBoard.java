@@ -6,6 +6,7 @@ public class AuctionListBoard extends Board {
 	
 	private int listNum;
 
+	// 현재 경매 리스트
 	public AuctionListBoard(int boardNum, String memberID, int listNum) {
 		super(boardNum, memberID);
 		this.listNum = listNum;
