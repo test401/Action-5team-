@@ -54,9 +54,9 @@
 		            		<tr>
 		            		    <td><label class="label">기간</label></td>
 		            			<td>
-			            			<input type="radio" name="endTime" value="3" >
-			            			<input type="radio" name="endTime" value="5">
-			            			<input type="radio" name="endTime" value="7">
+			            			<input type="radio" name="endTime" value="3">3일
+			            			<input type="radio" name="endTime" value="5">5일
+			            			<input type="radio" name="endTime" value="7">7일
 		            			</td>
 		            		</tr>
 		            		<tr>
@@ -75,7 +75,6 @@
         </div>
 
         <div class="tableRow">
-
             <div class="tableCell">
                <c:import url="/views/foter.jsp"/>
             </div>

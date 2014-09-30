@@ -39,7 +39,7 @@
 		            		</tr>
 		            		<tr>
 		            		    <td><label class="label">대표이미지</label></td>
-		            			<td><input type="text" name="image"></td>
+		            			<td><input type="file" name="image"></td>
 		            		</tr>
 		            		<tr>
 		            		    <td><label class="label">시작가</label></td>
@@ -52,7 +52,11 @@
 		            		</tr>
 		            		<tr>
 		            		    <td><label class="label">기간</label></td>
-		            			<td><input type="radio" name="endTime" value="3"><input type="radio" name="endTime" value="5"><input type="radio" name="endTime" value="7"></td>
+		            			<td><input type="radio" name="endTime" value="3">3일<input type="radio" name="endTime" value="5">5일<input type="radio" name="endTime" value="7">7일</td>
+		            		</tr>
+		            		<tr>
+		            		    <td><label class="label">업로드이미지</label></td>
+		            			<td><input type="file" name="" value="3"></td>
 		            		</tr>
 		            		<tr>
 		            			<td colspan="10">

@@ -92,9 +92,12 @@ window.onload = displayTime; // 문서가 로딩될 때 수행할 함수 설정
 	            		</tr>
 	            	</table>
 	        	</div>
+	        	<div>
+	        		<c:import url="/views/board/auctionReplyForm.jsp" />
+	        	</div>
 		    </div>
         </div>
-
+        
         <div class="tableRow">
             <div class="tableCell">
                <c:import url="/views/foter.jsp"/>
