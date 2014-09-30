@@ -24,7 +24,7 @@
 		            		<tr>
 		            			<td><label class="label">카테고리</label></td>
 		            			<td>
-		            				<select name="catagoryID">
+		            				<select name="categoryID">
 		            					<option value=""></option>
 		            					<option value=""></option>
 		            					<option value=""></option>
