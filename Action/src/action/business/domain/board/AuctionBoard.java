@@ -14,8 +14,8 @@ public class AuctionBoard extends Board {
 
 	private String image;
 	private BLOB contents;
-	private Date startTime;
-	private Date endTime;
+	private String startTime;
+	private String endTime;
 	private int catagoryID;
 	private int isImmediately;
 	private int startPrice;
@@ -25,7 +25,7 @@ public class AuctionBoard extends Board {
 	
 	/** 경매 리스트 조회용 */
 	public AuctionBoard(int boardNum, String title, String memberID,
-			String image, Date endTime, int catagoryID,
+			String image, String endTime, int catagoryID,
 			int immediatelyPrice, int currentPrice) {
 		super(boardNum, title, memberID);
 		this.image = image;
@@ -37,8 +37,8 @@ public class AuctionBoard extends Board {
 	
 	/** 경매 상세 조회용 */
 	public AuctionBoard(int boardNum, String title, String memberID, 
-			String image, BLOB contents, Date startTime,
-			Date endTime, int catagoryID, int isImmediately, int startPrice,
+			String image, BLOB contents, String startTime,
+			String endTime, int catagoryID, int isImmediately, int startPrice,
 			int immediatelyPrice, int currentPrice) {
 		super(boardNum,title,memberID);
 		this.image = image;
@@ -53,8 +53,8 @@ public class AuctionBoard extends Board {
 	}
 	
 	/** 경매 작성용 */
-	public AuctionBoard(String title, String memberID, String image, BLOB contents, Date startTime,
-			Date endTime, int catagoryID, int isImmediately, int startPrice,
+	public AuctionBoard(String title, String memberID, String image, BLOB contents, String startTime,
+			String endTime, int catagoryID, int isImmediately, int startPrice,
 			int immediatelyPrice, int currentPrice) {
 		super(title, memberID);
 		this.image = image;
@@ -97,19 +97,19 @@ public class AuctionBoard extends Board {
 		this.contents = contents;
 	}
 
-	public Date getStartTime() {
+	public String getStartTime() {
 		return startTime;
 	}
 
-	public void setStartTime(Date startTime) {
+	public void setStartTime(String startTime) {
 		this.startTime = startTime;
 	}
 
-	public Date getEndTime() {
+	public String getEndTime() {
 		return endTime;
 	}
 
-	public void setEndTime(Date endTime) {
+	public void setEndTime(String endTime) {
 		this.endTime = endTime;
 	}
 

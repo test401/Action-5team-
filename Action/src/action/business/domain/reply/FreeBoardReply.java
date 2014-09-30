@@ -4,10 +4,15 @@ public class FreeBoardReply extends Reply{
 
 	private int freeBoardNum;
 
-	public FreeBoardReply(int replyNum, int masterNum, int replyOrder,
+	public FreeBoardReply(int replyNum, String memberID, int masterNum, int replyOrder,
 			int replyStep, String replyContent, int freeBoardNum) {
-		super(replyNum, masterNum, replyOrder, replyStep, replyContent);
+		super(replyNum, memberID, replyContent, masterNum, replyOrder, replyStep);
 		this.freeBoardNum = freeBoardNum;
+	}
+	
+	/**댓글 작성 */
+	public FreeBoardReply(String memberID, String replyContent) {
+		super(memberID, replyContent);
 	}
 
 	public int getFreeBoardNum() {

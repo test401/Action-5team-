@@ -4,10 +4,17 @@ public class QnABoardReply extends Reply {
 	
 	private int qnaBoradNum;
 
-	public QnABoardReply(int replyNum, int masterNum, int replyOrder,
-			int replyStep, String replyContent, int qnaBoradNum) {
-		super(replyNum, masterNum, replyOrder, replyStep, replyContent);
+	public QnABoardReply(int replyNum, String memberID,String replyContent, int masterNum, int replyOrder,
+			int replyStep,  int qnaBoradNum) {
+		super(replyNum, memberID, replyContent, masterNum, replyOrder, replyStep);
 		this.qnaBoradNum = qnaBoradNum;
+	}
+	
+	
+
+	public QnABoardReply(String memberID, String replyContent) {
+		super(memberID, replyContent);
+	
 	}
 
 	public int getQnaBoradNum() {
