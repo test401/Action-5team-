@@ -2,7 +2,10 @@
 <<<<<<<=HEAD
 >>>>>>>=refs/heads/newricho
 eclipse.preferences.version=1
+encoding//WebContent/js=UTF-8
 encoding//src/action/business/domain=UTF-8
 encoding//src/action/business/domain/Board.java=UTF-8
 encoding//src/action/business/domain/board/Board.java=UTF-8
+encoding//src/action/web/controller=UTF-8
 encoding//src/action/web/controller/AuctionBoardController.java=UTF-8
+encoding/src=UTF-8

@@ -14,6 +14,12 @@ public class BidListBoard extends Board {
 		this.price = price;
 		this.bidNum = bidNum;
 	}
+	
+	//입찰 하기
+	public BidListBoard(int boardNum, String memberID, int price) {
+		super(boardNum, memberID);
+		this.price = price;
+	}
 
 	public int getPrice() {
 		return price;

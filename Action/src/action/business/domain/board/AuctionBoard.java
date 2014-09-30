@@ -1,9 +1,5 @@
 package action.business.domain.board;
 
-import java.util.Date;
-
-import oracle.sql.BLOB;
-
 
 /**3. 경매 게시판 테이블
  * 게시글번호(게시판 공통), 글제목(게시판 공통), 작성자(게시판 공통), 대표이미지, 내용,
@@ -13,9 +9,9 @@ import oracle.sql.BLOB;
 public class AuctionBoard extends Board {
 
 	private String image;
-	private BLOB contents;
-	private Date startTime;
-	private Date endTime;
+	private String contents;
+	private String startTime;
+	private String endTime;
 	private int catagoryID;
 	private int isImmediately;
 	private int startPrice;
@@ -25,7 +21,7 @@ public class AuctionBoard extends Board {
 	
 	/** 경매 리스트 조회용 */
 	public AuctionBoard(int boardNum, String title, String memberID,
-			String image, Date endTime, int catagoryID,
+			String image, String endTime, int catagoryID,
 			int immediatelyPrice, int currentPrice) {
 		super(boardNum, title, memberID);
 		this.image = image;
@@ -37,8 +33,8 @@ public class AuctionBoard extends Board {
 	
 	/** 경매 상세 조회용 */
 	public AuctionBoard(int boardNum, String title, String memberID, 
-			String image, BLOB contents, Date startTime,
-			Date endTime, int catagoryID, int isImmediately, int startPrice,
+			String image, String contents, String startTime,
+			String endTime, int catagoryID, int isImmediately, int startPrice,
 			int immediatelyPrice, int currentPrice) {
 		super(boardNum,title,memberID);
 		this.image = image;
@@ -53,8 +49,8 @@ public class AuctionBoard extends Board {
 	}
 	
 	/** 경매 작성용 */
-	public AuctionBoard(String title, String memberID, String image, BLOB contents, Date startTime,
-			Date endTime, int catagoryID, int isImmediately, int startPrice,
+	public AuctionBoard(String title, String memberID, String image, String contents, String startTime,
+			String endTime, int catagoryID, int isImmediately, int startPrice,
 			int immediatelyPrice, int currentPrice) {
 		super(title, memberID);
 		this.image = image;
@@ -69,7 +65,7 @@ public class AuctionBoard extends Board {
 	}
 	
 	/** 경매 수정용 */
-	public AuctionBoard(String title, String image, BLOB contents, int catagoryID,
+	public AuctionBoard(String title, String image, String contents, int catagoryID,
 			int isImmediately, int immediatelyPrice) {
 		super(title);
 		this.image = image;
@@ -89,27 +85,27 @@ public class AuctionBoard extends Board {
 		this.image = image;
 	}
 
-	public BLOB getContents() {
+	public String getContents() {
 		return contents;
 	}
 
-	public void setContents(BLOB contents) {
+	public void setContents(String contents) {
 		this.contents = contents;
 	}
 
-	public Date getStartTime() {
+	public String getStartTime() {
 		return startTime;
 	}
 
-	public void setStartTime(Date startTime) {
+	public void setStartTime(String startTime) {
 		this.startTime = startTime;
 	}
 
-	public Date getEndTime() {
+	public String getEndTime() {
 		return endTime;
 	}
 
-	public void setEndTime(Date endTime) {
+	public void setEndTime(String endTime) {
 		this.endTime = endTime;
 	}
 

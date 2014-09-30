@@ -5,6 +5,7 @@
 <head>
 <meta charset="UTF-8">
 <link rel="stylesheet" href="../../action.css">
+<script src="/Action/ckeditor/ckeditor.js"></script>
 <title>Action Write Form</title>
 </head>
 <body>
@@ -56,6 +57,9 @@
 		            		<tr>
 		            			<td colspan="10">
 		            				<textarea rows="10" cols="80" name="contents"></textarea>
+		            		<script>
+							 	CKEDITOR.replace('contents',{enterMode:'2', shiftEnterMode:'3'});
+							</script>
 		            			</td>
 		            		</tr>
 		            		<tr>

@@ -1,6 +1,7 @@
 package action.web.controller;
 
 import java.io.IOException;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -11,8 +12,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import oracle.sql.BLOB;
-
 import action.business.domain.board.AuctionBoard;
+import action.business.domain.board.AuctionListBoard;
+import action.business.domain.board.BidListBoard;
 import action.business.domain.board.Board;
 import action.business.service.BoardService;
 import action.business.service.AuctionBoardServiceImpl;
@@ -65,13 +67,14 @@ public class AuctionBoardController extends HttpServlet {
     }
     
 	/* 
-     * 조건에 맞는 모든 게시물 목록을 보여주는 요청을 처리한다.
+     * 조건에 맞는 모든 경매 게시물 목록을 보여주는 요청을 처리한다.
      */
 	private void selectBoardList(HttpServletRequest request, HttpServletResponse response) 
             throws ServletException, IOException {
-		//1. searchType, searchText 요청 파라미터 값을 구한다.
+		//1. searchType, searchText, searchCategory 요청 파라미터 값을 구한다.
 		String searchType = request.getParameter("searchType");
 		String searchText = request.getParameter("searchText");
+		String searchCategory = request.getParameter("searchCategory");
 				
 		//1.2 pageNumber 요청 파라미터 값을 구한다.
 		String pageNumber = request.getParameter("pageNumber");
@@ -82,13 +85,14 @@ public class AuctionBoardController extends HttpServlet {
 				currentPageNumber = Integer.parseInt(pageNumber);
 			}
 	
-		//2. 검색 옵션을 담고 있는 MAP 객체를 생성하여 searchType, searchText 값을 저장한다.
+		//2. 검색 옵션을 담고 있는 MAP 객체를 생성하여 searchType, searchText, searchCategory 값을 저장한다.
 				Map<String, Object> searchInfo = new HashMap<String, Object>();
 				searchInfo.put("searchType", searchType);
 				searchInfo.put("searchText", searchText); 
+				searchInfo.put("searchCategory", searchCategory);
 				
 		//  BoardService 객체로부터 모든 게시글 리스트를 구해온다.
-		ActionBoardBoardService service = new AuctionBoardServiceImpl();
+		AuctionBoardService service = new AuctionBoardServiceImpl();
 		
 		// 전체 게시글 개수
 		int totalBoardCount = service.getBoardCount(searchInfo);
@@ -130,7 +134,7 @@ public class AuctionBoardController extends HttpServlet {
     
     
     /* 
-     * 선택된 게시글을 읽어와서 보여주는 요청을 처리한다.
+     * 선택된 경매글을 읽어와서 보여주는 요청을 처리한다.
      */
 	private void readBoard(HttpServletRequest request, HttpServletResponse response) 
             throws ServletException, IOException, DataNotFoundException {
@@ -153,29 +157,78 @@ public class AuctionBoardController extends HttpServlet {
 
         // 3.2 request scope 속성으로 currentPageNumber를 저장한다.
 		request.setAttribute("currentPageNumber", currentPageNumber);
-		//request.setAttribute("searchText", searchText);
+		
         
-        // 4. RequestDispatcher 객체를 통해 뷰 페이지(/WEB-INF/views/board/read.jsp)로 요청을 전달한다.
+        // 4. RequestDispatcher 객체를 통해 뷰 페이지(/views/board/read.jsp)로 요청을 전달한다.
         RequestDispatcher dispatcher = request.getRequestDispatcher("/views/board/read.jsp");
         dispatcher.forward(request, response);
         
 	}
 	
+	/* 
+     * 경매 입찰을 위한 요청을 처리한다.
+     */
+	private void bidAuction(HttpServletRequest request, HttpServletResponse response) 
+            throws ServletException, IOException, DataNotFoundException {
+		
+		String currentPrice = request.getParameter("currentPrice");
+		String memberID = request.getParameter("memberID");
+		String boardNum = request.getParameter("boardNum");
+		
+		// 2. 구해 온 요청 파라미터 값을 지닌 BidBoard 객체를 생성한다.
+		BidListBoard board = new BidListBoard(Integer.parseInt("boardNum"), memberID, Integer.parseInt("currentPrice"));
+				
+		// 3. BoardService 객체를 통해 해당 게시글을 등록한다.
+		AuctionBoardService service = new AuctionBoardServiceImpl();
+		service.writeBoard(board);
+		
+		
+
+        // RequestDispatcher 객체를 통해 뷰 페이지(/views/board/writeForm.jsp)로 요청을 전달한다.
+        RequestDispatcher dispatcher = request.getRequestDispatcher("/views/board/writeForm.jsp");
+        dispatcher.forward(request, response);
+	}
 	
 	/* 
-     * 게시글 등록을 위한 폼을 응답한다.
+     * 입찰이 완료됬을 때를 위한 요청을 처리한다.
+     */
+	private void AuctionList(HttpServletRequest request, HttpServletResponse response) 
+            throws ServletException, IOException, DataNotFoundException {
+		
+		String memberID = request.getParameter("memberID");
+		String boardNum = request.getParameter("boardNum");
+		String price = request.getParameter("price");
+		
+		// 2. 구해 온 요청 파라미터 값을 지닌 BidBoard 객체를 생성한다.
+		AuctionListBoard board = new AuctionListBoard(memberID, Integer.parseInt("boardNum"), 
+				 Integer.parseInt("price"));
+				
+		// 3. BoardService 객체를 통해 해당 게시글을 등록한다.
+		AuctionBoardService service = new AuctionBoardServiceImpl();
+		service.writeBoard(board);
+		
+		
+
+        // RequestDispatcher 객체를 통해 뷰 페이지(/views/board/writeForm.jsp)로 요청을 전달한다.
+        RequestDispatcher dispatcher = request.getRequestDispatcher("/views/board/writeForm.jsp");
+        dispatcher.forward(request, response);
+	}
+	
+	
+	/* 
+     * 경매글 등록을 위한 폼을 응답한다.
      */
 	private void writeBoardForm(HttpServletRequest request, HttpServletResponse response) 
             throws ServletException, IOException, DataNotFoundException {
 		
 
-        // RequestDispatcher 객체를 통해 뷰 페이지(/WEB-INF/views/board/writeForm.jsp)로 요청을 전달한다.
-        RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/views/board/writeForm.jsp");
+        // RequestDispatcher 객체를 통해 뷰 페이지(/views/board/writeForm.jsp)로 요청을 전달한다.
+        RequestDispatcher dispatcher = request.getRequestDispatcher("/views/board/writeForm.jsp");
         dispatcher.forward(request, response);
 	}
 	
 	/* 
-     * 게시글을 등록하는 요청을 처리한다.
+     * 경매글을 등록하는 요청을 처리한다.
      */
 	private void writeBoard(HttpServletRequest request, HttpServletResponse response) 
             throws ServletException, IOException, DataNotFoundException {
@@ -183,7 +236,8 @@ public class AuctionBoardController extends HttpServlet {
 		String title = request.getParameter("title");
 		String memberID = request.getParameter("memberID");
 		String image = request.getParameter("image");
-		String contents = request.getParameter("contents"); 
+		String contents = request.getParameter("contents");
+		String categoryID = request.getParameter("categoryID");
 		String startTime = request.getParameter("startTime");
 		String endTime = request.getParameter("endTime");
 		String isImm = request.getParameter("isImmediately");
@@ -191,9 +245,11 @@ public class AuctionBoardController extends HttpServlet {
 		String immPrice = request.getParameter("immediatelyPrice");
 		String currentPrice = request.getParameter("currentPrice");
 		
-		// 2. 구해 온 요청 파라미터 값와 ip 값을 지닌 Board 객체를 생성한다.
+		// 2. 구해 온 요청 파라미터 값을 지닌 AuctionBoard 객체를 생성한다.
 		AuctionBoard board = new AuctionBoard(title, memberID, image, 
-				contents, startTime, endTime, isImm, startPrice, immPrice, currentPrice);
+				 contents, startTime, endTime, Integer.parseInt("categoryID"), 
+				 Integer.parseInt("isImm"), Integer.parseInt("startPrice"), 
+				 Integer.parseInt("immPrice"), Integer.parseInt("currentPrice"));
 		
 		// 3. BoardService 객체를 통해 해당 게시글을 등록한다.
 		AuctionBoardService service = new AuctionBoardServiceImpl();
@@ -207,11 +263,11 @@ public class AuctionBoardController extends HttpServlet {
 	}
 
 	/* 
-     * 게시글 수정을 위해 적절한 내용이 채워진 폼을 응답한다.
+     * 경매글 수정을 위해 적절한 내용이 채워진 폼을 응답한다.
      */
 	private void updateBoardForm(HttpServletRequest request, HttpServletResponse response) 
             throws ServletException, IOException, DataNotFoundException {
-		// 요청 파라미터로 부터 글 번호(num)를 구한다.
+		// 요청 파라미터로 부터 경매글 번호(boardNum)를 구한다.
 		String boardNum = request.getParameter("boardNum");
 		
 		//1.2 pageNumber 요청 파라미터 값을 구한다.
@@ -232,29 +288,30 @@ public class AuctionBoardController extends HttpServlet {
 		//request.setAttribute("searchType", searchType);
 		//request.setAttribute("searchText", searchText);
         
-        // RequestDispatcher 객체를 통해 뷰 페이지(/WEB-INF/views/board/updateForm.jsp)로 요청을 전달한다.
+        // RequestDispatcher 객체를 통해 뷰 페이지(/views/board/updateForm.jsp)로 요청을 전달한다.
         RequestDispatcher dispatcher = request.getRequestDispatcher("/views/board/updateForm.jsp");
         dispatcher.forward(request, response);
 	}
 	
 	/* 
-     * 게시글을 수정하는 요청을 처리한다.
+     * 경매글을 수정하는 요청을 처리한다.
      */
 	private void updateBoard(HttpServletRequest request, HttpServletResponse response) 
             throws ServletException, IOException, DataNotFoundException {
-		// 1. 요청 파라미터로 부터 글 번호(num), 작성자(writer), 제목(title), 내용(contents)을 구한다.
-		String image = request.getParameter("image");
-		String memberID = request.getParameter("memberID");
+		// 1. 요청 파라미터 값을 구한다.
 		String title = request.getParameter("title");
+		String image = request.getParameter("image");
 		String contents = request.getParameter("contents");
-		String ip = request.getRemoteAddr();
-		
-		
-		// 2. 구해 온 요청 파라미터 값와 ip 값을 지닌 Board 객체를 생성한다.
-		Board board = new Board(Integer.parseInt(num) ,writer, title, contents, ip);
+		String memberID = request.getParameter("categoryID");
+		String isImmediately = request.getParameter("isImmediately");
+		String immediatelyPrice = request.getParameter("immediatelyPrice");
+	
+		// 2. 구해 온 요청 파라미터 값을 지닌 AuctionBoard 객체를 생성한다.
+		AuctionBoard board = new AuctionBoard(title, image ,contents, Integer.parseInt("categoryID"),
+				Integer.parseInt("isImmediately"), Integer.parseInt("immediatelyPrice"));
 		
 		// 3. BoardService 객체를 통해 해당 게시글을 갱신한다.
-		BoardService service = new BoardServiceImpl();
+		AuctionBoardService service = new AuctionBoardServiceImpl();
 		service.updateBoard(board);
         
 		// 4. request scope 속성(board)에 게시글을 저장한다.
@@ -267,11 +324,11 @@ public class AuctionBoardController extends HttpServlet {
 	}
 
 	/* 
-     * 게시글을 삭제하는 요청을 처리한다.
+     * 경매글을 삭제하는 요청을 처리한다.
      */
 	private void removeBoard(HttpServletRequest request, HttpServletResponse response) 
             throws ServletException, IOException, DataNotFoundException {
-		// 1. 요청 파라미터로 부터 글 번호(num)를 구한다.
+		// 1. 요청 파라미터로 부터 경매글 번호(boardNum)를 구한다.
 		String boardNum = request.getParameter("boardNum");
 	
 		// 2. BoardService 객체를 통해 해당 번호의 게시글을 삭제한다.

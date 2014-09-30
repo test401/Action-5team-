@@ -21,16 +21,6 @@
   </servlet-mapping>
   <servlet>
     <description></description>
-    <display-name>BoardController</display-name>
-    <servlet-name>BoardController</servlet-name>
-    <servlet-class>action.web.controller.BoardController</servlet-class>
-  </servlet>
-  <servlet-mapping>
-    <servlet-name>BoardController</servlet-name>
-    <url-pattern>/BoardController</url-pattern>
-  </servlet-mapping>
-  <servlet>
-    <description></description>
     <display-name>AuctionBoardController</display-name>
     <servlet-name>AuctionBoardController</servlet-name>
     <servlet-class>action.web.controller.AuctionBoardController</servlet-class>
@@ -48,5 +38,25 @@
   <servlet-mapping>
     <servlet-name>ReplyController</servlet-name>
     <url-pattern>/ReplyController</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>BoardController</display-name>
+    <servlet-name>BoardController</servlet-name>
+    <servlet-class>action.web.controller.BoardController</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>BoardController</servlet-name>
+    <url-pattern>/BoardController</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>ReplyContorller</display-name>
+    <servlet-name>ReplyContorller</servlet-name>
+    <servlet-class>action.web.controller.ReplyContorller</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>ReplyContorller</servlet-name>
+    <url-pattern>/ReplyContorller</url-pattern>
   </servlet-mapping>
 </web-app>

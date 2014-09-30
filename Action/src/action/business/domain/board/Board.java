@@ -16,7 +16,7 @@ public abstract class Board {
 	/** 제목*/
 	private String title;
 	/** 내용*/
-	private BLOB contents;
+	private String contents;
 	
 	public Board() {
 		
@@ -41,7 +41,7 @@ public abstract class Board {
 		this.memberID = memberID;
 	}
 	
-	public Board(String title, String memberID, BLOB contents) {
+	public Board(String title, String memberID, String contents) {
 		super();
 		this.title = title;
 		this.memberID = memberID;
@@ -55,7 +55,7 @@ public abstract class Board {
 		this.memberID = memberID;
 	}
 	
-	public Board(int boardNum, String title, String memberID, BLOB contents) {
+	public Board(int boardNum, String title, String memberID, String contents) {
 		super();
 		this.boardNum = boardNum;
 		this.title = title;
@@ -81,10 +81,10 @@ public abstract class Board {
 	public void setTitle(String title) {
 		this.title = title;
 	}
-	public BLOB getcontents() {
+	public String getcontents() {
 		return contents;
 	}
-	public void setcontents(BLOB contents) {
+	public void setcontents(String contents) {
 		this.contents = contents;
 	}
 	
