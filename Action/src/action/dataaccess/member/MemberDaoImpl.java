@@ -1,7 +1,6 @@
 package action.dataaccess.member;
 
 import java.sql.Connection;
-import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -13,7 +12,7 @@ import javax.naming.NamingException;
 import javax.sql.DataSource;
 
 import action.business.domain.member.Member;
-import action.business.service.MemberDao;
+import action.business.service.member.MemberDao;
 
 public class MemberDaoImpl implements MemberDao {
 	/** 멤버 DB 새로 만들 필요 있음 */
@@ -44,7 +43,7 @@ public class MemberDaoImpl implements MemberDao {
 
 	@Override
 	public void insertMember(Member member) {
-		String query = "INSERT INTO Member VALUES (?, ?, ?, ?, ?, 0, ?)";
+		String query = "INSERT INTO AuctionMember VALUES (?, ?, ?, ?, ?, 0, 0)";
 
 		Connection connection = null;
 		PreparedStatement pstmt = null;
@@ -52,16 +51,11 @@ public class MemberDaoImpl implements MemberDao {
 		try {
 			connection = obtainConnection();
 			pstmt = connection.prepareStatement(query);
-			pstmt.setString(1, member.getId());
+			pstmt.setString(1, member.getMemberID());
 			pstmt.setString(2, member.getPassword());
 			pstmt.setString(3, member.getName());
 			pstmt.setString(4, member.getAddress());
-			pstmt.setString(5, member.getTel());
-			if(member.getId().equals("admin")){
-				pstmt.setInt(6, 1);
-			} else {
-				pstmt.setInt(6, 0);
-			}			
+			pstmt.setString(5, member.getTel());			
 			pstmt.executeUpdate();
 
 		} catch (SQLException se) {
@@ -84,7 +78,7 @@ public class MemberDaoImpl implements MemberDao {
 	public Member selectMember(String id) {
 		Member member = null;
 
-		String query = "SELECT * FROM Member WHERE id = ?";        		
+		String query = "SELECT * FROM AuctionMember WHERE memberID = ?";        		
 
 		Connection connection = null;
 		PreparedStatement pstmt = null;
@@ -97,13 +91,13 @@ public class MemberDaoImpl implements MemberDao {
 			rs = pstmt.executeQuery();    
 
 			if (rs.next()) {
-				member = new Member(rs.getString("id"), 
+				member = new Member(rs.getString("memberID"), 
 						rs.getString("password"),
 						rs.getString("name"),
 						rs.getString("address"),
 						rs.getString("tel"),
-						rs.getInt("warningCount"),
-						rs.getInt("memberClass"));
+						rs.getInt("warnCount"),
+						rs.getInt("isAdmin"));
 			}
 
 		} catch(SQLException se) {
@@ -128,8 +122,8 @@ public class MemberDaoImpl implements MemberDao {
 
 	@Override
 	public void updateMember(Member member) {
-		String query = "UPDATE Member SET password = ?, Name = ?, address = ?, Tel = ? "
-				+ "WHERE id = ?";
+		String query = "UPDATE AuctionMember SET password = ?, Name = ?, address = ?, Tel = ? "
+				+ "WHERE memberID = ?";
 
 		Connection connection = null;
 		PreparedStatement pstmt = null;
@@ -141,7 +135,7 @@ public class MemberDaoImpl implements MemberDao {
 			pstmt.setString(2, member.getName());
 			pstmt.setString(3, member.getAddress());
 			pstmt.setString(4, member.getTel());
-			pstmt.setString(5, member.getId());
+			pstmt.setString(5, member.getMemberID());
 
 			pstmt.executeUpdate();
 
@@ -163,7 +157,7 @@ public class MemberDaoImpl implements MemberDao {
 
 	@Override
 	public void deleteMember(Member member) {
-		String query = "DELETE FROM Member WHERE id = ?";
+		String query = "DELETE FROM AuctionMember WHERE memberID = ?";
 
 		Connection connection = null;
 		PreparedStatement pstmt = null;
@@ -171,7 +165,7 @@ public class MemberDaoImpl implements MemberDao {
 		try {
 			connection = obtainConnection();
 			pstmt = connection.prepareStatement(query);
-			pstmt.setString(1, member.getId());
+			pstmt.setString(1, member.getMemberID());
 			pstmt.executeUpdate();
 
 		} catch (SQLException se) {
@@ -191,10 +185,10 @@ public class MemberDaoImpl implements MemberDao {
 	}
 
 	@Override
-	public Member checkMember(String id, String password) {
-		Member member = new Member(id, password);
+	public Member checkMember(String memberID, String password) {
+		Member member = new Member(memberID, password);
 
-		String query = "SELECT Password, Name, address, Tel, warning_count, member_class FROM Member WHERE id = ?";
+		String query = "SELECT Password, Name, address, Tel, warnCount, isAdmin FROM AuctionMember WHERE memberID = ?";
 
 		Connection connection = null;
 		PreparedStatement pstmt = null;
@@ -203,7 +197,7 @@ public class MemberDaoImpl implements MemberDao {
 		try {
 			connection = obtainConnection();
 			pstmt = connection.prepareStatement(query);
-			pstmt.setString(1, id);
+			pstmt.setString(1, memberID);
 			rs = pstmt.executeQuery();
 
 			if (rs.next()) {
@@ -212,8 +206,8 @@ public class MemberDaoImpl implements MemberDao {
 					member.setName(rs.getString("Name"));
 					member.setAddress(rs.getString("address"));
 					member.setTel(rs.getString("tel"));
-					member.setWarningCount(rs.getInt("warning_count"));
-					member.setMemberClass(rs.getInt("member_class"));					
+					member.setWarnCount(rs.getInt("warnCount"));
+					member.setIsAdmin(rs.getInt("isAdmin"));					
 					member.setLoginCheck(Member.VALID_MEMBER);
 				} else {
 					member.setLoginCheck(Member.INVALID_PASSWORD);
@@ -238,7 +232,7 @@ public class MemberDaoImpl implements MemberDao {
 
 	@Override
 	public Member[] selectAllMembers() {
-		String query = "SELECT * FROM Member";                
+		String query = "SELECT * FROM AuctionMember";                
 
 		Connection connection = null;
 		PreparedStatement pstmt = null;
@@ -253,13 +247,13 @@ public class MemberDaoImpl implements MemberDao {
 			rs = pstmt.executeQuery();
 
 			while (rs.next()) {
-				member = new Member(rs.getString("id"), 
+				member = new Member(rs.getString("memberID"), 
 						rs.getString("password"),
 						rs.getString("name"),
 						rs.getString("address"),
 						rs.getString("tel"),
-						rs.getInt("warningCount"),
-						rs.getInt("memberClass"));
+						rs.getInt("warnCount"),
+						rs.getInt("isAdmin"));
 				temp.add(member);            	
 			}           
 
@@ -278,10 +272,10 @@ public class MemberDaoImpl implements MemberDao {
 	}
 
 	@Override
-	public boolean memberIDExists(String id) {
+	public boolean memberIDExists(String memberID) {
 		boolean result = false;	
 
-		String query = "SELECT * FROM Member WHERE id = ?";
+		String query = "SELECT * FROM AuctionMember WHERE memberID = ?";
 		
 		Connection connection = null;
 		PreparedStatement pstmt = null;
@@ -290,7 +284,7 @@ public class MemberDaoImpl implements MemberDao {
 		try {
 			connection = obtainConnection();
 			pstmt = connection.prepareStatement(query);
-			pstmt.setString(1, id);
+			pstmt.setString(1, memberID);
 			rs = pstmt.executeQuery();
 									
 			if (rs.next()) {

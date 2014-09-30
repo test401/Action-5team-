@@ -1,19 +1,18 @@
-package action.business.service;
+package action.business.service.board;
 
 import java.util.List;
 import java.util.Map;
 
-import action.business.domain.board.Board;
+import action.business.domain.board.AuctionBoard;
 
-public interface BoardDao {
-
+public interface AuctionBoardDao {
 	/**
 	 * 조건에 맞는 모든 게시물 목록을 조회한다.
 	 * 
 	 * @param searchInfo 검색에 사용될 조건 정보를 담고 있는 Map 객체
 	 * @return 검색된 게시물 목록을 담고 있는 List 객체
 	 */
-	public List<Board> selectBoardList(Map<String, Object> searchInfo);
+	public List<AuctionBoard> selectBoardList(Map<String, Object> searchInfo);
 
 	/**
 	 * 조건에 맞는 모든 게시글 개수를 조회한다.
@@ -28,7 +27,7 @@ public interface BoardDao {
 	 * @param num 검색하고자 하는 게시글의 번호
 	 * @return
 	 */
-	public Board selectBoard(int num);	
+	public AuctionBoard selectBoard(int num);	
 
 	/**
 	 * 인수로 주어진 번호에 해당하는 게시글이 있는지 확인한다.
@@ -43,14 +42,14 @@ public interface BoardDao {
 	 * 
 	 * @param board 등록할 게시글 정보를 담고 있는 Board 객체
 	 */
-	public void insertBoard(Board board);
+	public void insertBoard(AuctionBoard board);
 	
 	/**
 	 * 인수로 주어진 Board 객체의 정보로 기존 게시글을 수정한다.
 	 * 
 	 * @param board 수정할 게시글 정보를 담고 있는 Board 객체
 	 */
-	public void updateBoard(Board board);
+	public void updateBoard(AuctionBoard board);
 
 	/**
 	 * 인수로 주어진 번호에 해당하는 게시글을 삭제한다.

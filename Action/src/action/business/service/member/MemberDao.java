@@ -1,4 +1,4 @@
-package action.business.service;
+package action.business.service.member;
 
 import action.business.domain.member.Member;
 

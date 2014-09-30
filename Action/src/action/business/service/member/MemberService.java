@@ -1,4 +1,4 @@
-package action.business.service;
+package action.business.service.member;
 
 import action.business.domain.member.Member;
 import action.business.service.DataDuplicatedException;
@@ -21,7 +21,7 @@ public interface MemberService {
      * @return 검색된 회원정보를 담고 있는 Member 객체
      * @throws DataNotFoundException memberID에 해당하는 회원이 존재하지 않을 경우 발생 
      */
-	public Member findMember(String memberID) throws DataNotFoundException;
+	public Member findMember(String id) throws DataNotFoundException;
 	
     /**
      * 인수로 주어진 Member 객체의 정보로 해당 회원정보를 갱신(회원정보 변경)한다.
@@ -52,7 +52,7 @@ public interface MemberService {
      * @param password 확인하고자 하는 회원의 password
      * @return 유효 회원 여부 등의 회원정보를 담고 있는 Member 객체
      */
-	public Member loginCheck(String memberID, String password);
+	public Member loginCheck(String id, String password);
 	
     /**
      * 모든 회원을 검색한다.
