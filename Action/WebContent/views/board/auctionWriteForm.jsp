@@ -19,7 +19,7 @@
 	            	<form action="" method="POST">
 		            	<table>
 		            		<tr>
-		            			<td><label class="registerLabel" >경매물품등록</label></td>
+		            			<td><label class="registerlabel" >경매물품등록</label></td>
 		            		</tr>
 		            		<tr>
 		            			<td><label class="label">카테고리</label></td>
@@ -54,12 +54,12 @@
 		            			<td><input type="radio" name="endTime" value="3"><input type="radio" name="endTime" value="5"><input type="radio" name="endTime" value="7"></td>
 		            		</tr>
 		            		<tr>
-		            			<td>
-		            				<textarea rows="" cols="" name="contents"></textarea>
+		            			<td colspan="10">
+		            				<textarea rows="10" cols="80" name="contents"></textarea>
 		            			</td>
 		            		</tr>
 		            		<tr>
-		            		    <td><input type="submit" name="register" value="가입신청"></td>
+		            		    <td><input type="submit" name="register" value="경매등록"></td>
 		            			<td><input type="button" name="cancle" value="취소"></td>
 		            		</tr>
 		            	</table>

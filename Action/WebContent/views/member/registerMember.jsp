@@ -15,8 +15,6 @@
         <div class="tableRow">
         <div class="tableCell">
         		<c:import url="/views/side-bar.jsp" />
-
-        	
             <div class="main">
 	            <form action="" method="POST">
 	            	<table>

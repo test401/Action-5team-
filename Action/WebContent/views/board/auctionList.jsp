@@ -37,13 +37,13 @@
                 		</td>
             		</tr>
             		<c:choose>
-					<c:when test="${empty requestScope.boardList}">
+					<c:when test="${empty requestScope.auctionList}">
 						<tr>
 							<td colspan="5">등록된 게시물이 없습니다.</td>
 						</tr>
 					</c:when>
 					<c:otherwise>
-					<c:forEach items='${requestScope["AuctionList"]}' var="auction" varStatus="loopStatus">
+					<c:forEach items='${requestScope["auctionList"]}' var="auction" varStatus="loopStatus">
                     <tr>
                         <td class="auctionno">${auction.boardNum}</td>
                         <td class="auctionimage">
