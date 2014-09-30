@@ -9,7 +9,7 @@
 // 현재 시각을 표시하는 함수 선언
 function displayTime() {
 	var elt = document.getElementById("clock"); // id="clock"인 요소 찾기
-	var time = document.getElementById("dd");
+	var time = document.getElementById("endTime");
 	var now = new Date(); // 현재 시각 얻기
 	var date = new Date(time.value);//마감날짜
 	date.setHours(24, 0, 0, 0);//마감시간
@@ -81,7 +81,7 @@ window.onload = displayTime; // 문서가 로딩될 때 수행할 함수 설정
 	            		</tr>
 	            		<tr>
 	            		    <td><label class="label">마감날짜</label></td>
-	            			<td colspan="4"><textarea hidden="true" rows="" cols="" id="dd">2014-09-30</textarea>2014-09-30</td>
+	            			<td colspan="4"><textarea hidden="true" rows="" cols="" id="endTime">2014-09-30</textarea>2014-09-30</td>
 	            		</tr>
 	            		<tr>
 	            		    <td><label class="label">남은시간</label></td>
