@@ -2,13 +2,14 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
 <div class="sidebar">
-	<br>
-    <c:if test="${empty sessionScope.loginMember}">
-        <c:import url="/views/member/login.jsp" />
-    </c:if>
-    <c:if test="${not empty sessionScope.loginMember}">     
-        <c:import url="/views/member/logout.jsp" />        
-    </c:if>
+	<div id ="sidebarMargin">
+			<c:if test="${empty sessionScope.loginMember}">
+			<c:import url="/views/member/login.jsp" />
+		</c:if>
+		<c:if test="${not empty sessionScope.loginMember}">
+			<c:import url="/views/member/logout.jsp" />
+		</c:if>
+	</div>
     
     <table id="sidebartable">
         <tr>

@@ -14,9 +14,11 @@
             <td></td>
         </tr>
         <tr>
-            <td><label style="font-size: x-small;"><a href="<c:url value='/views/member/registerMember.jsp' />">회원가입</a></label></td>
-            <td><label style="font-size: x-small;" ><a href="">아이디/비밀번호찾기</a></label></td>
-            <td></td>
+            <td colspan="2"><label class="memberFont"><a href="<c:url value='/views/member/registerMember.jsp' />">회원가입</a></label></td>
+        </tr>
+        <tr>    
+            <td colspan="2"><label class="memberFont"><a href="">아이디/비밀번호찾기</a></label></td>
+            
         </tr>
     </table>
 </form>

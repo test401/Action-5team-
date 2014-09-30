@@ -17,7 +17,8 @@
 			selected="selected"
 			</c:if>>내용</option>
 		</select> 
-		<input id="searchinput" type="text" name="searchText" size="20" value="${param.searchText}" onfocus="this.select();">
+		
+		<input id="searchinput" type="text" name="searchText" size="40" value="${param.searchText}" onfocus="this.select();">
 		<input type="button" value="검색" onclick="searchCheck(this.form);"> 
 	</form>
 </div>

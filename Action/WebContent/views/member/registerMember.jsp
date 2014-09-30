@@ -15,6 +15,8 @@
         <div class="tableRow">
         <div class="tableCell">
         		<c:import url="/views/side-bar.jsp" />
+
+        	
             <div class="main">
 	            <form action="" method="POST">
 	            	<table>
@@ -46,12 +48,13 @@
 	            			<td><input type="text" name="address"></td>
 	            		</tr>
 	            		<tr>
-	            		    <td><input type="submit" name="register" value="가입신청"></td>
-	            			<td><input type="button" name="cancle" value="취소"></td>
+	            		    <td><br><input type="submit" name="register" value="가입신청"></td>
+	            			<td><br><input type="button" name="cancle" value="취소"></td>
 	            		</tr>
 	            	</table>
 	            </form>
         	</div>
+        	
 	            <div class="tableCell">
 	        		<img alt="" src="../images/registerimg.gif">
 	       		</div>
