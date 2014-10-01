@@ -39,4 +39,14 @@
     <servlet-name>AuctionBoardController</servlet-name>
     <url-pattern>/AuctionBoard</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>ReplyController</display-name>
+    <servlet-name>ReplyController</servlet-name>
+    <servlet-class>action.web.controller.ReplyController</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>ReplyController</servlet-name>
+    <url-pattern>/ReplyController</url-pattern>
+  </servlet-mapping>
 </web-app>
