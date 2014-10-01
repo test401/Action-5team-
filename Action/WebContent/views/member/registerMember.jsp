@@ -56,7 +56,7 @@
         	</div>
         	
 	            <div class="tableCell">
-	        		<img id="registerimg" alt="" src="">
+	        		<img id="registerimg" alt="" src="">...
 	       		</div>
 	       		</div>
         </div>
