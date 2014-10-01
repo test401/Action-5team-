@@ -392,6 +392,35 @@ public class AuctionBoardDaoImpl implements AuctionBoardDao {
 		}
 
 	}
+	
+	@Override
+	public void updatePrice(AuctionBoard board) {
+		String query="UPDATE AuctionBoard SET currentPrice = ? WHERE boardnum = ?";
+
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+
+		try{
+			conn = obtainConnection();
+			pstmt = conn.prepareStatement(query);			
+			pstmt.setInt(1, board.getCurrentPrice());
+			pstmt.setInt(2, board.getBoardNum());			
+
+			pstmt.executeUpdate();			
+
+		}catch(SQLException se){
+			System.err.println("BoardDaoImpl updatePrice() Error :" + se.getMessage());
+			se.printStackTrace(System.err);
+		}finally{
+			try { 
+				if (pstmt != null) pstmt.close(); 
+			} catch (SQLException se) { se.printStackTrace(System.err); }
+			try { 
+				if (conn != null) conn.close(); 
+			} catch (SQLException se) { se.printStackTrace(System.err); }
+		}
+		
+	}
 
 	@Override
 	public void deleteBoard(int num) {
@@ -420,4 +449,6 @@ public class AuctionBoardDaoImpl implements AuctionBoardDao {
 			} catch (SQLException se) { se.printStackTrace(System.err); }
 		}
 	}
+
+	
 }
