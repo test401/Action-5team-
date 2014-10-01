@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<link rel="stylesheet" href="../../action.css">
+<link rel="stylesheet" href="/Action/action.css">
 <title>Action Register Success</title>
 </head>
 <body>
@@ -15,10 +15,10 @@
         <div class="tableRow">
             <c:import url="/views/side-bar.jsp" />
             <div class="views/main.jsp">
-	            <form action="main" method="POST">
-					<img alt="" src="../images/welcome.gif">
+	            <form action="/Action/views/main.jsp" method="POST">
+					<img alt="" src="/Action/views/images/welcome.gif">
 					<br>
-					<input type="submit" value="메인으로" >
+					<input type="submit" value="홈으로" >
 	            </form>
         	</div>
         </div>

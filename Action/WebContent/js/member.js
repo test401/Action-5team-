@@ -21,9 +21,9 @@ function passwordCheck(inputField, errorSpan){
 }
 //작성/수정 폼의 공백을 체크하는 기능
 function boardWriteCheck(form) {
-	if (form.id.value.length == 0) {
+	if (form.memberID.value.length == 0) {
 		alert("id을 입력하세요.");
-		form.id.focus();
+		form.memberID.focus();
 		document.getElementById("registerimg").setAttribute("src", "../images/registerimg.gif");
 		return;
 	}

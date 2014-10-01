@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Context path="/Action">
+       <Resource
+         name="jdbc/actionDB"
+         type="javax.sql.DataSource"
+         url="jdbc:oracle:thin:@localhost:1521:xe"
+         driverClassName="oracle.jdbc.OracleDriver"
+         username="sku"
+         password="sku"
+         maxActive="10"
+         maxIdle="5"
+         maxWait="5000" />
+</Context>

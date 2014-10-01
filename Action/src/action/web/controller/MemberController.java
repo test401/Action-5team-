@@ -15,8 +15,9 @@ import action.business.*;
 import action.business.domain.member.Member;
 import action.business.service.DataDuplicatedException;
 import action.business.service.DataNotFoundException;
-import action.business.service.MemberService;
-import action.business.service.MemberServiceImpl;
+import action.business.service.member.MemberService;
+import action.business.service.member.MemberServiceImpl;
+
 
 
 /**
@@ -185,7 +186,7 @@ public class MemberController extends HttpServlet {
 		// 3.3.4. RequestDispatcher 객체를 통해 뷰 서블릿(thankYou.view)으로 요청을 전달한다.
 		// RequestDispatcher dispatcher =
 		// request.getRequestDispatcher("thankYou.view");
-		RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/thankYou.jsp");
+		RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/views/member/registerSuccess.jsp");
 		dispatcher.forward(request, response);
 	}
 	

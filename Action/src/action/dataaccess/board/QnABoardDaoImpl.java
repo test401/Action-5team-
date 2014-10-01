@@ -24,7 +24,7 @@ public class QnABoardDaoImpl implements QnABoardDao {
 		try {
 			//Class.forName("oracle.jdbc.OracleDriver");
 			Context context = new InitialContext();
-			dataSource = (DataSource) context.lookup("java:comp/env/jdbc/dukeshopDB");
+			dataSource = (DataSource) context.lookup("java:comp/env/jdbc/actionDB");
 		} catch(NamingException ne) {
 			System.err.println("JNDI error occured");
 			ne.printStackTrace(System.err);

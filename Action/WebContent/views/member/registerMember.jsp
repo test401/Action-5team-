@@ -5,7 +5,7 @@
 <head>
 <meta charset="UTF-8">
 <link rel="stylesheet" href="../../action.css">
-<script src="../../js/member.js"></script>
+<script src="/Action/js/member.js"></script>
 <title>Action Register Member</title>
 </head>
 <body>
@@ -18,14 +18,14 @@
         		<c:import url="/views/side-bar.jsp" />
 
             <div class="main">
-	            <form action="" method="POST">
+	            <form action="/Action/MemberController?action=register" method="POST">
 	            	<table>
 	            		<tr>
 	            			<td><label class="registerLabel" >회원가입</label></td>
 	            		</tr>
 	            		<tr>
 	            			<td><label class="label">회원 아이디</label></td>
-	            			<td><input type="text" name="id"></td>
+	            			<td><input type="text" name="memberID"></td>
 	            		</tr>       	
 	            		<tr>
 	            		    <td><label class="label">회원 이름</label></td>
