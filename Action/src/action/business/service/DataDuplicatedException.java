@@ -24,5 +24,4 @@ public class DataDuplicatedException extends Exception {
 	public DataDuplicatedException(Throwable cause) {
 		super(cause);
 	}
-
 }

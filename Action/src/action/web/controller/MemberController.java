@@ -52,6 +52,7 @@ public class MemberController extends HttpServlet {
 			} else if (action.equals("remove")) {
 				removeMember(request, response);
 			}
+			
 		}catch(DataNotFoundException dne){
 			throw new ServletException(dne);
 		}catch(DataDuplicatedException dde){
@@ -285,7 +286,7 @@ public class MemberController extends HttpServlet {
 		MemberService memberService = new MemberServiceImpl();
 
 		// 1.3. memberID로 회원를 검색한다.(MemberService의 findMember() 사용)
-		Member selectedMember = memberService.findMember(member.getId());
+		Member selectedMember = memberService.findMember(member.getMemberID());
 
 		// request scope 속성에 검색된 회원 객체를 저장한다.
 		request.setAttribute("selectedMember", selectedMember);

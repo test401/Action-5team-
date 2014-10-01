@@ -5,6 +5,7 @@
 <head>
 <meta charset="UTF-8">
 <link rel="stylesheet" href="../../action.css">
+<script src="../../js/member.js"></script>
 <title>Action Update</title>
 </head>
 <body>
@@ -42,8 +43,8 @@
 	            			<td><input type="text" name="address" value="${sessionScope.loginMember.address}"></td>
 	            		</tr>
 	            		<tr>
-	            		    <td><input type="submit" name="register" value="수정"></td>
-	            			<td><input type="button" name="cancle" value="취소"></td>
+	            		    <td><input type="button" name="register" value="수정" onclick="boardWriteCheck(this.form);"></td>
+	            			<td><input type="button" name="cancle" value="취소" onclick="goUrl();"></td>
 	            		</tr>
 	            		
 	            	</table>

@@ -91,7 +91,7 @@ window.onload = displayTime; // 문서가 로딩될 때 수행할 함수 설정
 	            		</tr>
 	            		<tr>
 	            		    <td><label class="label">마감날짜</label></td>
-	            			<td colspan="4"><textarea hidden="true" rows="" cols="" id="endTime">2014-09-30</textarea>2014-09-30${auctionBoard.endTime}</td>
+	            			<td colspan="4"><textarea hidden="true" rows="" cols="" id="endTime">2014-10-02</textarea>2014-10-02${auctionBoard.endTime}</td>
 	            		</tr>
 	            		<tr>
 	            		    <td><label class="label">남은시간</label></td>
@@ -100,12 +100,13 @@ window.onload = displayTime; // 문서가 로딩될 때 수행할 함수 설정
 	            		<tr>
 	            		    <td><label class="label">입찰가</label></td>
 	            			<td colspan="7">
-	            				<form action="">
+	            				<form action="" method="get">
 	            					<input type="number" step="100" name="currentPrice" min="${auctionBoard.currentPrice}" autofocus="autofocus">
-	            					<c:if test="${auctionBoard.endTime >= now }">
+	            					<%-- <c:if test="${auctionBoard.endTime >= now }"> --%>
+	            						<input hidden="true" type="text" name="boardNum" value="${auctionBoard.boardNum}">
 		            					<input type="submit" value="입찰하기" onclick="">
 		            					<input type="button" value="입찰취소" onclick="">
-									</c:if>
+									<%-- </c:if> --%>
 	            				</form>
 	            				<%-- <fmt:formatDate value="${now}" pattern="yyyy-MM-dd" var="nyear"/> --%>
 	            			</td>
