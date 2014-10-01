@@ -7,6 +7,7 @@
 <head>
 <meta charset="UTF-8">
 <link rel="stylesheet" href="../../action.css">
+<script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
 <script src="../../js/auction.js"></script>
 <script src="../../js/board.js"></script>
 <script>
@@ -104,7 +105,7 @@ window.onload = displayTime; // 문서가 로딩될 때 수행할 함수 설정
 	            					<input type="number" step="100" name="currentPrice" min="${auctionBoard.currentPrice}" autofocus="autofocus">
 	            					<%-- <c:if test="${auctionBoard.endTime >= now }"> --%>
 	            						<input hidden="true" type="text" name="boardNum" value="${auctionBoard.boardNum}">
-		            					<input type="submit" value="입찰하기" onclick="">
+		            					<input type="button" value="입찰하기" onclick="">
 		            					<input type="button" value="입찰취소" onclick="">
 									<%-- </c:if> --%>
 	            				</form>

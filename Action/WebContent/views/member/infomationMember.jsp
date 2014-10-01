@@ -28,11 +28,6 @@
 	            		    <td><label class="label">회원 이름</label></td>
 	            			<td><label class="label">${sessionScope.loginMember.name}"</label></td>
 	            		</tr>
-	            		<tr>
-	            		    <td><label class="label">비밀번호</label></td>
-	            			<td><label class="label">${sessionScope.loginMember.password}"</label></td>
-	            		</tr>
-	            		
 						<tr>
 	            		    <td><label class="label">연락처</label></td>
 	            			<td><label class="label">${sessionScope.loginMember.tel}"</label></td>
