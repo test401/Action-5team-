@@ -56,7 +56,8 @@
         	</div>
         	
 	            <div class="tableCell">
-	        		<img id="registerimg" alt="" src="">...
+	        		<img id="registerimg" alt="" src=""
+	        		style="width: 500px; height: 500px">
 	       		</div>
 	       		</div>
         </div>
