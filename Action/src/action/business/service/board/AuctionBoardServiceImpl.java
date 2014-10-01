@@ -45,11 +45,19 @@ public class AuctionBoardServiceImpl implements AuctionBoardService {
 		boardDaoAccess.updateBoard(board); 
 		
 	}
+	
+	@Override
+	public void updatePrice(AuctionBoard board) throws DataNotFoundException {
+		boardDaoAccess.updatePrice(board);
+		
+	}
 
 	@Override
 	public void removeBoard(int num) throws DataNotFoundException {
 		boardDaoAccess.deleteBoard(num);
 		
 	}
+
+	
 
 }

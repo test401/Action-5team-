@@ -43,14 +43,7 @@ public interface AuctionListBoardDao {
 	 * 
 	 * @param board 등록할 게시글 정보를 담고 있는 Board 객체
 	 */
-	public void insertBoard(AuctionListBoard board);
-	
-	/**
-	 * 인수로 주어진 Board 객체의 정보로 기존 게시글을 수정한다.
-	 * 
-	 * @param board 수정할 게시글 정보를 담고 있는 Board 객체
-	 */
-	public void updateBoard(AuctionListBoard board);
+	public void insertBoard(AuctionListBoard board);	
 
 	/**
 	 * 인수로 주어진 번호에 해당하는 게시글을 삭제한다.

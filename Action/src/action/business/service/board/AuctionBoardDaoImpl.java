@@ -1,4 +1,4 @@
-package action.dataaccess.board;
+package action.business.service.board;
 
 import java.sql.Connection;
 import java.sql.Date;
@@ -88,8 +88,8 @@ public class AuctionBoardDaoImpl implements AuctionBoardDao {
 		AuctionBoard board = null;
 
 		String query = "SELECT * FROM " 
-				+ "(SELECT ROWNUM r, boardnum, title, memberID, image, categoryID, startprice, immediatelyprice, endtime FROM "
-				+ "(SELECT boardnum, title, memberID, image, categoryID, startprice, immediatelyprice, endtime FROM AuctionBoard "
+				+ "(SELECT ROWNUM r, boardnum, title, memberID, contents, categoryID, startprice, immediatelyprice, endtime FROM "
+				+ "(SELECT boardnum, title, memberID, contents, categoryID, startprice, immediatelyprice, endtime FROM AuctionBoard "
 				+ categorySQL + whereSQL + " ORDER BY boardnum DESC)) WHERE r BETWEEN ? and ?";		
 
 		Connection conn = null;
@@ -128,14 +128,16 @@ public class AuctionBoardDaoImpl implements AuctionBoardDao {
 					title = title.substring(0, 20) + "...";
 				}
 
-				board = new AuctionBoard(rs.getInt("boardnum"),
+				board = new AuctionBoard(
+						rs.getInt("boardnum"),
 						title,
 						rs.getString("memberID"),
-						rs.getString("image"),
-						rs.getInt("currentPrice"),						
+						rs.getString("endtime"),						
 						rs.getInt("categoryID"),
 						rs.getInt("immediatelyPrice"),
-						rs.getString("endtime"));
+						rs.getInt("currentPrice"),
+						rs.getString("mainImage")
+						);
 				boardList.add(board);
 			}
 
@@ -256,7 +258,8 @@ public class AuctionBoardDaoImpl implements AuctionBoardDao {
 			rs = pstmt.executeQuery();
 
 			if(rs.next()){
-				board = new AuctionBoard(rs.getInt("boardNum"),
+				board = new AuctionBoard(
+						rs.getInt("boardNum"),
 						rs.getString("title"),
 						rs.getString("memberID"),
 						rs.getString("contents"),
@@ -365,9 +368,8 @@ public class AuctionBoardDaoImpl implements AuctionBoardDao {
 
 	@Override
 	public void updateBoard(AuctionBoard board) {
-		String query="UPDATE AuctionBoard SET title = ?, contents = ?, "
-				+ "catagoryID = ?, isImmediately = ?, immediatelyPrice = ?, "
-				+ "image =?, mainImage = ?  WHERE boardnum = ?";
+		String query="UPDATE AuctionBoard SET title = ?,contents = ?, catagoryID = ?, "
+				+ "isImmediately = ?, immediatelyPrice = ?, image =?, mainImage =?  WHERE boardnum = ?";
 
 		Connection conn = null;
 		PreparedStatement pstmt = null;
@@ -379,10 +381,9 @@ public class AuctionBoardDaoImpl implements AuctionBoardDao {
 			pstmt.setString(2, board.getContents());
 			pstmt.setInt(3, board.getCatagoryID());
 			pstmt.setInt(4, board.getIsImmediately());
-			pstmt.setInt(5, board.getImmediatelyPrice());
+			pstmt.setInt(5, board.getImmediatelyPrice());	
 			pstmt.setString(6, board.getImage());
 			pstmt.setString(7, board.getMainImage());
-			pstmt.setInt(8, board.getBoardNum());			
 
 			pstmt.executeUpdate();			
 
