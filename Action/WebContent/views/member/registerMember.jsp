@@ -5,6 +5,7 @@
 <head>
 <meta charset="UTF-8">
 <link rel="stylesheet" href="../../action.css">
+<script src="../../js/member.js"></script>
 <title>Action Register Member</title>
 </head>
 <body>
@@ -32,11 +33,11 @@
 	            		</tr>
 	            		<tr>
 	            		    <td><label class="label">비밀번호</label></td>
-	            			<td><input type="text" name="password"></td>
+	            			<td><input type="password" name="password"></td>
 	            		</tr>
 	            		<tr>
 	            		    <td><label class="label">비밀번호확인</label></td>
-	            			<td><input type="text" name="checkPassowrd"></td>
+	            			<td><input type="password" name="checkPassword" onblur="passwordCheck(this, document.getElementById('pass'));"><span id="pass"></span></td>
 	            		</tr>
 						<tr>
 	            		    <td><label class="label">연락처</label></td>
@@ -47,15 +48,15 @@
 	            			<td><input type="text" name="address"></td>
 	            		</tr>
 	            		<tr>
-	            		    <td><br><input type="submit" name="register" value="가입신청"></td>
-	            			<td><br><input type="button" name="cancle" value="취소"></td>
+	            		    <td><br><input type="button" name="register" value="가입신청" onclick="boardWriteCheck(this.form);"></td>
+	            			<td><br><input type="button" name="cancle" value="취소" onclick="goUrl();"></td>
 	            		</tr>
 	            	</table>
 	            </form>
         	</div>
         	
 	            <div class="tableCell">
-	        		<img alt="" src="../images/registerimg.gif">
+	        		<img id="registerimg" alt="" src="">
 	       		</div>
 	       		</div>
         </div>

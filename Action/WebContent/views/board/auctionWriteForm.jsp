@@ -5,7 +5,8 @@
 <head>
 <meta charset="UTF-8">
 <link rel="stylesheet" href="../../action.css">
-<script src="/Action/ckeditor/ckeditor.js"></script>
+<script src="../../ckeditor/ckeditor.js"></script>
+<script src="../../js/board.js"></script>
 <title>Action Write Form</title>
 </head>
 <body>
@@ -67,8 +68,8 @@
 		            			</td>
 		            		</tr>
 		            		<tr>
-		            		    <td><input type="submit" name="register" value="경매등록"></td>
-		            			<td><input type="button" name="cancle" value="취소"></td>
+		            		    <td><input type="button" name="register" value="경매등록" onclick="boardWriteCheck(this.form);"></td>
+		            			<td><input type="button" name="cancle" value="취소" onclick="goUrl('list');"></td>
 		            		</tr>
 		            	</table>
 		            </form>

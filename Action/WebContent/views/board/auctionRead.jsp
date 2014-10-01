@@ -1,10 +1,14 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jstl/fmt_rt" %>
+<jsp:useBean id="now" class="java.util.Date" />
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <link rel="stylesheet" href="../../action.css">
+<script src="../../js/auction.js"></script>
+<script src="../../js/board.js"></script>
 <script>
 // 현재 시각을 표시하는 함수 선언
 function displayTime() {
@@ -56,16 +60,18 @@ window.onload = displayTime; // 문서가 로딩될 때 수행할 함수 설정
 	            	<table>
 	            		<tr>
 	            			<td><label class="registerlabel" >경매물품</label></td>
-	            			<td><input type="button" name="update" value="수정"></td>
-	            			<td><input type="button" name="delete" value="삭제"></td>
+	            			<c:if test="${auctionBoard.memberID == loginMember.memberID}">
+		            			<td><input type="button" name="update" value="수정"></td>
+		            			<td><input type="button" name="delete" value="삭제"></td>
+	            			</c:if>
 	            		</tr>
 	            		<tr>
 	            			<td colspan="2">${auctionBoard.title}</td>
 	            			<td></td>
 	            		</tr>       	
 	            		<tr>
-	            		    <td><label class="label">현재가</label></td>
-	            			<td></td>
+	            		    <td><label class="label">현재입찰가</label></td>
+	            			<td>${auctionBoard.currentPrice}</td>
 	            		</tr>
 	            		<tr>
 	            		    <td><label class="label">시작가</label></td>
@@ -80,12 +86,29 @@ window.onload = displayTime; // 문서가 로딩될 때 수행할 함수 설정
 	            			<td></td>
 	            		</tr>
 	            		<tr>
+	            		    <td><label class="label">시작날짜</label></td>
+	            			<td colspan="4">${auctionBoard.startTime}</td>
+	            		</tr>
+	            		<tr>
 	            		    <td><label class="label">마감날짜</label></td>
-	            			<td colspan="4"><textarea hidden="true" rows="" cols="" id="endTime">2014-09-30</textarea>2014-09-30</td>
+	            			<td colspan="4"><textarea hidden="true" rows="" cols="" id="endTime">2014-09-30</textarea>2014-09-30${auctionBoard.endTime}</td>
 	            		</tr>
 	            		<tr>
 	            		    <td><label class="label">남은시간</label></td>
 	            			<td colspan="4"><span id="clock" ></span></td>
+	            		</tr>
+	            		<tr>
+	            		    <td><label class="label">입찰가</label></td>
+	            			<td colspan="7">
+	            				<form action="">
+	            					<input type="number" step="100" name="currentPrice" min="${auctionBoard.currentPrice}" autofocus="autofocus">
+	            					<c:if test="${auctionBoard.endTime >= now }">
+		            					<input type="submit" value="입찰하기" onclick="">
+		            					<input type="button" value="입찰취소" onclick="">
+									</c:if>
+	            				</form>
+	            				<%-- <fmt:formatDate value="${now}" pattern="yyyy-MM-dd" var="nyear"/> --%>
+	            			</td>
 	            		</tr>
 	            		<tr>
 							<td class="contents" colspan="8">${auctionBoard.contents}</td>
@@ -93,11 +116,12 @@ window.onload = displayTime; // 문서가 로딩될 때 수행할 함수 설정
 	            	</table>
 	        	</div>
 	        	<div>
-	        		<c:import url="/views/board/auctionReplyForm.jsp" />
+	        		<%-- <c:import url="/views/board/auctionReplyForm.jsp" /> --%>
 	        	</div>
 		    </div>
         </div>
         
+
         <div class="tableRow">
             <div class="tableCell">
                <c:import url="/views/foter.jsp"/>

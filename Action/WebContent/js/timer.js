@@ -1,8 +1,8 @@
 // 현재 시각을 표시하는 함수 선언
-function displayTime(day) {
+function displayTime() {
 	var elt = document.getElementById("clock"); // id="clock"인 요소 찾기
 	var now = new Date(); // 현재 시각 얻기
-	var date = new Date(day);// 마감날짜
+	var date = new Date();// 마감날짜
 	date.setHours(24, 0, 0, 0);// 마감시간
 	var endTime = parseInt(date.getTime() / 1000);// 마감시간 초로만들기
 	var nowTime = parseInt(now.getTime() / 1000);// 현재시간 초로만들기

@@ -34,14 +34,9 @@ function boardWriteCheck(form) {
 		return;
 	}
 
-	if (form.startPrice.value.length == 0) {
-		alert("시작가를 입력하세요.");
-		form.startPrice.focus();
-		return;
-	}
-	if (form.endTime.value.length == 0) {
-		alert("기간을 선택하세요.");
-		form.endTime.focus();
+	if (form.writer.value.length == 0) {
+		alert("이름을 입력하세요.");
+		form.writer.focus();
 		return;
 	}
 
