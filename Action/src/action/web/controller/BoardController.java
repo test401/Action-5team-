@@ -179,6 +179,10 @@ public class BoardController extends HttpServlet {
 			String contents = request.getParameter("contents");
 			String notice = request.getParameter("notice");
 			
+			if ((notice == null) || (notice.length() == 0)) {
+				notice="0";
+			}
+
 			// 2. 구해 온 요청 파라미터 값을 지닌 AuctionBoard 객체를 생성한다.
 			
 			if(notice != null) {				

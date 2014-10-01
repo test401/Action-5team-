@@ -8,7 +8,7 @@ package action.business.domain.board;
 
 public class AuctionBoard extends Board {
 
-	private String image;
+
 	private String contents;
 	private String startTime;
 	private String endTime;
@@ -17,27 +17,30 @@ public class AuctionBoard extends Board {
 	private int startPrice;
 	private int immediatelyPrice;
 	private int currentPrice;
+	private String image;
+	private String mainImage;
 	
 	
 	/** 경매 리스트 조회용 */
 	public AuctionBoard(int boardNum, String title, String memberID,
-			String image, String endTime, int catagoryID,
-			int immediatelyPrice, int currentPrice) {
+			String endTime, int catagoryID,
+			int immediatelyPrice, int currentPrice, String mainImage) {
+
 		super(boardNum, title, memberID);
-		this.image = image;
 		this.endTime = endTime;
 		this.catagoryID = catagoryID;
 		this.immediatelyPrice = immediatelyPrice;
 		this.currentPrice = currentPrice;
+		this.mainImage = mainImage;
 	}
 	
 	/** 경매 상세 조회용 */
 	public AuctionBoard(int boardNum, String title, String memberID, 
-			String image, String contents, String startTime,
+			String contents, String startTime,
 			String endTime, int catagoryID, int isImmediately, int startPrice,
-			int immediatelyPrice, int currentPrice) {
+			int immediatelyPrice, int currentPrice, String image, String mainImage) {
+
 		super(boardNum,title,memberID);
-		this.image = image;
 		this.contents = contents;
 		this.startTime = startTime;
 		this.endTime = endTime;
@@ -46,14 +49,17 @@ public class AuctionBoard extends Board {
 		this.startPrice = startPrice;
 		this.immediatelyPrice = immediatelyPrice;
 		this.currentPrice = currentPrice;
+		this.image = image;
+		this.mainImage = mainImage;
 	}
 	
 	/** 경매 작성용 */
-	public AuctionBoard(String title, String memberID, String image, String contents, String startTime,
+
+	public AuctionBoard(String title, String memberID, String contents, String startTime,
 			String endTime, int catagoryID, int isImmediately, int startPrice,
-			int immediatelyPrice, int currentPrice) {
+			int immediatelyPrice, int currentPrice, String image, String mainImage) {
+
 		super(title, memberID);
-		this.image = image;
 		this.contents = contents;
 		this.startTime = startTime;
 		this.endTime = endTime;
@@ -62,21 +68,24 @@ public class AuctionBoard extends Board {
 		this.startPrice = startPrice;
 		this.immediatelyPrice = immediatelyPrice;
 		this.currentPrice = currentPrice;
+		this.image = image;
+		this.mainImage = mainImage;
 	}
 	
 	/** 경매 수정용 */
-	public AuctionBoard(String title, String image, String contents, int catagoryID,
-			int isImmediately, int immediatelyPrice) {
+
+	public AuctionBoard(String title, String contents, int catagoryID,
+			int isImmediately, int immediatelyPrice, String image, String mainImage) {
 		super(title);
-		this.image = image;
 		this.contents = contents;
 		this.catagoryID = catagoryID;
 		this.isImmediately = isImmediately;
 		this.immediatelyPrice = immediatelyPrice;
+		this.image = image;
+		this.mainImage = mainImage;
 	}
 
-	
-	
+
 	public String getImage() {
 		return image;
 	}
@@ -148,6 +157,15 @@ public class AuctionBoard extends Board {
 	public void setCurrentPrice(int currentPrice) {
 		this.currentPrice = currentPrice;
 	}
+
+	public String getMainImage() {
+		return mainImage;
+	}
+
+	public void setMainImage(String mainImage) {
+		this.mainImage = mainImage;
+	}
+	
 	
 	
 	

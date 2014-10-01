@@ -6,9 +6,9 @@ import action.business.domain.board.AuctionListBoard;
 import action.business.service.DataNotFoundException;
 import action.dataaccess.board.AuctionListBoardDaoImpl;
 
-public class AuctionListBoardServiceImpl implements AuctionListBoardService{
+public class AuctionListBoardServiceImpl implements AuctionListBoardService {
 	
-	private AuctionListBoardDaoImpl boardDaoAccess;
+	private AuctionListBoardDao boardDaoAccess;
 
 	public AuctionListBoardServiceImpl(){
 		boardDaoAccess = new AuctionListBoardDaoImpl();
@@ -37,13 +37,7 @@ public class AuctionListBoardServiceImpl implements AuctionListBoardService{
 	public void writeBoard(AuctionListBoard board) {
 		boardDaoAccess.insertBoard(board);
 		
-	}
-
-	@Override
-	public void updateBoard(AuctionListBoard board) throws DataNotFoundException {
-		boardDaoAccess.updateBoard(board); 
-		
-	}
+	}	
 
 	@Override
 	public void removeBoard(int num) throws DataNotFoundException {

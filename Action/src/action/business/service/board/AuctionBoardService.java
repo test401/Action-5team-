@@ -46,6 +46,14 @@ public interface AuctionBoardService {
      * @throws DataNotFoundException 해당하는 게시글이 존재하지 않을 경우 발생 
      */
 	public void updateBoard(AuctionBoard board) throws DataNotFoundException;
+	
+	/**
+     * 기존 게시글을 수정한다.
+     *
+     * @param board 수정할 게시글 정보를 담고 있는 Board 객체
+     * @throws DataNotFoundException 해당하는 게시글이 존재하지 않을 경우 발생 
+     */
+	public void updatePrice(AuctionBoard board) throws DataNotFoundException;
 		
     /**
      * 특정 번호의 게시글을 삭제한다.

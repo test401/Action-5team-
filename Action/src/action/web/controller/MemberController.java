@@ -52,7 +52,7 @@ public class MemberController extends HttpServlet {
 			} else if (action.equals("remove")) {
 				removeMember(request, response);
 			}
-			
+
 		}catch(DataNotFoundException dne){
 			throw new ServletException(dne);
 		}catch(DataDuplicatedException dde){
@@ -126,6 +126,7 @@ public class MemberController extends HttpServlet {
 		dispathcer.forward(request, response);
 	}
 
+	
 	/**
 	 * 새로운 회원을 등록하는 요청을 처리한다.
 	 * @throws DataDuplicatedException 
@@ -139,8 +140,8 @@ public class MemberController extends HttpServlet {
 		String name = request.getParameter("name");
 		String tel = request.getParameter("tel");
 		String address = request.getParameter("address");
-		int warningCount = 0;
-		int memberClass = 0;
+		int warnCount = 0;
+		int isAdmin = 0;
 
 		// 3.2. 폼 데이터의 유효성을 검증하는 처리를 한다.
 		// 3.2.1. 에러 메시지들을 저장할 리스트
@@ -173,7 +174,7 @@ public class MemberController extends HttpServlet {
 		// 3.3. 새로운 회원을 등록하는 처리를 한다.
 		// 3.3.1. 적절한 데이터를 가진 Member 객체를 생성하여
 		Member member = new Member(memberID, password, name, address,
-				tel, warningCount, memberClass);
+				tel, warnCount, isAdmin);
 
 		// 3.3.2. MemberService 객체에 위임하여 회원을 등록한다.
 		MemberService memberService = new MemberServiceImpl();
