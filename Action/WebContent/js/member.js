@@ -10,11 +10,6 @@ function deleteCheck(url){
 	}
 }
 
-function writeCheck(url){
-	if(confirm("회원만 글작성만 됩니다. 회원가입을 하시겠습니까?")){
-		goUrl(url);
-	}
-}
 
 function passwordCheck(inputField, errorSpan){
 	var password = inputField.form.password.value;

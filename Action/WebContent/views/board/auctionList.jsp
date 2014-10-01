@@ -18,9 +18,14 @@
         <div class="tableCell">
 				<c:import url="/views/category.jsp"></c:import>
 		</div>
-		<div class="tableRow">
+		<div class="buttonbar">
 				<c:import url="/views/searchbar.jsp"></c:import>
 		</div>
+		
+		
+		
+		
+		<!-- 여기부터 시작 경매상품 보기 -->
             <div class="main">
             	<table id="allauctionlist">
             		<tr>
