@@ -3,10 +3,9 @@ package action.business.service;
 /**
  * 중복된 정보가 존재할 경우 발생하는 예외
  * 
- * @author S401 
+ * @author Sin-eon
  * */
 public class DataDuplicatedException extends Exception {
-
 	private static final long serialVersionUID = 1L;
 
 	public DataDuplicatedException() {

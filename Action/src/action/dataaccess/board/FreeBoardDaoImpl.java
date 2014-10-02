@@ -229,7 +229,7 @@ public class FreeBoardDaoImpl implements FreeBoardDao {
 				board = new FreeBoard(rs.getInt("boardnum"),
 						rs.getString("title"),
 						rs.getString("memberID"),
-						(BLOB) rs.getBlob("contents"),
+						rs.getString("contents"),
 						rs.getInt("isnotice"));
 			}
 		}catch(SQLException se){
@@ -310,7 +310,7 @@ public class FreeBoardDaoImpl implements FreeBoardDao {
 			pstmt.setInt(1, board.getBoardNum());
 			pstmt.setString(2, board.getTitle());
 			pstmt.setString(3, board.getMemberID());
-			pstmt.setBlob(4, board.getcontents());
+			pstmt.setString(4, board.getcontents());
 			pstmt.setInt(5, board.getIsNotice());
 
 			pstmt.executeUpdate();
@@ -346,7 +346,7 @@ public class FreeBoardDaoImpl implements FreeBoardDao {
 			conn = obtainConnection();
 			pstmt = conn.prepareStatement(query);
 			pstmt.setString(1, board.getTitle());
-			pstmt.setBlob(2, board.getcontents());
+			pstmt.setString(2, board.getcontents());
 			pstmt.setInt(3, board.getBoardNum());			
 
 			pstmt.executeUpdate();			

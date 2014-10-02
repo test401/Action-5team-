@@ -24,6 +24,13 @@ public abstract class Board {
 	
 	
 	
+	public Board(int boardNum) {
+		super();
+		this.boardNum = boardNum;
+	}
+
+
+
 	public Board(int boardNum, String memberID) {
 		super();
 		this.boardNum = boardNum;

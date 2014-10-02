@@ -88,8 +88,8 @@ public class AuctionBoardDaoImpl implements AuctionBoardDao {
 		AuctionBoard board = null;
 
 		String query = "SELECT * FROM " 
-				+ "(SELECT ROWNUM r, boardnum, title, memberID, image, categoryID, startprice, immediatelyprice, endtime FROM "
-				+ "(SELECT boardnum, title, memberID, image, categoryID, startprice, immediatelyprice, endtime FROM AuctionBoard "
+				+ "(SELECT ROWNUM r, boardnum, title, memberID, mainImage, categoryID, currentprice, immediatelyprice, endtime FROM "
+				+ "(SELECT boardnum, title, memberID, mainImage, categoryID, currentprice, immediatelyprice, endtime FROM AuctionBoard "
 				+ categorySQL + whereSQL + " ORDER BY boardnum DESC)) WHERE r BETWEEN ? and ?";		
 
 		Connection conn = null;
@@ -131,7 +131,7 @@ public class AuctionBoardDaoImpl implements AuctionBoardDao {
 				board = new AuctionBoard(rs.getInt("boardnum"),
 						title,
 						rs.getString("memberID"),
-						rs.getString("image"),
+						rs.getString("mainImage"),
 						rs.getInt("currentPrice"),						
 						rs.getInt("categoryID"),
 						rs.getInt("immediatelyPrice"),
@@ -403,7 +403,7 @@ public class AuctionBoardDaoImpl implements AuctionBoardDao {
 	@Override
 	public void updatePrice(AuctionBoard board) {
 		String query="UPDATE AuctionBoard SET currentPrice = ? WHERE boardnum = ?";
-
+	
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 

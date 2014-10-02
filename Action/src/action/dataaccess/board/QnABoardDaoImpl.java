@@ -227,7 +227,7 @@ public class QnABoardDaoImpl implements QnABoardDao {
 				board = new QnABoard(rs.getInt("boardnum"),
 						rs.getString("title"),
 						rs.getString("memberID"),
-						(BLOB) rs.getBlob("contents"));
+						rs.getString("contents"));
 			}
 		}catch(SQLException se){
 			System.err.println("BoardDaoImpl selectBoard() Error :" + se.getMessage());
@@ -307,7 +307,7 @@ public class QnABoardDaoImpl implements QnABoardDao {
 			pstmt.setInt(1, board.getBoardNum());
 			pstmt.setString(2, board.getTitle());
 			pstmt.setString(3, board.getMemberID());
-			pstmt.setBlob(4, board.getcontents());			
+			pstmt.setString(4, board.getcontents());			
 
 			pstmt.executeUpdate();
 
@@ -342,7 +342,7 @@ public class QnABoardDaoImpl implements QnABoardDao {
 			conn = obtainConnection();
 			pstmt = conn.prepareStatement(query);
 			pstmt.setString(1, board.getTitle());
-			pstmt.setBlob(2, board.getcontents());
+			pstmt.setString(2, board.getcontents());
 			pstmt.setInt(3, board.getBoardNum());			
 
 			pstmt.executeUpdate();			

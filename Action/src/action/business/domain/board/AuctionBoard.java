@@ -85,6 +85,13 @@ public class AuctionBoard extends Board {
 		this.mainImage = mainImage;
 	}
 
+	/** 입찰하기 */
+	public AuctionBoard(int boardNum, int currentPrice) {
+		super(boardNum);
+		this.currentPrice = currentPrice;
+	}
+
+	
 
 	public String getImage() {
 		return image;
