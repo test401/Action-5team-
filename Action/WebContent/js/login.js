@@ -1,5 +1,5 @@
 $(function() {
-	$('#loginbutton').click(function() {
+	$('#loginButton').click(function() {
 		jQuery.ajax({
 			type: "POST",
 			url: '/Action/MemberController',

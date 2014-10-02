@@ -16,8 +16,7 @@
         <tr>
             <td id="menulabel">Menu</td>
         </tr>    
-        <tr>
-            <td><hr></td>
+        <tr><td><hr></td>
         </tr>
         <tr>
             <td><a href="/Action/views/board/auctionList.jsp">경매상품보기</a></td>
