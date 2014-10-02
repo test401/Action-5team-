@@ -17,9 +17,9 @@
             <c:import url="/views/side-bar.jsp" />
             <div class="views/main.jsp">
 	            <form action="/Action/views/main.jsp" method="POST">
-					<img alt="" src="/Action/views/images/welcome.gif">
+					<img alt="" id="loginokimage" src="/Action/views/images/welcome.gif">
 					<br>
-					<input type="submit" value="홈으로" >
+					<input type="submit" id="loginokbtn"value="홈으로">
 	            </form>
         	</div>
         </div>
