@@ -1,19 +1,41 @@
 body { 
-	background-color: #b5a789;
+	background-color: #ffffff;
 	font-family: Georgia, "Times New Roman", Times, serif;
 	font-size: small;
 	margin: 0px;
 }
+a:link { text-decoration: none; color: #000000; }
+a:visited { text-decoration: none; color: #000000; }
+a:hover, a:active { text-decoration: underline; color: #cc6600; }
+.tableRow{
+	display:table-row;
+}
+
+.tableCell{
+	vertical-align: top;
+	float: left;
+}
+
+/* .center{
+	text-align: center;
+	width: 500px;
+	margin-left: 200px;
+	float: inherit;
+} */
+
 
 header{
-	background-color: #675c47;
+	background-color: #E6E6FA;
 	margin: 15px 15px 15px 15px;
 	height: 110px;
-	width: 1200px;
+	width: 1205px;
+	
 }
 
 #actionLogo{
-	margin-left:20px;
+	background-color: #E6E6FA;
+	margin-left:5px;
+	margin-top: 5px;
  	float:left;
 } 
 
@@ -21,29 +43,27 @@ header{
 	position :absolute;
 	text-align: left;
 	margin-left:20px;
+	margin-top: 5px;
  	
 }
 
+/* 여기부터 footer 주석 */
 footer {
-	
-	width: 1200px;
-	background-color: #675c47;
-	color: #efe5d0;
+	width: 1175px;
+	height: 60px;
+	background-color: #E6E6FA;
+	color: #000000;
 	text-align: left;
 	padding: 15px;
 	margin: 15px 15px 15px 15px;
-	
-	font-size: 95%;
+	font-size: 100%;
 }
 
 #tableFooter{
-	background-color: #675c47;
-	color: #efe5d0;
 	display:table; 
 }
 #tableFooterRow{
 	display: table-row;
-	
 }
 
 section#groupName {
@@ -89,30 +109,117 @@ section#auction {
 	width: 150px;	
 }
 
+/* 여기까지 footer 주석 */
 
+
+/* 여기부터 sidebar 주석 */
 div.sidebar{
-	background-color: #675c47;
-	color: #efe5d0;
-	display:table; 
+	background-color: #E6E6FA;
+	color: #000000;
+	float:left;
 	margin-left: 15px;
-	width: 290px;
-	height: 500px;
-	font-size: 110%;
-	
+	width: 270px;
+	height: 750px;
 }
+ #sidebarMargin{
+	background-color: #ffffff;
+ 	/* border-style:double;
+ 	border-color:blue; */
+ 	width:260px;
+ 	height:120px;
+	margin: 5px;
+	font-size: 110%;
+} 
 
 #sidebartable{
-	
 	border-spacing: 15px;
-	display: table-row;
-	
+	font-size: 150%;
 }
 
-
-#menulabel{
-	
-	
+.loginlabel{
+	font-size: 15px;
+	width: 70px;
+	height: 30px;
 }
+
+#loginButton{
+	height: 40px;
+}
+.memberFontID{
+	float: right;
+}
+/* 여기까지 sidebar 주석 */
+
+
+/* 회원가입 관련 부분 주석 */
+	
+
+.registermain{	
+/*회원가입 [회원가입] 문구  */
+	list-style-position: inside;
+	margin: 40px 30px 45px 30px;
+	height:500px;
+	width: 400px;
+	float: inherit;
+	font-size:large;
+}
+
+#registerbtnin{
+	width: 100px;
+	margin-left: 100px;
+}
+#registerbtncancle{
+	width: 100px;
+}
+
+.registerLabel{
+	font-size: 30px;
+	color: fuchsia;
+	margin: 0px 0px 0px 20px;
+}
+/*회원관리 주석 끝  */
+
+/* 로그인 완료 이미지 주석 */
+#loginokimage{
+	width: 600px;
+	height: 400px;
+	margin-left: 170px;
+	margin-top: 30px;
+}
+#loginokbtn{
+	margin-left: 360px;
+	margin-top: 30px;
+	width: 200px;
+	height: 50px;
+}
+
+/* 로그인 완료 끝 */
+
+
+
+
+/* 여기서 부터 카태고리와 검색바 */
+#categorytable{
+	background-color: #E6E6FA;
+	color: #000000;
+	margin-left: 15px;
+	width:900px;
+	height: 30px;
+}
+
+.category{
+	margin-left: 25px;
+	font-size:100%;
+}
+
+.buttonbar{
+	background-color: #ffffff;
+	text-align:center;
+	/* margin-left: 50px; */
+	color: #000000;
+}
+/*카태고리와 검색바  끝*/
+
 
 
 

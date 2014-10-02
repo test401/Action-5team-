@@ -4,7 +4,8 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<link rel="stylesheet" href="../action.css">
+<link rel="stylesheet" href="/Action/action.css">
+
 <title>Action</title>
 </head>
 <body>

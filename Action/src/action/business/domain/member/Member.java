@@ -17,7 +17,7 @@ public class Member {
 	
 	
 	/** 회원 ID */
-	private String id;
+	private String memberID;
 	
 	/** 회원 비밀번호 */
 	private String password;
@@ -32,13 +32,13 @@ public class Member {
 	private String tel;
 	
 	/** 회원 경고 회수 */
-	private int warningCount;
+	private int warnCount;
 	
 	/**
 	 * 회원 등급
 	 * 0은 일반 회원, 1은 관리자로 구분한다.
 	 */
-	private int memberClass;
+	private int isAdmin;
 	
 	/** 회원의 로그인 유효성 체크 */
 	private int loginCheck;
@@ -53,20 +53,20 @@ public class Member {
 	 * 회원 등록용 생성자 
 	 * 
 	 */
-	public Member(String id, String password, String name, String address,
-			String tel, int warningCount, int memberClass) {		
-		this.id = id;
+	public Member(String memberID, String password, String name, String address,
+			String tel, int warnCount, int isAdmin) {		
+		this.memberID = memberID;
 		this.password = password;
 		this.name = name;
 		this.address = address;
 		this.tel = tel;
-		this.warningCount = warningCount;
-		this.memberClass = memberClass;
+		this.warnCount = warnCount;
+		this.isAdmin = isAdmin;
 	}
 		
 	/** 회원 로그인용 생성자 */
-	public Member(String id, String password) {		
-		this.id = id;
+	public Member(String memberID, String password) {		
+		this.memberID = memberID;
 		this.password = password;
 	}	
 	
@@ -79,12 +79,12 @@ public class Member {
 	}
 
 	/** getter & setter */
-	public String getId() {
-		return id;
+	public String getMemberID() {
+		return memberID;
 	}
 
-	public void setId(String id) {
-		this.id = id;
+	public void setMemberID(String memberID) {
+		this.memberID = memberID;
 	}
 
 	public String getPassword() {
@@ -119,20 +119,20 @@ public class Member {
 		this.tel = tel;
 	}
 
-	public int getWarningCount() {
-		return warningCount;
+	public int getWarnCount() {
+		return warnCount;
 	}
 
-	public void setWarningCount(int warningCount) {
-		this.warningCount = warningCount;
+	public void setWarnCount(int warnCount) {
+		this.warnCount = warnCount;
 	}
 
-	public int getMemberClass() {
-		return memberClass;
+	public int getIsAdmin() {
+		return isAdmin;
 	}
 
-	public void setMemberClass(int memberClass) {
-		this.memberClass = memberClass;
+	public void setIsAdmin(int isAdmin) {
+		this.isAdmin = isAdmin;
 	}
 
 	public int getLoginCheck() {
@@ -145,9 +145,9 @@ public class Member {
 
 	@Override
 	public String toString() {
-		return "Member [id=" + id + ", password=" + password + ", name=" + name
+		return "Member [id=" + memberID + ", password=" + password + ", name=" + name
 				+ ", address=" + address + ", tel=" + tel + ", warningCount="
-				+ warningCount + ", memberClass=" + memberClass + "]";
+				+ warnCount + ", memberClass=" + isAdmin + "]";
 	}
 
 }

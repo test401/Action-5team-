@@ -1,10 +1,15 @@
 package action.web.controller;
 
 import java.io.File;
+<<<<<<< HEAD
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.Date;
+=======
+import java.io.IOException;
+import java.io.PrintWriter;
+>>>>>>> refs/remotes/origin/newricho
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
@@ -54,19 +59,19 @@ public class AuctionBoardController extends HttpServlet {
 	        String action = request.getPathInfo();
 	
 	        // action 값에 따라 적절한 메소드를 선택하여 호출한다.
-	        if (action.equals("/list")) {
+	        if (action.equals("list")) {
 	        	selectBoardList(request, response);
-	        } else if (action.equals("/read")) {
+	        } else if (action.equals("read")) {
 	        	readBoard(request, response);
-	        } else if (action.equals("/writeForm")) {
+	        } else if (action.equals("writeForm")) {
 	        	writeBoardForm(request, response);
-	        } else if (action.equals("/write")) {
+	        } else if (action.equals("write")) {
 	        	writeBoard(request, response);
-	        } else if (action.equals("/updateForm")) {
+	        } else if (action.equals("updateForm")) {
 	            updateBoardForm(request, response);
-	        } else if (action.equals("/update")) {
+	        } else if (action.equals("update")) {
 	            updateBoard(request, response);
-	        } else if (action.equals("/remove")) {
+	        } else if (action.equals("remove")) {
 	            removeBoard(request, response);
 	        } else {  	
 	        	response.sendError(HttpServletResponse.SC_NOT_FOUND);
@@ -135,8 +140,8 @@ public class AuctionBoardController extends HttpServlet {
 		request.setAttribute("endPageNumber", endPageNumber);
 		request.setAttribute("totalPageCount", totalPageCount);
         
-        //  RequestDispatcher 객체를 통해 뷰 페이지(/WEB-INF/views/board/list.jsp)로 요청을 전달한다.
-        RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/views/board/list.jsp");
+        //  RequestDispatcher 객체를 통해 뷰 페이지(/views/board/auctionList.jsp)로 요청을 전달한다.
+        RequestDispatcher dispatcher = request.getRequestDispatcher("/views/board/auctionList.jsp");
         dispatcher.forward(request, response);
 		
         
@@ -161,7 +166,11 @@ public class AuctionBoardController extends HttpServlet {
 			}
 		// 2. BoardService 객체로부터 해당 글 번호의 게시글을 구해온다.
 		AuctionBoardService service = new AuctionBoardServiceImpl();
+<<<<<<< HEAD
 		AuctionBoard board = service.readBoard(Integer.parseInt(boardNum));
+=======
+		AuctionBoard board = service.findBoard(Integer.parseInt(boardNum));
+>>>>>>> refs/remotes/origin/newricho
 		
 		// 3. request scope 속성(board)에 게시글을 저장한다.
         request.setAttribute("board", board);
@@ -170,8 +179,13 @@ public class AuctionBoardController extends HttpServlet {
 		request.setAttribute("currentPageNumber", currentPageNumber);
 		
         
+<<<<<<< HEAD
         // 4. RequestDispatcher 객체를 통해 뷰 페이지(/views/board/read.jsp)로 요청을 전달한다.
         RequestDispatcher dispatcher = request.getRequestDispatcher("/views/board/read.jsp");
+=======
+        // 4. RequestDispatcher 객체를 통해 뷰 페이지(/views/board/auctionRead.jsp)로 요청을 전달한다.
+        RequestDispatcher dispatcher = request.getRequestDispatcher("/views/board/auctionRead.jsp");
+>>>>>>> refs/remotes/origin/newricho
         dispatcher.forward(request, response);
         
 	}
@@ -179,6 +193,7 @@ public class AuctionBoardController extends HttpServlet {
 	/* 
      * 경매 입찰을 위한 요청을 처리한다.
      */
+<<<<<<< HEAD
 	private void bidAuction(HttpServletRequest request, HttpServletResponse response) 
             throws ServletException, IOException, DataNotFoundException {
 		
@@ -197,12 +212,36 @@ public class AuctionBoardController extends HttpServlet {
 
         // RequestDispatcher 객체를 통해 뷰 페이지(/views/board/writeForm.jsp)로 요청을 전달한다.
         RequestDispatcher dispatcher = request.getRequestDispatcher("/views/board/writeForm.jsp");
+=======
+	public void bidAuction(HttpServletRequest request, HttpServletResponse response) 
+            throws ServletException, IOException, DataNotFoundException {
+		
+		String currentPrice = request.getParameter("currentPrice");
+		String memberID = request.getParameter("memberID");
+		String boardNum = request.getParameter("boardNum");
+		
+		// 구해 온 요청 파라미터 값을 지닌 AuctionBoard 객체를 생성한다.
+		AuctionBoard auctionBoard = new AuctionBoard(Integer.parseInt("boardNum") ,Integer.parseInt("currentPrice"));
+		// AuctionBoardService 객체를 통해 현재입찰금을 갱신한다.
+		AuctionBoardService auctionService = new AuctionBoardServiceImpl();
+		auctionService.updatePrice(auctionBoard);
+		
+		// 구해 온 요청 파라미터 값을 지닌 BidBoard 객체를 생성한다.
+		BidListBoard bidBoard = new BidListBoard(Integer.parseInt("boardNum"), memberID, Integer.parseInt("currentPrice"));
+		// BidListBoardService 객체를 통해 입찰목록을 등록한다.
+		BidListBoardService bidService = new BidListBoardServiceImpl();
+		bidService.writeBoard(bidBoard);
+		
+        // RequestDispatcher 객체를 통해 목록 보기(read)로 요청을 전달한다.
+        RequestDispatcher dispatcher = request.getRequestDispatcher("read");
+>>>>>>> refs/remotes/origin/newricho
         dispatcher.forward(request, response);
 	}
 	
 	/* 
      * 입찰이 완료됬을 때를 위한 요청을 처리한다.
      */
+<<<<<<< HEAD
 	private void AuctionList(HttpServletRequest request, HttpServletResponse response) 
             throws ServletException, IOException, DataNotFoundException {
 		
@@ -222,6 +261,27 @@ public class AuctionBoardController extends HttpServlet {
 
         // RequestDispatcher 객체를 통해 뷰 페이지(/views/board/writeForm.jsp)로 요청을 전달한다.
         RequestDispatcher dispatcher = request.getRequestDispatcher("/views/board/writeForm.jsp");
+=======
+	public void AuctionList(HttpServletRequest request, HttpServletResponse response) 
+            throws ServletException, IOException, DataNotFoundException {
+		
+		String memberID = request.getParameter("memberID");
+		String boardNum = request.getParameter("boardNum");
+		String price = request.getParameter("price");
+		
+		// 2. 구해 온 요청 파라미터 값을 지닌 BidBoard 객체를 생성한다.
+		AuctionListBoard board = new AuctionListBoard(memberID, Integer.parseInt("boardNum"), 
+				 Integer.parseInt("price"));
+				
+		// 3. BoardService 객체를 통해 해당 게시글을 등록한다.
+		AuctionListBoardService service = new AuctionListBoardServiceImpl();
+		service.writeBoard(board);
+		
+		
+
+        // RequestDispatcher 객체를 통해 목록 보기(list)로 요청을 전달한다.
+        RequestDispatcher dispatcher = request.getRequestDispatcher("list");
+>>>>>>> refs/remotes/origin/newricho
         dispatcher.forward(request, response);
 	}
 	
@@ -233,8 +293,13 @@ public class AuctionBoardController extends HttpServlet {
             throws ServletException, IOException, DataNotFoundException {
 		
 
+<<<<<<< HEAD
         // RequestDispatcher 객체를 통해 뷰 페이지(/views/board/writeForm.jsp)로 요청을 전달한다.
         RequestDispatcher dispatcher = request.getRequestDispatcher("/views/board/writeForm.jsp");
+=======
+        // RequestDispatcher 객체를 통해 뷰 페이지(/views/board/auctionWriteForm.jsp)로 요청을 전달한다.
+        RequestDispatcher dispatcher = request.getRequestDispatcher("/views/board/auctionWriteForm.jsp");
+>>>>>>> refs/remotes/origin/newricho
         dispatcher.forward(request, response);
 	}
 	
@@ -306,6 +371,7 @@ public class AuctionBoardController extends HttpServlet {
 				FileItem item = iter.next();
 				// 일반 폼 필드 처리 (<input type="file">이 아닌 경우)
 				if (item.isFormField()) {
+<<<<<<< HEAD
 					names[count] = item.getString();
 					count++;
 
@@ -321,6 +387,23 @@ public class AuctionBoardController extends HttpServlet {
 					}
 					imageName = imageName.substring(index + 1); // 파일명만 추출
 */					
+=======
+					names[count] = item.getString("UTF-8");
+					count++;
+
+				 // 파일 업로드 처리 (<input type="file">인 경우)
+				} else {
+					
+					
+					images[count] = item.getName();// 경로가 포함된 파일명
+					//if(images[count] != null && images[count])
+					int index = images[count].lastIndexOf("\\"); // 디렉터리 구분자 위치를 통해
+					if (index == -1) {
+						index = images[count].lastIndexOf("/");
+					}
+					images[count] = images[count].substring(index + 1); // 파일명만 추출
+				
+>>>>>>> refs/remotes/origin/newricho
 					// 파일 업로드 처리
 					File uploadedFile = new File(uploadDir, images[count]);
 					item.write(uploadedFile); // 실질적인 저장
@@ -369,6 +452,10 @@ public class AuctionBoardController extends HttpServlet {
      */
 	private void updateBoardForm(HttpServletRequest request, HttpServletResponse response) 
             throws ServletException, IOException, DataNotFoundException {
+<<<<<<< HEAD
+=======
+		
+>>>>>>> refs/remotes/origin/newricho
 		// 요청 파라미터로 부터 경매글 번호(boardNum)를 구한다.
 		String boardNum = request.getParameter("boardNum");
 		
@@ -400,6 +487,7 @@ public class AuctionBoardController extends HttpServlet {
      */
 	private void updateBoard(HttpServletRequest request, HttpServletResponse response) 
             throws ServletException, IOException, DataNotFoundException {
+<<<<<<< HEAD
 		// 1. 요청 파라미터 값을 구한다.
 		String title = request.getParameter("title");
 		String image = request.getParameter("image");
@@ -411,7 +499,32 @@ public class AuctionBoardController extends HttpServlet {
 		// 2. 구해 온 요청 파라미터 값을 지닌 AuctionBoard 객체를 생성한다.
 		AuctionBoard board = new AuctionBoard(title, imageName ,contents, Integer.parseInt("categoryID"),
 				Integer.parseInt("isImmediately"), Integer.parseInt("immediatelyPrice"), image);
+=======
 		
+		request.setCharacterEncoding("UTF-8");
+		response.setContentType("text/html; charset=UTF-8");
+		PrintWriter out = response.getWriter();		
+		
+		// multipart 컨텐트 여부 확인
+		boolean isMultipart = ServletFileUpload.isMultipartContent(request);
+		if (!isMultipart) {
+			out.println("요청 내용이 multipart/form-data가 아닙니다.");
+			out.close();
+			return;
+		}
+		
+		
+		// 1. 요청 파라미터 값을 구한다.
+		String title = null;
+		String contents = null;
+		String catagoryID = null;
+		String isImmediately = null;
+		String immediatelyPrice = null;
+		String image = null;
+		String mainImage = null;
+>>>>>>> refs/remotes/origin/newricho
+		
+<<<<<<< HEAD
 		// 3. BoardService 객체를 통해 해당 게시글을 갱신한다.
 		AuctionBoardService service = new AuctionBoardServiceImpl();
 		service.updateBoard(board);
@@ -419,6 +532,93 @@ public class AuctionBoardController extends HttpServlet {
 		// 4. request scope 속성(board)에 게시글을 저장한다.
         request.setAttribute("board", board);
    
+=======
+		String[] images = {image, mainImage};
+
+		String[] names = {title, contents, catagoryID, isImmediately, 
+						immediatelyPrice, image, mainImage};
+		
+		// 디스크 기반의 FileItem factory 생성
+		DiskFileItemFactory factory = new DiskFileItemFactory();
+		// repository 생성 (a secure temp location is used)
+		ServletContext servletContext = this.getServletConfig().getServletContext();
+		File repository = (File) servletContext.getAttribute("javax.servlet.context.tempdir");
+		// File repository = new File(uploadDir, "temp");  
+		// if (!repository.exists()) { repository.mkdir(); }
+		
+		// factory 제약 설정
+		factory.setSizeThreshold(1024 * 100); // 메모리에 저장할 최대 size (100K까지는 메모리에 저장)
+		factory.setRepository(repository);	// 파일 임시 저장소 (100K 이상이면 repository에 저장)	
+		
+		// 파일 업로드 핸들러 생성
+		ServletFileUpload upload = new ServletFileUpload(factory);
+		// 총 request size 제약 설정
+		upload.setSizeMax(1024 * 1024 * 20); // 최대 size (20M까지 가능)
+		
+		// 요청 파싱
+		try {
+			List<FileItem> items = upload.parseRequest(request);
+			int count = 0;
+			
+			// 업로드된 items 처리
+			Iterator<FileItem> iter = items.iterator();
+			while (iter.hasNext()) {    
+				FileItem item = iter.next();
+				// 일반 폼 필드 처리 (<input type="file">이 아닌 경우)
+				if (item.isFormField()) {
+					names[count] = item.getString("UTF-8");
+					count++;
+
+				 // 파일 업로드 처리 (<input type="file">인 경우)
+				} else {
+					
+					
+					images[count] = item.getName();// 경로가 포함된 파일명
+					//if(images[count] != null && images[count])
+					int index = images[count].lastIndexOf("\\"); // 디렉터리 구분자 위치를 통해
+					if (index == -1) {
+						index = images[count].lastIndexOf("/");
+					}
+					images[count] = images[count].substring(index + 1); // 파일명만 추출
+					
+					// 파일 업로드 처리
+					File uploadedFile = new File(uploadDir, images[count]);
+					item.write(uploadedFile); // 실질적인 저장
+					
+					
+					//즉시구매여부가 널값이거나 0이면 즉시구매, 즉시구매가격을 0으로 설정
+					if ((names[3] == null) || (names[3].length() == 0)) {
+						names[3]="0";
+						names[4]="0";
+					}
+					
+	
+					//names[0] = title,             names[1] = contents,  
+					//names[2] = catagoryID         names[3] = isImmediately
+					//names[4] = immediatelyPrice,  
+					//images[0] = image             images[1] = mainImage
+					
+					// 구해 온 요청 파라미터 값을 지닌 AuctionBoard 객체를 생성한다.
+					
+					
+					AuctionBoard board = new AuctionBoard(names[0], names[1], Integer.parseInt(names[2]),
+							Integer.parseInt(names[3]), Integer.parseInt(names[4]), images[0], images[1]);
+					
+					// 3. BoardService 객체를 통해 해당 게시글을 갱신한다.
+					AuctionBoardService service = new AuctionBoardServiceImpl();
+					service.updateBoard(board);
+					// 4. request scope 속성(board)에 게시글을 저장한다.
+					request.setAttribute("board", board);
+				}		
+			}			
+				out.close();
+			} catch (Exception e) {
+				e.printStackTrace();
+				out.println("파일 업로드 처리에 문제가 있습니다.");	
+			}
+		
+		
+>>>>>>> refs/remotes/origin/newricho
         // 5. RequestDispatcher 객체를 통해 게시물 보기(read)로 요청을 전달한다.
         RequestDispatcher dispatcher = request.getRequestDispatcher("read");
         dispatcher.forward(request, response);
@@ -437,7 +637,7 @@ public class AuctionBoardController extends HttpServlet {
 		AuctionBoardService service = new AuctionBoardServiceImpl();
 		service.removeBoard(Integer.parseInt(boardNum));
 
-        // 3. RequestDispatcher 객체를 통해 목록 보기(board?action=list)로 요청을 전달한다.
+        // 3. RequestDispatcher 객체를 통해 목록 보기(list)로 요청을 전달한다.
 		RequestDispatcher dispatcher = request.getRequestDispatcher("list");
 	    dispatcher.forward(request, response);
 		

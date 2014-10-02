@@ -8,10 +8,17 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+<<<<<<< HEAD
 import action.business.domain.board.Board;
 import action.business.domain.reply.AuctionBoardReply;
 import action.business.service.DataNotFoundException;
 
+=======
+import action.business.domain.board.AuctionBoard;
+import action.business.domain.board.Board;
+import action.business.domain.reply.AuctionBoardReply;
+import action.business.service.DataNotFoundException;
+>>>>>>> refs/remotes/origin/newricho
 
 
 /**

@@ -1,9 +1,5 @@
 package action.business.domain.board;
 
-import java.util.Date;
-
-import oracle.sql.BLOB;
-
 
 /**3. 경매 게시판 테이블
  * 게시글번호(게시판 공통), 글제목(게시판 공통), 작성자(게시판 공통), 대표이미지, 내용,
@@ -12,8 +8,13 @@ import oracle.sql.BLOB;
 
 public class AuctionBoard extends Board {
 
+<<<<<<< HEAD
 	private String image;
 	private BLOB contents;
+=======
+
+	private String contents;
+>>>>>>> refs/remotes/origin/newricho
 	private String startTime;
 	private String endTime;
 	private int catagoryID;
@@ -21,27 +22,43 @@ public class AuctionBoard extends Board {
 	private int startPrice;
 	private int immediatelyPrice;
 	private int currentPrice;
+	private String image;
+	private String mainImage;
 	
 	
 	/** 경매 리스트 조회용 */
+<<<<<<< HEAD
 	public AuctionBoard(int boardNum, String title, String memberID,
 			String image, String endTime, int catagoryID,
 			int immediatelyPrice, int currentPrice) {
+=======
+	public AuctionBoard(int boardNum, String title, String memberID,
+			String endTime, int catagoryID,
+			int immediatelyPrice, int currentPrice, String mainImage) {
+
+>>>>>>> refs/remotes/origin/newricho
 		super(boardNum, title, memberID);
-		this.image = image;
 		this.endTime = endTime;
 		this.catagoryID = catagoryID;
 		this.immediatelyPrice = immediatelyPrice;
 		this.currentPrice = currentPrice;
+		this.mainImage = mainImage;
 	}
 	
 	/** 경매 상세 조회용 */
+<<<<<<< HEAD
 	public AuctionBoard(int boardNum, String title, String memberID, 
 			String image, BLOB contents, String startTime,
 			String endTime, int catagoryID, int isImmediately, int startPrice,
 			int immediatelyPrice, int currentPrice) {
+=======
+	public AuctionBoard(int boardNum, String title, String memberID, 
+			String contents, String startTime,
+			String endTime, int catagoryID, int isImmediately, int startPrice,
+			int immediatelyPrice, int currentPrice, String image, String mainImage) {
+
+>>>>>>> refs/remotes/origin/newricho
 		super(boardNum,title,memberID);
-		this.image = image;
 		this.contents = contents;
 		this.startTime = startTime;
 		this.endTime = endTime;
@@ -50,14 +67,23 @@ public class AuctionBoard extends Board {
 		this.startPrice = startPrice;
 		this.immediatelyPrice = immediatelyPrice;
 		this.currentPrice = currentPrice;
+		this.image = image;
+		this.mainImage = mainImage;
 	}
 	
 	/** 경매 작성용 */
+<<<<<<< HEAD
 	public AuctionBoard(String title, String memberID, String image, BLOB contents, String startTime,
 			String endTime, int catagoryID, int isImmediately, int startPrice,
 			int immediatelyPrice, int currentPrice) {
+=======
+
+	public AuctionBoard(String title, String memberID, String contents, String startTime,
+			String endTime, int catagoryID, int isImmediately, int startPrice,
+			int immediatelyPrice, int currentPrice, String image, String mainImage) {
+
+>>>>>>> refs/remotes/origin/newricho
 		super(title, memberID);
-		this.image = image;
 		this.contents = contents;
 		this.startTime = startTime;
 		this.endTime = endTime;
@@ -66,21 +92,31 @@ public class AuctionBoard extends Board {
 		this.startPrice = startPrice;
 		this.immediatelyPrice = immediatelyPrice;
 		this.currentPrice = currentPrice;
+		this.image = image;
+		this.mainImage = mainImage;
 	}
 	
 	/** 경매 수정용 */
-	public AuctionBoard(String title, String image, BLOB contents, int catagoryID,
-			int isImmediately, int immediatelyPrice) {
+
+	public AuctionBoard(String title, String contents, int catagoryID,
+			int isImmediately, int immediatelyPrice, String image, String mainImage) {
 		super(title);
-		this.image = image;
 		this.contents = contents;
 		this.catagoryID = catagoryID;
 		this.isImmediately = isImmediately;
 		this.immediatelyPrice = immediatelyPrice;
+		this.image = image;
+		this.mainImage = mainImage;
+	}
+
+	/** 입찰하기 */
+	public AuctionBoard(int boardNum, int currentPrice) {
+		super(boardNum);
+		this.currentPrice = currentPrice;
 	}
 
 	
-	
+
 	public String getImage() {
 		return image;
 	}
@@ -89,11 +125,11 @@ public class AuctionBoard extends Board {
 		this.image = image;
 	}
 
-	public BLOB getContents() {
+	public String getContents() {
 		return contents;
 	}
 
-	public void setContents(BLOB contents) {
+	public void setContents(String contents) {
 		this.contents = contents;
 	}
 
@@ -152,6 +188,15 @@ public class AuctionBoard extends Board {
 	public void setCurrentPrice(int currentPrice) {
 		this.currentPrice = currentPrice;
 	}
+
+	public String getMainImage() {
+		return mainImage;
+	}
+
+	public void setMainImage(String mainImage) {
+		this.mainImage = mainImage;
+	}
+	
 	
 	
 	

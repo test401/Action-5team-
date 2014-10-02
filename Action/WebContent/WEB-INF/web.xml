@@ -21,16 +21,6 @@
   </servlet-mapping>
   <servlet>
     <description></description>
-    <display-name>BoardController</display-name>
-    <servlet-name>BoardController</servlet-name>
-    <servlet-class>action.web.controller.BoardController</servlet-class>
-  </servlet>
-  <servlet-mapping>
-    <servlet-name>BoardController</servlet-name>
-    <url-pattern>/BoardController</url-pattern>
-  </servlet-mapping>
-  <servlet>
-    <description></description>
     <display-name>AuctionBoardController</display-name>
     <servlet-name>AuctionBoardController</servlet-name>
     <servlet-class>action.web.controller.AuctionBoardController</servlet-class>
@@ -49,4 +39,66 @@
     <servlet-name>ReplyController</servlet-name>
     <url-pattern>/ReplyController</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>BoardController</display-name>
+    <servlet-name>BoardController</servlet-name>
+    <servlet-class>action.web.controller.BoardController</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>BoardController</servlet-name>
+    <url-pattern>/BoardController</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>ReplyContorller</display-name>
+    <servlet-name>ReplyContorller</servlet-name>
+    <servlet-class>action.web.controller.ReplyContorller</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>ReplyContorller</servlet-name>
+    <url-pattern>/ReplyContorller</url-pattern>
+  </servlet-mapping>
+  
+    <error-page>
+    <exception-type>java.lang.Exception</exception-type>
+    <location>/exceptionPage.jsp</location>
+  </error-page>
+  <error-page>
+    <error-code>404</error-code>
+    <location>/404.jsp</location>
+  </error-page>
+  
+    <filter>
+    <display-name>EncodingFilter</display-name>
+    <filter-name>EncodingFilter</filter-name>
+    <filter-class>action.web.filter.EncodingFilter</filter-class>
+    <init-param>
+      <description></description>
+      <param-name>encoding</param-name>
+      <param-value>UTF-8</param-value>
+    </init-param>
+  </filter>
+  
+   <filter-mapping>
+    <filter-name>EncodingFilter</filter-name>
+    <servlet-name>MemberController</servlet-name>
+  </filter-mapping>
+   <filter-mapping>
+    <filter-name>EncodingFilter</filter-name>
+    <servlet-name>AuctionBoardController</servlet-name>
+  </filter-mapping>
+   <filter-mapping>
+    <filter-name>EncodingFilter</filter-name>
+    <servlet-name>ReplyController</servlet-name>
+  </filter-mapping>
+   <filter-mapping>
+    <filter-name>EncodingFilter</filter-name>
+    <servlet-name>BoardController</servlet-name>
+  </filter-mapping>
+   <filter-mapping>
+    <filter-name>EncodingFilter</filter-name>
+    <servlet-name>ReplyContorller</servlet-name>
+  </filter-mapping>
+
 </web-app>
