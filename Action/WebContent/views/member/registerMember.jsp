@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<link rel="stylesheet" href="../../action.css">
+<link rel="stylesheet" href="/Action/action.css">
 <script src="/Action/js/member.js"></script>
 <title>Action Register Member</title>
 </head>

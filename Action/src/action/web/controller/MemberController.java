@@ -30,7 +30,6 @@ public class MemberController extends HttpServlet {
 	protected void processRequest(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
 
-//		request.setCharacterEncoding("UTF-8");
 		//1. action 요청파라미터 값을 확인한다.
 		String action = request.getParameter("action");
 		/*
@@ -84,12 +83,13 @@ public class MemberController extends HttpServlet {
 		if (check == Member.VALID_MEMBER) {
 //			//request scope 속성에 유효한 회원을 저장한다.
 //			request.setAttribute("loginMember", member);
-			//session객체를 생성 후 session scope 속성에 로그인된 회원 객체를 저장하고 
+			//session객체를 생성 후 session scope 속성에 로그인된 회원 객체를 저장하고
 			HttpSession session = request.getSession(true);
 			session.setAttribute("loginMember", member);
 			// RequestDispatcher 객체를 통해 뷰 서블릿(logout.jsp)으로 요청을 전달한다.
-			RequestDispatcher dispatcher = request.getRequestDispatcher("/views/main.jsp");
-			dispatcher.forward(request, response);
+/*			RequestDispatcher dispatcher = request.getRequestDispatcher("/views/main.jsp");
+			dispatcher.forward(request, response);*/
+			response.getWriter().print(memberID);
 		//유효하지 않는 아이디인 경우
 		} else {
 			//에러메시지 변수
@@ -104,9 +104,11 @@ public class MemberController extends HttpServlet {
 			}
 			// 에러 내용을 request scope 속성에 저장하고
 			request.setAttribute("loginErrorMsg", loginErrorMsg);
+			response.getWriter().print(loginErrorMsg);
 			// 에러 페이지 뷰 서블릿(userError.jsp)으로 요청을 전달한다.
-			RequestDispatcher dispathcer = request.getRequestDispatcher("/views/main.jsp");
-			dispathcer.forward(request, response);
+/*			RequestDispatcher dispathcer = request.getRequestDispatcher("/views/main.jsp");
+			dispathcer.forward(request, response);*/
+			
 		}
 	}
 	

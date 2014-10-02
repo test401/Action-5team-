@@ -187,9 +187,8 @@ public class MemberDaoImpl implements MemberDao {
 	@Override
 	public Member checkMember(String memberID, String password) {
 		Member member = new Member(memberID, password);
-
 		String query = "SELECT Password, Name, address, Tel, warnCount, isAdmin FROM AuctionMember WHERE memberID = ?";
-
+		
 		Connection connection = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
@@ -226,7 +225,6 @@ public class MemberDaoImpl implements MemberDao {
 			try { if (pstmt != null) pstmt.close(); } catch (SQLException se) { se.printStackTrace(System.err); }
 			try { if (connection != null) connection.close(); } catch (SQLException se) { se.printStackTrace(System.err); }
 		}
-
 		return member;
 	}
 
