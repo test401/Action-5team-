@@ -88,7 +88,7 @@ public class MemberController extends HttpServlet {
 			HttpSession session = request.getSession(true);
 			session.setAttribute("loginMember", member);
 			// RequestDispatcher 객체를 통해 뷰 서블릿(logout.jsp)으로 요청을 전달한다.
-			RequestDispatcher dispatcher = request.getRequestDispatcher("index.jsp");
+			RequestDispatcher dispatcher = request.getRequestDispatcher("/views/main.jsp");
 			dispatcher.forward(request, response);
 		//유효하지 않는 아이디인 경우
 		} else {
@@ -105,7 +105,7 @@ public class MemberController extends HttpServlet {
 			// 에러 내용을 request scope 속성에 저장하고
 			request.setAttribute("loginErrorMsg", loginErrorMsg);
 			// 에러 페이지 뷰 서블릿(userError.jsp)으로 요청을 전달한다.
-			RequestDispatcher dispathcer = request.getRequestDispatcher("index.jsp");
+			RequestDispatcher dispathcer = request.getRequestDispatcher("/views/main.jsp");
 			dispathcer.forward(request, response);
 		}
 	}
@@ -123,7 +123,7 @@ public class MemberController extends HttpServlet {
 			session.removeAttribute("loginMember");
 		}
 		// index.jsp페이지로 전달한다.(맨처음 페이지 표시하기 위함)
-		RequestDispatcher dispathcer = request.getRequestDispatcher("index.jsp");
+		RequestDispatcher dispathcer = request.getRequestDispatcher("/views/main.jsp");
 		dispathcer.forward(request, response);
 	}
 
@@ -255,7 +255,7 @@ public class MemberController extends HttpServlet {
 		// request scope 속성에 정보수정된 member를 저장하고
 		request.setAttribute("member", member);
 		// RequestDispatcher 객체를 통해 뷰 서블릿(thankYou.jsp)으로 요청을 전달한다.
-		RequestDispatcher dispatcher = request.getRequestDispatcher("thankYou.jsp");
+		RequestDispatcher dispatcher = request.getRequestDispatcher("/views/member/infomationMember.jsp");
 		dispatcher.forward(request, response);
 
 	}
@@ -294,7 +294,7 @@ public class MemberController extends HttpServlet {
 		request.setAttribute("selectedMember", selectedMember);
 		
 		// RequestDispatcher를 통해 view 서블릿으로 요청 전달한다.
-		RequestDispatcher dispatcher = request.getRequestDispatcher("updateMember.jsp");
+		RequestDispatcher dispatcher = request.getRequestDispatcher("/views/member/infomationMember.jsp");
 		dispatcher.forward(request, response);
 	}
 	
@@ -328,7 +328,7 @@ public class MemberController extends HttpServlet {
 		session.removeAttribute("loginMember");
 		
 		// RequestDispatcher 객체를 통해 뷰 서블릿(goodByeYou.jsp)으로 요청을 전달한다.
-		RequestDispatcher dispatcher = request.getRequestDispatcher("goodByeYou.jsp");
+		RequestDispatcher dispatcher = request.getRequestDispatcher("/views/member/leaveSuccess.jsp");
 		dispatcher.forward(request, response);
 		
 	}

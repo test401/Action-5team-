@@ -5,6 +5,7 @@
 <head>
 <meta charset="UTF-8">
 <link rel="stylesheet" href="/Action/action.css">
+<script src="/Action/js/member.js"></script>
 <title>Action Register Success</title>
 </head>
 <body>

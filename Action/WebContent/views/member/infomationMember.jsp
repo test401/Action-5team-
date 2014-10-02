@@ -4,7 +4,8 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<link rel="stylesheet" href="../../action.css">
+<link rel="stylesheet" href="/Action/action.css">
+<script src="/Action/js/member.js"></script>
 <title>Action My Information</title>
 </head>
 <body>
@@ -15,34 +16,32 @@
         <div class="tableRow">
             <c:import url="/views/side-bar.jsp" />
             <div class="main">
-	            <form action="" method="POST">
 	            	<table>
 	            		<tr>
 	            			<td><label class="registerLabel" >회원가입</label></td>
 	            		</tr>
 	            		<tr>
 	            			<td><label class="label">회원 아이디</label></td>
-	            			<td><label>${sessionScope.loginMember.id}</label></td>
+	            			<td><label>${sessionScope.loginMember.memberID}</label></td>
 	            		</tr>       	
 	            		<tr>
 	            		    <td><label class="label">회원 이름</label></td>
-	            			<td><label class="label">${sessionScope.loginMember.name}"</label></td>
+	            			<td><label class="label">${sessionScope.loginMember.name}</label></td>
 	            		</tr>
 						<tr>
 	            		    <td><label class="label">연락처</label></td>
-	            			<td><label class="label">${sessionScope.loginMember.tel}"</label></td>
+	            			<td><label class="label">${sessionScope.loginMember.tel}</label></td>
 	            		</tr>
 	            		<tr>
 	            		    <td><label class="label">주소</label></td>
-	            			<td><label class="label">${sessionScope.loginMember.address}"</label></td>
+	            			<td><label class="label">${sessionScope.loginMember.address}</label></td>
 	            		</tr>
 	            		<tr>
-	            		    <td><input type="submit" name="register" value="수정"></td>
-	            			<td><input type="submit" name="register" value="탈퇴"></td>
+	            		    <td><button name="update" onclick="goUrl('/Action/views/member/updateMember.jsp')">수정</button></td>
+	            			<td><button name="delete" onclick="deleteCheck('/Action/MemberController?action=remove');">탈퇴</button></td>
 	            		</tr>
 	            		
 	            	</table>
-	            </form>
         	</div>
         </div>   
         

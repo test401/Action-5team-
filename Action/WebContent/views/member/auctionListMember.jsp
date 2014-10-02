@@ -4,7 +4,8 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<link rel="stylesheet" href="../../action.css">
+<link rel="stylesheet" href="/Action/action.css">
+<script src="/Action/js/member.js"></script>
 <title>Action My Auction List</title>
 </head>
 <body>
@@ -22,7 +23,7 @@
 	            		</tr>
 	            		<tr>
 	            			<td><label class="label">회원 아이디</label></td>
-	            			<td><label>${sessionScope.loginMember.id}</label></td>
+	            			<td><label>${sessionScope.loginMember.memberID}</label></td>
 	            		</tr>       	
 	            		<tr>
 	            		    <td><label class="label">회원 이름</label></td>

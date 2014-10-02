@@ -4,7 +4,8 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<link rel="stylesheet" href="../../action.css">
+<link rel="stylesheet" href="/Action/action.css">
+<script src="/Action/js/member.js"></script>
 <title>Action Register Success</title>
 </head>
 <body>
@@ -15,12 +16,12 @@
         <div class="tableRow">
             <c:import url="/views/side-bar.jsp" />
             <div class="views/main.jsp">
-	            <form action="main" method="POST">
+	            <form action="/Action/views/main.jsp" method="POST">
 					<p>
 						그동안 이용해 주셔서 감사합니다.
 					</p>
 					<br>
-					<input type="submit" value="메인으로" >
+					<input type="submit" value="홈으로" >
 	            </form>
         	</div>
         </div>

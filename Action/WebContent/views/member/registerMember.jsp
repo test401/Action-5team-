@@ -49,7 +49,7 @@
 	            		</tr>
 	            		<tr>
 	            		    <td><br><input type="button" name="register" value="가입신청" onclick="boardWriteCheck(this.form);"></td>
-	            			<td><br><input type="button" name="cancle" value="취소" onclick="goUrl();"></td>
+	            			<td><br><input type="button" name="cancle" value="취소" onclick="goUrl('/Action/views/main.jsp');"></td>
 	            		</tr>
 	            	</table>
 	            </form>
