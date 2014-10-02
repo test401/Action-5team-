@@ -8,13 +8,7 @@ package action.business.domain.board;
 
 public class AuctionBoard extends Board {
 
-<<<<<<< HEAD
-	private String image;
-	private BLOB contents;
-=======
-
 	private String contents;
->>>>>>> refs/remotes/origin/newricho
 	private String startTime;
 	private String endTime;
 	private int catagoryID;
@@ -27,16 +21,10 @@ public class AuctionBoard extends Board {
 	
 	
 	/** 경매 리스트 조회용 */
-<<<<<<< HEAD
-	public AuctionBoard(int boardNum, String title, String memberID,
-			String image, String endTime, int catagoryID,
-			int immediatelyPrice, int currentPrice) {
-=======
 	public AuctionBoard(int boardNum, String title, String memberID,
 			String endTime, int catagoryID,
 			int immediatelyPrice, int currentPrice, String mainImage) {
 
->>>>>>> refs/remotes/origin/newricho
 		super(boardNum, title, memberID);
 		this.endTime = endTime;
 		this.catagoryID = catagoryID;
@@ -46,18 +34,11 @@ public class AuctionBoard extends Board {
 	}
 	
 	/** 경매 상세 조회용 */
-<<<<<<< HEAD
-	public AuctionBoard(int boardNum, String title, String memberID, 
-			String image, BLOB contents, String startTime,
-			String endTime, int catagoryID, int isImmediately, int startPrice,
-			int immediatelyPrice, int currentPrice) {
-=======
 	public AuctionBoard(int boardNum, String title, String memberID, 
 			String contents, String startTime,
 			String endTime, int catagoryID, int isImmediately, int startPrice,
 			int immediatelyPrice, int currentPrice, String image, String mainImage) {
 
->>>>>>> refs/remotes/origin/newricho
 		super(boardNum,title,memberID);
 		this.contents = contents;
 		this.startTime = startTime;
@@ -72,17 +53,11 @@ public class AuctionBoard extends Board {
 	}
 	
 	/** 경매 작성용 */
-<<<<<<< HEAD
-	public AuctionBoard(String title, String memberID, String image, BLOB contents, String startTime,
-			String endTime, int catagoryID, int isImmediately, int startPrice,
-			int immediatelyPrice, int currentPrice) {
-=======
 
 	public AuctionBoard(String title, String memberID, String contents, String startTime,
 			String endTime, int catagoryID, int isImmediately, int startPrice,
 			int immediatelyPrice, int currentPrice, String image, String mainImage) {
 
->>>>>>> refs/remotes/origin/newricho
 		super(title, memberID);
 		this.contents = contents;
 		this.startTime = startTime;
