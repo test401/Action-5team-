@@ -36,7 +36,7 @@
 								<input type="button" value="경매등록" onclick="writeCheck('<c:url value="/views/member/registerMember.jsp"/>');">
 							</c:when>
 							<c:otherwise>
-								<input type="button" value="경매등록" onclick="goUrl('writeForm');">
+								<input type="button" value="경매등록" onclick="goUrl('auctionWriteForm.jsp');">
 							</c:otherwise>
 						</c:choose>
                 		</td>

@@ -24,6 +24,10 @@
     <display-name>AuctionBoardController</display-name>
     <servlet-name>AuctionBoardController</servlet-name>
     <servlet-class>action.web.controller.AuctionBoardController</servlet-class>
+    <init-param>
+      <param-name>uploadDir</param-name>
+      <param-value>img</param-value>
+    </init-param>
   </servlet>
   <servlet-mapping>
     <servlet-name>AuctionBoardController</servlet-name>

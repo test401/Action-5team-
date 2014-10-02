@@ -34,16 +34,16 @@ function boardWriteCheck(form) {
 		return;
 	}
 
-	if (form.startPrice.value.length == 0) {
+/*	if (form.startPrice.value.length == 0) {
 		alert("시작가를 입력하세요.");
 		form.startPrice.focus();
 		return;
-	}
-	if (form.endTime.value.length == 0) {
+	}*/
+/*	if (form.endTime.value.length == 0) {
 		alert("기간을 선택하세요.");
 		form.endTime.focus();
 		return;
-	}
+	}*/
 
 	if (CKEDITOR.instances.contents.getData().length == 0) {
 		alert("내용을 입력하세요.");

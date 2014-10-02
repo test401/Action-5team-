@@ -85,9 +85,12 @@ public class AuctionListBoardDaoImpl implements AuctionListBoardDao{
 					title = title.substring(0, 20) + "...";
 				}
 
-				board = new AuctionListBoard(rs.getInt("boardnum"),
+				board = new AuctionListBoard(
+						rs.getInt("listnum"),
 						rs.getString("memberID"),
-						rs.getInt("listnum"));
+						rs.getInt("boardnum"),
+						rs.getInt("price")
+						);
 				boardList.add(board);
 			}
 
@@ -166,9 +169,11 @@ public class AuctionListBoardDaoImpl implements AuctionListBoardDao{
 			rs = pstmt.executeQuery();
 
 			if(rs.next()){
-				board = new AuctionListBoard(rs.getInt("boardnum"),
+				board = new AuctionListBoard(
+						rs.getInt("listnum"),
 						rs.getString("memberID"),
-						rs.getInt("listnum"));
+						rs.getInt("boardnum"),
+						rs.getInt("price"));
 			}
 		}catch(SQLException se){
 			System.err.println("BoardDaoImpl selectBoard() Error :" + se.getMessage());
@@ -235,8 +240,8 @@ public class AuctionListBoardDaoImpl implements AuctionListBoardDao{
 	 */
 	@Override
 	public void insertBoard(AuctionListBoard board) {
-		String query = "INSERT INTO AuctionListBoard (listnum, boardnum, memberID) "
-				+ "VALUES (board_num_seq.NEXTVAL, ?, ?)";
+		String query = "INSERT INTO AuctionListBoard (listnum, boardnum, memberID, price) "
+				+ "VALUES (AUCTIONLISTBOARD_LISTNUM_SEQ.NEXTVAL, ?, ?, ?)";
 
 		Connection conn = null;
 		PreparedStatement pstmt = null;
@@ -247,6 +252,7 @@ public class AuctionListBoardDaoImpl implements AuctionListBoardDao{
 
 			pstmt.setInt(1, board.getBoardNum());
 			pstmt.setString(2, board.getMemberID());
+			pstmt.setInt(3, board.getPrice());
 
 			pstmt.executeUpdate();
 

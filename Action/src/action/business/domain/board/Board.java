@@ -9,6 +9,11 @@ import oracle.sql.BLOB;
  * */
 public abstract class Board {
 	
+	@Override
+	public String toString() {
+		return "Board [boardNum=" + boardNum + ", memberID=" + memberID
+				+ ", title=" + title + ", contents=" + contents + "]";
+	}
 	/** 게시글번호*/
 	private int boardNum;
 	/** 회원ID*/

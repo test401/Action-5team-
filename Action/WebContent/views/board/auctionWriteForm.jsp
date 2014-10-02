@@ -18,7 +18,7 @@
 	        <div class="tableCell">
 	        	<c:import url="/views/side-bar.jsp" />
 	            <div class="main">
-	            	<form action="" method="POST">
+	            	<form action="/Action/AuctionBoard?action=write" method="POST" enctype="multipart/form-data">
 		            	<table>
 		            		<tr>
 		            			<td><label class="registerlabel" >경매물품등록</label></td>
@@ -27,10 +27,10 @@
 		            			<td><label class="label">카테고리</label></td>
 		            			<td>
 		            				<select name="categoryID">
-		            					<option value=""></option>
-		            					<option value=""></option>
-		            					<option value=""></option>
-		            					<option value=""></option>
+		            					<option value="1">카</option>
+		            					<option value="2">테</option>
+		            					<option value="3">고</option>
+		            					<option value="4">리</option>
 		            				</select>
 		            			</td>
 		            		</tr>       	
@@ -38,10 +38,10 @@
 		            		    <td><label class="label">제목</label></td>
 		            			<td><input type="text" name="title" placeholder="글제목을 입력하여주세요."></td>
 		            		</tr>
-		            		<tr>
+		            		<!-- <tr>
 		            		    <td><label class="label">대표이미지</label></td>
 		            			<td><input type="file" name="image"></td>
-		            		</tr>
+		            		</tr> -->
 		            		<tr>
 		            		    <td><label class="label">시작가</label></td>
 		            			<td><input type="text" name="startPrice"></td>

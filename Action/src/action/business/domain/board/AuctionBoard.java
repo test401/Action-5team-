@@ -54,13 +54,12 @@ public class AuctionBoard extends Board {
 	
 	/** 경매 작성용 */
 
-	public AuctionBoard(String title, String memberID, String contents, String startTime,
-			String endTime, int catagoryID, int isImmediately, int startPrice,
-			int immediatelyPrice, int currentPrice, String image, String mainImage) {
+	public AuctionBoard(String memberID, int catagoryID, String title,
+			int startPrice, int isImmediately, int immediatelyPrice, String endTime, String contents,
+			int currentPrice,  String mainImage, String image) {
 
 		super(title, memberID);
 		this.contents = contents;
-		this.startTime = startTime;
 		this.endTime = endTime;
 		this.catagoryID = catagoryID;
 		this.isImmediately = isImmediately;
@@ -170,6 +169,16 @@ public class AuctionBoard extends Board {
 
 	public void setMainImage(String mainImage) {
 		this.mainImage = mainImage;
+	}
+
+	@Override
+	public String toString() {
+		return "AuctionBoard [contents=" + contents + ", startTime="
+				+ startTime + ", endTime=" + endTime + ", catagoryID="
+				+ catagoryID + ", isImmediately=" + isImmediately
+				+ ", startPrice=" + startPrice + ", immediatelyPrice="
+				+ immediatelyPrice + ", currentPrice=" + currentPrice
+				+ ", image=" + image + ", mainImage=" + mainImage + "]";
 	}
 	
 	

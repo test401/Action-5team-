@@ -3,6 +3,7 @@ package action.web.controller;
 import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
@@ -14,12 +15,14 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.apache.commons.fileupload.FileItem;
 import org.apache.commons.fileupload.disk.DiskFileItemFactory;
 import org.apache.commons.fileupload.servlet.ServletFileUpload;
 
 import action.business.domain.board.*;
+import action.business.domain.member.Member;
 import action.business.service.DataNotFoundException;
 import action.business.service.board.*;
 import action.util.PageHandler;
@@ -49,7 +52,7 @@ public class AuctionBoardController extends HttpServlet {
 
         try {
 	        // action 요청파라미터 값을 확인한다.
-	        String action = request.getPathInfo();
+	        String action = request.getParameter("action");
 	
 	        // action 값에 따라 적절한 메소드를 선택하여 호출한다.
 	        if (action.equals("list")) {
@@ -256,28 +259,28 @@ public class AuctionBoardController extends HttpServlet {
 			out.close();
 			return;
 		}
-
+		HttpSession session = request.getSession(true);
+		Member member = (Member) session.getAttribute("loginMember");
 		// 요청 파라미터
 		String title = "";
-		String memberID = null;
+		String memberID = member.getMemberID();
 		String contents = null;
-		String startTime = null;
 		String endTime = null;
-		String categoryID = null;
+		String catagoryID = null;
 		String isImm = null;
 		String startPrice = null;
 		String immPrice = null;
-		String currentPrice = null;
+		int currentPrice = 0;
 		String image = null;
 		String mainImage = null;
 		
-		String[] images = {image, mainImage};
+		String[] images = {mainImage, image};
 		
 		
-		String[] names = {title, memberID, contents, startTime, endTime, categoryID,
-				isImm, startPrice, immPrice, currentPrice};
+		/*String[] names = {title, memberID, contents, endTime, catagoryID,
+				isImm, startPrice, immPrice};*/
 		
-		
+		String[] names = {catagoryID, title, startPrice, immPrice, contents};
 		
 		// 디스크 기반의 FileItem factory 생성
 		DiskFileItemFactory factory = new DiskFileItemFactory();
@@ -300,7 +303,7 @@ public class AuctionBoardController extends HttpServlet {
 		try {
 			List<FileItem> items = upload.parseRequest(request);
 			int count = 0;
-			
+			int count2 = 0;
 			// 업로드된 items 처리
 			Iterator<FileItem> iter = items.iterator();
 			while (iter.hasNext()) {    
@@ -308,49 +311,51 @@ public class AuctionBoardController extends HttpServlet {
 				// 일반 폼 필드 처리 (<input type="file">이 아닌 경우)
 				if (item.isFormField()) {
 					names[count] = item.getString("UTF-8");
+					System.out.println(names[count]);
 					count++;
 
 				 // 파일 업로드 처리 (<input type="file">인 경우)
 				} else {
 					
 					
-					images[count] = item.getName();// 경로가 포함된 파일명
+					images[count2] = item.getName();// 경로가 포함된 파일명
 					//if(images[count] != null && images[count])
-					int index = images[count].lastIndexOf("\\"); // 디렉터리 구분자 위치를 통해
+					int index = images[count2].lastIndexOf("\\"); // 디렉터리 구분자 위치를 통해
 					if (index == -1) {
-						index = images[count].lastIndexOf("/");
+						index = images[count2].lastIndexOf("/");
 					}
-					images[count] = images[count].substring(index + 1); // 파일명만 추출
+					images[count2] = images[count2].substring(index + 1); // 파일명만 추출
+					
 				
 					// 파일 업로드 처리
-					File uploadedFile = new File(uploadDir, images[count]);
+					File uploadedFile = new File(uploadDir, images[count2]);
 					item.write(uploadedFile); // 실질적인 저장
-					
+					count2++;
 					
 					//즉시구매여부가 널값이거나 0이면 즉시구매, 즉시구매가격을 0으로 설정
-					if ((names[6] == null) || (names[6].length() == 0)) {
-						names[6]="0";
-						names[8]="0";
+			/*		if ((names[4] == null) || (names[4].length() == 0)) {
+						names[4]="0";
+						names[3]="0";
 					}
+					*/
 					
 					
-					
-					//names[0] = title,      names[1] = memberID
-					//names[2] = contents,  names[3] = startTime
-					//names[4] = endTime,  names[5] = categoryID
-					//names[6] = isImmediately, names[7] = startPrice
-					//names[8] = immediatelyPrice, names[9] = currentPrice
+					//names[0] = memberID,      names[1] = categoryID
+					//names[2] = title,  names[3] = startPrice
+					//names[4] = immPrice,  names[5] = isImm
+					//names[6] = endTime, names[7] = contents	
+					//{title, startPrice, immPrice, contents};
 					
 					// 구해 온 요청 파라미터 값을 지닌 AuctionBoard 객체를 생성한다.
-					AuctionBoard board = new AuctionBoard(names[0], names[1], names[2], 
-							names[3], names[4], Integer.parseInt(names[5]), Integer.parseInt(names[6]), 
-							 Integer.parseInt(names[7]), Integer.parseInt(names[8]), 
-							 Integer.parseInt(names[9]), 
-							 images[0], images[1]);
-					
+		/*			AuctionBoard board = new AuctionBoard(memberID, Integer.parseInt(names[0]),
+							names[1], Integer.parseInt(names[2]), Integer.parseInt(names[3]),
+							1, "5", names[4], 0, images[0], images[1]);
+				
+					System.out.println(board);
 					// 3. BoardService 객체를 통해 해당 게시글을 등록한다.
 					AuctionBoardService service = new AuctionBoardServiceImpl();
-					service.writeBoard(board);	
+					service.writeBoard(board);	*/
+					out.println(names[0] + " " + names[1]+ " " + names[2]+ " " + names[3]+ " " + " " + images[0] + " "+ images[1] + " "+ startPrice);
 				}		
 			}			
 			out.close();
@@ -360,8 +365,8 @@ public class AuctionBoardController extends HttpServlet {
 		}
 		
     //RequestDispatcher 객체를 통해 목록 보기(list)로 요청을 전달한다.
-		RequestDispatcher dispatcher = request.getRequestDispatcher("list");
-	    dispatcher.forward(request, response);
+//		RequestDispatcher dispatcher = request.getRequestDispatcher("list");
+//	    dispatcher.forward(request, response);
 		
 	}
 

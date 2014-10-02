@@ -326,7 +326,7 @@ public class AuctionBoardDaoImpl implements AuctionBoardDao {
 	public void insertBoard(AuctionBoard board) {
 		String query = "INSERT INTO AuctionBoard (boardNum, title, memberID, contents, "
 				+ "startTime, endTime, catagoryID, isImmediately, startPrice, immediatelyPrice, currentPrice, image, mainImage) "
-				+ "VALUES (board_num_seq.NEXTVAL, ?, ?, ?, SYSDATE, ?, ?, ?, ?, ?, ?, ?, ?)";
+				+ "VALUES (AUCTIONBOARD_BOARDNUM_SEQ.NEXTVAL, ?, ?, ?, SYSDATE, SYSDATE+"+board.getEndTime()+", ?, ?, ?, ?, ?, ?, ?)";
 
 		Connection conn = null;
 		PreparedStatement pstmt = null;
@@ -338,14 +338,14 @@ public class AuctionBoardDaoImpl implements AuctionBoardDao {
 			pstmt.setString(1, board.getTitle());
 			pstmt.setString(2, board.getMemberID());
 			pstmt.setString(3, board.getContents());
-			pstmt.setString(4, board.getEndTime());
-			pstmt.setInt(5, board.getCatagoryID());
-			pstmt.setInt(6, board.getIsImmediately());
-			pstmt.setInt(7, board.getStartPrice());
-			pstmt.setInt(8, board.getImmediatelyPrice());
-			pstmt.setInt(9, board.getCurrentPrice());
-			pstmt.setString(10, board.getImage());
-			pstmt.setString(11, board.getMainImage());
+//			pstmt.setString(4, board.getEndTime());
+			pstmt.setInt(4, board.getCatagoryID());
+			pstmt.setInt(5, board.getIsImmediately());
+			pstmt.setInt(6, board.getStartPrice());
+			pstmt.setInt(7, board.getImmediatelyPrice());
+			pstmt.setInt(8, board.getCurrentPrice());
+			pstmt.setString(9, board.getImage());
+			pstmt.setString(10, board.getMainImage());
 
 			pstmt.executeUpdate();
 
