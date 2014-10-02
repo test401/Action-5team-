@@ -137,6 +137,7 @@ public class AuctionBoardController extends HttpServlet {
         RequestDispatcher dispatcher = request.getRequestDispatcher("/views/board/auctionList.jsp");
         dispatcher.forward(request, response);
 		
+        
 	}
     
     
@@ -158,7 +159,9 @@ public class AuctionBoardController extends HttpServlet {
 			}
 		// 2. BoardService 객체로부터 해당 글 번호의 게시글을 구해온다.
 		AuctionBoardService service = new AuctionBoardServiceImpl();
+
 		AuctionBoard board = service.findBoard(Integer.parseInt(boardNum));
+
 		
 		// 3. request scope 속성(board)에 게시글을 저장한다.
         request.setAttribute("board", board);
@@ -166,7 +169,6 @@ public class AuctionBoardController extends HttpServlet {
         // 3.2 request scope 속성으로 currentPageNumber를 저장한다.
 		request.setAttribute("currentPageNumber", currentPageNumber);
 		
-        
         // 4. RequestDispatcher 객체를 통해 뷰 페이지(/views/board/auctionRead.jsp)로 요청을 전달한다.
         RequestDispatcher dispatcher = request.getRequestDispatcher("/views/board/auctionRead.jsp");
         dispatcher.forward(request, response);
@@ -232,7 +234,6 @@ public class AuctionBoardController extends HttpServlet {
 	private void writeBoardForm(HttpServletRequest request, HttpServletResponse response) 
             throws ServletException, IOException, DataNotFoundException {
 		
-
         // RequestDispatcher 객체를 통해 뷰 페이지(/views/board/auctionWriteForm.jsp)로 요청을 전달한다.
         RequestDispatcher dispatcher = request.getRequestDispatcher("/views/board/auctionWriteForm.jsp");
         dispatcher.forward(request, response);
@@ -369,7 +370,6 @@ public class AuctionBoardController extends HttpServlet {
      */
 	private void updateBoardForm(HttpServletRequest request, HttpServletResponse response) 
             throws ServletException, IOException, DataNotFoundException {
-		
 		// 요청 파라미터로 부터 경매글 번호(boardNum)를 구한다.
 		String boardNum = request.getParameter("boardNum");
 		

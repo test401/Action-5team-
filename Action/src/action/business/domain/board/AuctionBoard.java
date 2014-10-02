@@ -8,7 +8,6 @@ package action.business.domain.board;
 
 public class AuctionBoard extends Board {
 
-
 	private String contents;
 	private String startTime;
 	private String endTime;

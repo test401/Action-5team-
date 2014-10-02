@@ -1,8 +1,11 @@
 eclipse.preferences.version=1
 encoding//WebContent/js=UTF-8
 encoding//src/action/business/domain=UTF-8
+<<<<<<< HEAD
+=======
 encoding//src/action/business/domain/Board.java=UTF-8
 
+>>>>>>> refs/remotes/origin/newricho
 encoding//src/action/business/domain/board/Board.java=UTF-8
 encoding//src/action/business/service/DataDuplicatedException.java=UTF-8
 encoding//src/action/web/controller=UTF-8
