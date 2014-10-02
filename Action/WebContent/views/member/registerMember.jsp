@@ -76,7 +76,7 @@
 	            		<tr><td></td></tr>
 	            		
 	            		<tr>
-	            		    <td colspan="2"><input type="button" name="register" value="가입신청" onclick="boardWriteCheck(this.form);" size="25"></td>
+	            		    <td colspan="2"><input type="button" name="register" id="registerbtnin" value="가입신청" onclick="boardWriteCheck(this.form);" size="25">
 	            			<input type="button" id="registerbtncancle" name="cancle" value="취소" onclick="goUrl('/Action/views/main.jsp');"></td>
 	            		</tr>
 	            	</table>
