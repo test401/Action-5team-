@@ -63,8 +63,7 @@
     <servlet-name>ReplyContorller</servlet-name>
     <url-pattern>/ReplyContorller</url-pattern>
   </servlet-mapping>
-  
-    <error-page>
+  <error-page>
     <exception-type>java.lang.Exception</exception-type>
     <location>/exceptionPage.jsp</location>
   </error-page>
@@ -72,8 +71,7 @@
     <error-code>404</error-code>
     <location>/404.jsp</location>
   </error-page>
-  
-    <filter>
+  <filter>
     <display-name>EncodingFilter</display-name>
     <filter-name>EncodingFilter</filter-name>
     <filter-class>action.web.filter.EncodingFilter</filter-class>
@@ -83,26 +81,44 @@
       <param-value>UTF-8</param-value>
     </init-param>
   </filter>
-  
-   <filter-mapping>
+  <filter-mapping>
     <filter-name>EncodingFilter</filter-name>
     <servlet-name>MemberController</servlet-name>
   </filter-mapping>
-   <filter-mapping>
+  <filter-mapping>
     <filter-name>EncodingFilter</filter-name>
     <servlet-name>AuctionBoardController</servlet-name>
   </filter-mapping>
-   <filter-mapping>
+  <filter-mapping>
     <filter-name>EncodingFilter</filter-name>
     <servlet-name>ReplyController</servlet-name>
   </filter-mapping>
-   <filter-mapping>
+  <filter-mapping>
     <filter-name>EncodingFilter</filter-name>
     <servlet-name>BoardController</servlet-name>
   </filter-mapping>
-   <filter-mapping>
+  <filter-mapping>
     <filter-name>EncodingFilter</filter-name>
     <servlet-name>ReplyContorller</servlet-name>
   </filter-mapping>
-
+  <servlet>
+    <description></description>
+    <display-name>FreeBoardController</display-name>
+    <servlet-name>FreeBoardController</servlet-name>
+    <servlet-class>action.web.controller.FreeBoardController</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>FreeBoardController</servlet-name>
+    <url-pattern>/Free</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>QnABoardController</display-name>
+    <servlet-name>QnABoardController</servlet-name>
+    <servlet-class>action.web.controller.QnABoardController</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>QnABoardController</servlet-name>
+    <url-pattern>/QnA</url-pattern>
+  </servlet-mapping>
 </web-app>
