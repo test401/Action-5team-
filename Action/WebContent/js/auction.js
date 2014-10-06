@@ -56,6 +56,33 @@ function checkNotEmpty(inputField, errorSpan){
 	}
 }
 
+$(function() {
+	$('#bid').click(function() {
+		jQuery.ajax({
+			type: "POST",
+			url: '/Action/AuctionBoard',
+			data:
+				'action=bid'+"&"+
+				'currentPrice='+encodeURIComponent($("[name=currentPrice]").val())+"&"+
+				'memberID='+encodeURIComponent($("[name=bidmemberID]").val())+"&"+
+				'boardNum=' + encodeURIComponent($("[name=boardNum]").val()),
+			dataType: 'JSON',
+			success: function(data) {
+				alert(data.message);
+				$('#retruncurrentPrice').empty();
+				$('#retruncurrentPrice').html(data.currentPrice);
+//				if(data==0){							
+//					$('#price').html("안돼");
+//				}else{
+//					$('#price').html(text);
+//					$('#pr').attr('value',text);
+//				}
+			}
+		});
+	});
+});
+
+
 /*//작성/수정 폼의 공백을 체크하는 기능
 function boardWriteCheck(){
 	var form=document.writeForm;

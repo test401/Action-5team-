@@ -57,7 +57,14 @@ public interface AuctionBoardDao {
 	 * @param board 수정할 게시글 정보를 담고 있는 Board 객체
 	 */
 	public void updatePrice(AuctionBoard board);
-
+	
+	/**
+	 * 인수로 주어진 Board 객체의 정보로 기존 게시글의 입찰가를 확인한다.
+	 * 
+	 * @param board 확인할 게시글 정보를 담고 있는 Board 객체
+	 */
+	public boolean isPrice(AuctionBoard board);
+	
 	/**
 	 * 인수로 주어진 번호에 해당하는 게시글을 삭제한다.
 	 * 

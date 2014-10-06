@@ -62,7 +62,7 @@ public class AuctionBoardDaoImpl implements AuctionBoardDao {
 				if((searchType == null) || (searchType.length() == 0)){
 					whereSQL = "";
 				} else if (searchType.equals("all")){
-					whereSQL = "where (title LIKE ? OR memberID LIKE ? OR contents LIKE ?)";
+					whereSQL = " (title LIKE ? OR memberID LIKE ? OR contents LIKE ?)";
 				} else if ( (searchType.equals("title")) || (searchType.equals("memberID")) || (searchType.equals("contents")) ){
 					whereSQL = "(" + searchType.trim() + " LIKE ?)";
 				}
@@ -88,8 +88,8 @@ public class AuctionBoardDaoImpl implements AuctionBoardDao {
 				String query = "SELECT * FROM " 
 						+ "(SELECT ROWNUM r, boardnum, title, memberID, mainImage, categoryID, currentprice, immediatelyprice, endtime FROM "
 						+ "(SELECT boardnum, title, memberID, mainImage, categoryID, currentprice, immediatelyprice, endtime FROM AuctionBoard "
-						+ " ORDER BY boardnum DESC)) WHERE r BETWEEN ? and ?";		
-
+						+ categorySQL + whereSQL+" ORDER BY boardnum DESC)) WHERE r BETWEEN ? and ?";		
+				System.out.println(query);
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
@@ -172,7 +172,7 @@ public class AuctionBoardDaoImpl implements AuctionBoardDao {
 		if((searchType == null) || (searchType.length() == 0)){
 			whereSQL = "";
 		} else if (searchType.equals("all")){
-			whereSQL = " where (title LIKE ? OR memberID LIKE ? OR contents LIKE ?)";
+			whereSQL = " (title LIKE ? OR memberID LIKE ? OR contents LIKE ?)";
 		} else if ( (searchType.equals("title")) || (searchType.equals("memberID")) || (searchType.equals("contents")) ){
 			whereSQL = "(" + searchType.trim() + " LIKE ?)";
 		}
@@ -278,7 +278,7 @@ public class AuctionBoardDaoImpl implements AuctionBoardDao {
 			try { if (conn != null) conn.close(); } catch(SQLException e) { e.printStackTrace(System.err); }
 
 		}
-		
+		System.out.println(board);
 		return board;
 	}	
 
@@ -429,6 +429,49 @@ public class AuctionBoardDaoImpl implements AuctionBoardDao {
 	}
 
 	@Override
+	public boolean isPrice(AuctionBoard board) {
+		boolean result= false;
+		
+		String query="SELECT currentPrice, startPrice FROM AuctionBoard WHERE boardnum = ?";
+
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		
+		int newCurrentPrice = board.getCurrentPrice();
+		try{
+			conn = obtainConnection();
+			pstmt = conn.prepareStatement(query);
+			pstmt.setInt(1, board.getBoardNum());
+			rs = pstmt.executeQuery();
+			if(rs.next()){
+				if(rs.getInt("currentPrice")==0 && newCurrentPrice>rs.getInt("startPrice")){
+					result=true;
+				}else if(rs.getInt("currentPrice") != 0 && newCurrentPrice>rs.getInt("currentPrice")){
+					result=true;
+				}
+			}
+
+		}catch(SQLException se){
+			System.err.println("BoardDaoImpl isPrice() Error :" + se.getMessage());
+			se.printStackTrace(System.err);
+		}finally{
+			try { 
+				if (rs != null) rs.close(); 
+			} catch (SQLException se) { se.printStackTrace(System.err); }
+			try { 
+				if (pstmt != null) pstmt.close(); 
+			} catch (SQLException se) { se.printStackTrace(System.err); }
+			try { 
+				if (conn != null) conn.close(); 
+			} catch (SQLException se) { se.printStackTrace(System.err); }
+
+		}
+			
+		return result;
+	}
+
+	@Override
 	public void deleteBoard(int num) {
 		String query=" DELETE FROM AuctionBoard WHERE boardnum = ?";
 
@@ -455,6 +498,7 @@ public class AuctionBoardDaoImpl implements AuctionBoardDao {
 			} catch (SQLException se) { se.printStackTrace(System.err); }
 		}
 	}
+
 
 	
 }

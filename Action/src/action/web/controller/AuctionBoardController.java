@@ -3,8 +3,6 @@ package action.web.controller;
 import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.io.UnsupportedEncodingException;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
@@ -21,11 +19,20 @@ import javax.servlet.http.HttpSession;
 import org.apache.commons.fileupload.FileItem;
 import org.apache.commons.fileupload.disk.DiskFileItemFactory;
 import org.apache.commons.fileupload.servlet.ServletFileUpload;
+import org.json.simple.JSONObject;
 
-import action.business.domain.board.*;
+import action.business.domain.board.AuctionBoard;
+import action.business.domain.board.AuctionListBoard;
+import action.business.domain.board.BidListBoard;
+import action.business.domain.board.Board;
 import action.business.domain.member.Member;
 import action.business.service.DataNotFoundException;
-import action.business.service.board.*;
+import action.business.service.board.AuctionBoardService;
+import action.business.service.board.AuctionBoardServiceImpl;
+import action.business.service.board.AuctionListBoardService;
+import action.business.service.board.AuctionListBoardServiceImpl;
+import action.business.service.board.BidListBoardService;
+import action.business.service.board.BidListBoardServiceImpl;
 import action.util.PageHandler;
 
 /**
@@ -70,7 +77,9 @@ public class AuctionBoardController extends HttpServlet {
 	            updateBoard(request, response);
 	        } else if (action.equals("remove")) {
 	            removeBoard(request, response);
-	        } else {  	
+	        } else if (action.equals("bid")) {
+	        	bidAuction(request, response);
+	        } else {   	
 	        	response.sendError(HttpServletResponse.SC_NOT_FOUND);
 	        }
         } catch (Exception ex) {
@@ -87,7 +96,7 @@ public class AuctionBoardController extends HttpServlet {
 		String searchType = request.getParameter("searchType");
 		String searchText = request.getParameter("searchText");
 		String categoryType = request.getParameter("categoryType");
-				
+		
 		//1.2 pageNumber 요청 파라미터 값을 구한다.
 		String pageNumber = request.getParameter("pageNumber");
 		
@@ -181,34 +190,51 @@ public class AuctionBoardController extends HttpServlet {
 	/* 
      * 경매 입찰을 위한 요청을 처리한다.
      */
-	public void bidAuction(HttpServletRequest request, HttpServletResponse response) 
+	private void bidAuction(HttpServletRequest request, HttpServletResponse response) 
             throws ServletException, IOException, DataNotFoundException {
 		
 		String currentPrice = request.getParameter("currentPrice");
 		String memberID = request.getParameter("memberID");
 		String boardNum = request.getParameter("boardNum");
-		
+
+		JSONObject sendBoard = new JSONObject();
 		// 구해 온 요청 파라미터 값을 지닌 AuctionBoard 객체를 생성한다.
-		AuctionBoard auctionBoard = new AuctionBoard(Integer.parseInt("boardNum") ,Integer.parseInt("currentPrice"));
+		AuctionBoard auctionBoard = new AuctionBoard(Integer.parseInt(boardNum) ,Integer.parseInt(currentPrice));
 		// AuctionBoardService 객체를 통해 현재입찰금을 갱신한다.
 		AuctionBoardService auctionService = new AuctionBoardServiceImpl();
-		auctionService.updatePrice(auctionBoard);
-		
-		// 구해 온 요청 파라미터 값을 지닌 BidBoard 객체를 생성한다.
-		BidListBoard bidBoard = new BidListBoard(Integer.parseInt("boardNum"), memberID, Integer.parseInt("currentPrice"));
-		// BidListBoardService 객체를 통해 입찰목록을 등록한다.
-		BidListBoardService bidService = new BidListBoardServiceImpl();
-		bidService.writeBoard(bidBoard);
-		
-        // RequestDispatcher 객체를 통해 목록 보기(read)로 요청을 전달한다.
-        RequestDispatcher dispatcher = request.getRequestDispatcher("read");
-        dispatcher.forward(request, response);
+		if(auctionService.updatePrice(auctionBoard)){
+			// 구해 온 요청 파라미터 값을 지닌 BidBoard 객체를 생성한다.
+			BidListBoard bidBoard = new BidListBoard(Integer.parseInt(boardNum), memberID, Integer.parseInt(currentPrice));
+			// BidListBoardService 객체를 통해 입찰목록을 등록한다.
+			BidListBoardService bidService = new BidListBoardServiceImpl();
+			bidService.writeBoard(bidBoard);
+			
+			AuctionBoard board = auctionService.findBoard(Integer.parseInt(boardNum));
+	        
+			
+			sendBoard.put("message","입찰이 완료되었습니다.");
+			sendBoard.put("currentPrice", board.getCurrentPrice());
+			
+
+			// RequestDispatcher 객체를 통해 목록 보기(read)로 요청을 전달한다.
+//	        RequestDispatcher dispatcher = request.getRequestDispatcher("read");
+//	        dispatcher.forward(request, response);
+		}else{
+			//안↑되→영↘!
+			AuctionBoard board = auctionService.findBoard(Integer.parseInt(boardNum));
+			sendBoard.put("message","한발 늦었습니다.");
+			sendBoard.put("currentPrice", board.getCurrentPrice());
+			
+		}
+		PrintWriter out= response.getWriter();
+		out.print(sendBoard);
+		out.flush();
 	}
 	
 	/* 
      * 입찰이 완료됬을 때를 위한 요청을 처리한다.
      */
-	public void AuctionList(HttpServletRequest request, HttpServletResponse response) 
+	private void AuctionList(HttpServletRequest request, HttpServletResponse response) 
             throws ServletException, IOException, DataNotFoundException {
 		
 		String memberID = request.getParameter("memberID");

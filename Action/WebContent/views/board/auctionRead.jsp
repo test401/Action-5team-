@@ -64,6 +64,7 @@ window.onload = displayTime; // 문서가 로딩될 때 수행할 함수 설정
 	            			<c:if test="${auctionBoard.memberID == loginMember.memberID}">
 		            			<td><input type="button" name="update" value="수정" onclick="goUrl('/Action/AuctionBoard?action=updateForm&pageNumber=${currentPageNumber}&boardNum=${auctionBoard.boardNum}&searchType=${param.searchType}&searchText=${param.searchText}&categoryType=${param.categoryType}')"></td>
 		            			<td><input type="button" name="delete" value="삭제" onclick="deleteCheck('/Action/AuctionBoard?action=remove&boardNum=${auctionBoard.boardNum}')"></td>
+		            			<td><input hidden="true" type="text" name="bidmemberID" value="${loginMember.memberID}"></td>
 	            			</c:if>
 	            		</tr>
 	            		<tr>
@@ -72,7 +73,7 @@ window.onload = displayTime; // 문서가 로딩될 때 수행할 함수 설정
 	            		</tr>       	
 	            		<tr>
 	            		    <td><label class="label">현재입찰가</label></td>
-	            			<td>${auctionBoard.currentPrice}</td>
+	            			<td id="retruncurrentPrice">${auctionBoard.currentPrice}</td>
 	            		</tr>
 	            		<tr>
 	            		    <td><label class="label">시작가</label></td>
@@ -103,11 +104,11 @@ window.onload = displayTime; // 문서가 로딩될 때 수행할 함수 설정
 	            		    <td><label class="label">입찰가</label></td>
 	            			<td colspan="7">
 	            				<form action="" method="get">
-	            					<input type="number" step="100" name="currentPrice" min="${auctionBoard.currentPrice}" autofocus="autofocus">
+	            					<input type="number" step="100" name="currentPrice" min="${auctionBoard.currentPrice}" max ="1000000000" autofocus="autofocus">
 	            					<%-- <c:if test="${auctionBoard.endTime >= now }"> --%>
 	            						<input hidden="true" type="text" name="boardNum" value="${auctionBoard.boardNum}">
-		            					<input type="button" value="입찰하기" onclick="">
-		            					<input type="button" value="입찰취소" onclick="">
+		            					<input id="bid" type="button" value="입찰하기">
+		            					<!-- <input type="button" value="입찰취소" onclick=""> -->
 									<%-- </c:if> --%>
 	            				</form>
 	            				<%-- <fmt:formatDate value="${now}" pattern="yyyy-MM-dd" var="nyear"/> --%>

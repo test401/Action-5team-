@@ -2,7 +2,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
 <div class="buttonbar" >
-	<form name="searchForm" action="list?pageNumber=${currentPageNumber}">
+	<form name="searchForm" method="post" action="/Action/AuctionBoard?action=list&pageNumber=${currentPageNumber}">
 		<select name="searchType" >
 			<option value="all" <c:if test="${empty param.searchType || param.searchType=='all'}">
 			selected="selected"

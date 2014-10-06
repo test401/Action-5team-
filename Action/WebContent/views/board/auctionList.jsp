@@ -25,8 +25,6 @@
 		</div>
 		
 		
-		
-		
 		<!-- 여기부터 시작 경매상품 보기 -->
             <div class="main">
             	<table id="allauctionlist">
@@ -81,7 +79,7 @@
 										<a class="pagenumber currpage">${pageNumber}</a>
 									</c:when>
 									<c:otherwise>
-										<a class="pagenumber" href="list?pageNumber=${pageNumber}&searchType=${param.searchType}&searchText=${param.searchText}">${pageNumber}</a>
+										<a class="pagenumber" href="/Action/AuctionBoard?action=list&pageNumber=${pageNumber}&searchType=${param.searchType}&searchText=${param.searchText}">${pageNumber}</a>
 									</c:otherwise>
 								</c:choose>
 							</c:forEach>
