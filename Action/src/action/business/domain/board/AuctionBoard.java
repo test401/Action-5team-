@@ -91,6 +91,10 @@ public class AuctionBoard extends Board {
 
 	
 
+	public AuctionBoard() {
+		// TODO Auto-generated constructor stub
+	}
+
 	public String getImage() {
 		return image;
 	}

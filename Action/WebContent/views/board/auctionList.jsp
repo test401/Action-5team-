@@ -4,7 +4,10 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<link rel="stylesheet" href="../../action.css">
+<link rel="stylesheet" href="/Action/action.css">
+<script src="/Action/js/board.js">
+
+</script>
 <title>Action List</title>
 </head>
 <body>
@@ -36,7 +39,7 @@
 								<input type="button" value="경매등록" onclick="writeCheck('<c:url value="/views/member/registerMember.jsp"/>');">
 							</c:when>
 							<c:otherwise>
-								<input type="button" value="경매등록" onclick="goUrl('auctionWriteForm.jsp');">
+								<input type="button" value="경매등록" onclick="goUrl('/Action/AuctionBoard?action=writeForm');">
 							</c:otherwise>
 						</c:choose>
                 		</td>

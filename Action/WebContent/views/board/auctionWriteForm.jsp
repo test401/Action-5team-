@@ -4,9 +4,9 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<link rel="stylesheet" href="../../action.css">
-<script src="../../ckeditor/ckeditor.js"></script>
-<script src="../../js/board.js"></script>
+<link rel="stylesheet" href="/Action/action.css">
+<script src="/Action/ckeditor/ckeditor.js"></script>
+<script src="/Action/js/board.js"></script>
 <title>Action Write Form</title>
 </head>
 <body>
