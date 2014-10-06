@@ -56,17 +56,17 @@ public class AuctionBoardDaoImpl implements AuctionBoardDao {
 			categorySQL = "";
 		}else{
 			categorySQL = "WHERE (" + categoryType.trim() + " LIKE "
-					+ "(SELECT CategoryName FROM AuctionBoard, CategoryBoard "
-					+ "WHERE AuctionBoard.categoryID = CategoryBoard.categoryID))";
+					+ "(SELECT CategoryID FROM AuctionBoard, CategoryBoard "
+					+ "WHERE AuctionBoard.categoryID = CategoryBoard.categoryID)) ";
 		}		
 
 		// 2.1. searchType 값에 따라 사용될 조건절을 생성한다.
 		if((searchType == null) || (searchType.length() == 0)){
 			whereSQL = "";
 		} else if (searchType.equals("all")){
-			whereSQL = "(title LIKE ? OR memberID LIKE ? OR contents LIKE ?)";
+			whereSQL = "(title LIKE ? OR memberID LIKE ? OR contents LIKE ?) ";
 		} else if ( (searchType.equals("title")) || (searchType.equals("memberID")) || (searchType.equals("contents")) ){
-			whereSQL = "(" + searchType.trim() + " LIKE ?)";
+			whereSQL = "(" + searchType.trim() + " LIKE ?) ";
 		}
 
 		// 2.2. categorySQL의 유무에 따라 WHERE 혹은 AND절 생성을 결정한다.
@@ -87,10 +87,10 @@ public class AuctionBoardDaoImpl implements AuctionBoardDao {
 
 		AuctionBoard board = null;
 
-		String query = "SELECT * FROM " 
+		String query = "SELECT * FROM "
 				+ "(SELECT ROWNUM r, boardnum, title, memberID, image, categoryID, startprice, immediatelyprice, endtime FROM "
 				+ "(SELECT boardnum, title, memberID, image, categoryID, startprice, immediatelyprice, endtime FROM AuctionBoard "
-				+ categorySQL + whereSQL + " ORDER BY boardnum DESC)) WHERE r BETWEEN ? and ?";		
+				+ categorySQL + whereSQL + "ORDER BY boardnum DESC)) WHERE r BETWEEN ? and ?";		
 
 		Connection conn = null;
 		PreparedStatement pstmt = null;
@@ -132,7 +132,7 @@ public class AuctionBoardDaoImpl implements AuctionBoardDao {
 						title,
 						rs.getString("memberID"),
 						rs.getString("image"),
-						rs.getDate("endtime"),						
+						rs.getDate("endtime"),
 						rs.getInt("categoryID"),
 						rs.getInt("immediatelyPrice"),
 						rs.getInt("currentPrice"));

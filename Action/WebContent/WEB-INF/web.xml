@@ -49,4 +49,14 @@
     <servlet-name>ReplyController</servlet-name>
     <url-pattern>/ReplyController</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>FreeBoardController</display-name>
+    <servlet-name>FreeBoardController</servlet-name>
+    <servlet-class>action.web.controller.FreeBoardController</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>FreeBoardController</servlet-name>
+    <url-pattern>/freeBoard</url-pattern>
+  </servlet-mapping>
 </web-app>
