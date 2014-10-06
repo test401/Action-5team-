@@ -9,6 +9,8 @@ public abstract class Reply {
 	
 	/** 댓글 번호*/
 	private int replyNum;
+	/** 작성자*/
+	private String memberID;
 	/** 마스터 댓글 번호*/
 	private int masterNum;
 	/** 댓글의 댓글 번호*/
@@ -18,13 +20,47 @@ public abstract class Reply {
 	/** 댓글 내용*/
 	private String replyContent;
 	
-	public Reply(int replyNum, int masterNum, int replyOrder, int replyStep,
-			String replyContent) {
+	public Reply(int replyNum, String memberID,String replyContent, 
+			int masterNum, int replyOrder, int replyStep) {
 		super();
 		this.replyNum = replyNum;
+		this.memberID = memberID;
+		this.replyContent = replyContent;
 		this.masterNum = masterNum;
 		this.replyOrder = replyOrder;
 		this.replyStep = replyStep;
+	}
+	
+	public Reply(int replyNum, String replyContent, 
+			int masterNum, int replyOrder, int replyStep) {
+		super();
+		this.replyNum = replyNum;
+		this.replyContent = replyContent;
+		this.masterNum = masterNum;
+		this.replyOrder = replyOrder;
+		this.replyStep = replyStep;
+	}	
+	
+	/** 비회원 댓글 출력용 */
+	public Reply(int replyNum, String replyContent, int replyStep){
+		this.replyNum = replyNum;
+		this.replyContent = replyContent;
+		this.replyStep = replyStep;
+	}
+	
+	/** 댓글 출력용 */
+	public Reply(int replyNum, String memberID, String replyContent, int replyStep) {
+		super();	
+		this.replyNum = replyNum;
+		this.memberID = memberID;
+		this.replyContent = replyContent;
+		this.replyStep = replyStep;
+	}
+	
+	/** 댓글 작성용 */
+	public Reply(int replyNum, String memberID, String replyContent){
+		this.replyNum = replyNum;
+		this.memberID = memberID;
 		this.replyContent = replyContent;
 	}
 
@@ -67,6 +103,16 @@ public abstract class Reply {
 	public void setReplyContent(String replyContent) {
 		this.replyContent = replyContent;
 	}
+
+	public String getMemberID() {
+		return memberID;
+	}
+
+	public void setMemberID(String memberID) {
+		this.memberID = memberID;
+	}
+	
+	
 	
 	
 	

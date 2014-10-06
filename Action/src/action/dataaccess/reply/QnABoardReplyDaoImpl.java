@@ -1,4 +1,4 @@
-package action.dataaccess.board;
+package action.dataaccess.reply;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -6,25 +6,23 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 import javax.naming.Context;
 import javax.naming.InitialContext;
 import javax.naming.NamingException;
 import javax.sql.DataSource;
 
-import action.business.domain.board.BidListBoard;
-import action.business.service.board.BidListBoardDao;
+import action.business.domain.reply.QnABoardReply;
+import action.business.service.reply.QnABoardReplyDao;
 
-public class BidListBoardDaoImpl implements BidListBoardDao {
+public class QnABoardReplyDaoImpl implements QnABoardReplyDao {
 
 	private DataSource dataSource;
 
-	public BidListBoardDaoImpl(){
+	public QnABoardReplyDaoImpl(){
 		try {
-			//Class.forName("oracle.jdbc.OracleDriver");
 			Context context = new InitialContext();
-			dataSource = (DataSource) context.lookup("java:comp/env/jdbc/dukeshopDB");
+			dataSource = (DataSource) context.lookup("java:comp/env/jdbc/actionDB");
 		} catch(NamingException ne) {
 			System.err.println("JNDI error occured");
 			ne.printStackTrace(System.err);
@@ -37,52 +35,36 @@ public class BidListBoardDaoImpl implements BidListBoardDao {
 	}
 
 	/**
-	 * 조건에 맞는 모든 게시물 목록을 조회한다.
+	 * 해당 게시글 내의 모든 댓글 목록을 조회한다.
 	 * 
-	 * @return 검색된 게시물 목록을 담고 있는 List 객체
+	 * @return 검색된 댓글 목록을 담고 있는 List 객체
 	 */
 	@Override
-	public List<BidListBoard> selectBoardList(Map<String, Object> searchInfo) {		
+	public List<QnABoardReply> selectReplyList(int boardNum) {	
 
-		// 1.2. searchInfo Map으로부터 현재 페이지에 보여질 게시글의 행 번호(startRow, endRow) 값을 구한다.
-		int startRow = (Integer) searchInfo.get("startRow");
-		int endRow = (Integer) searchInfo.get("endRow");
-		String memberID = (String) searchInfo.get("memberID");
-
-		BidListBoard board = null;
-
-		String query = "SELECT * FROM " 
-				+ "(SELECT ROWNUM r, auctionlistboard.listnum, categoryboard.categoryname, auctionboard.title, "
-				+ "auctionboard.image, auctionboard.currentprice, auctionboard.endtime "
-				+ "FROM (SELECT bidlistboard.bidnum, bidlistboard.boardnum, bidlistboard.memberid, bidlistboard.price "
-				+ "FROM AUCTIONBOARD, BIDLISTBOARD WHERE BIDLISTBOARD.BOARDNUM = auctionboard.boardnum "
-				+ "AND bidlistboard.memberid = ? ORDER BY bidnum) WHERE r BETWEEN ? and ?";
-
+		String query = "SELECT replyNum, memberID, replyContent, replyStep FROM QnABoardReply ORDER BY masterNum, replyNum WHERE QnABoardNum = ?";
+		
+		QnABoardReply reply = null;
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
-		List<BidListBoard> boardList = new ArrayList<BidListBoard>();
+		List<QnABoardReply> replyList = new ArrayList<QnABoardReply>();
 
 		try{
 			conn = obtainConnection();
-			pstmt = conn.prepareStatement(query);
-
-			pstmt.setString(1, memberID);
-			pstmt.setInt(2, startRow);
-			pstmt.setInt(3, endRow);
-
-			rs = pstmt.executeQuery();			
-
+			pstmt = conn.prepareStatement(query);			
+			pstmt.setInt(1, boardNum);
+			rs = pstmt.executeQuery();
 			while(rs.next()){
-				board = new BidListBoard(rs.getInt("bidnum"),
-						rs.getInt("boardnum"),
+				reply = new QnABoardReply(rs.getInt("replyNum"),
 						rs.getString("memberID"),
-						rs.getInt("price"));
-				boardList.add(board);
+						rs.getString("replyContent"),
+						rs.getInt("replyStep"));
+				replyList.add(reply);
 			}
 
 		}catch(SQLException se){
-			System.err.println("BidListBoardDaoImpl selectBoardList() Error :" + se.getMessage());
+			System.err.println("QnABoardReplyDaoImpl selectReplyList() Error :" + se.getMessage());
 		}finally{
 			try { if (rs != null) rs.close(); } catch(SQLException ex) { ex.printStackTrace(System.err); }
 			try { if (pstmt != null) pstmt.close(); } catch(SQLException ex) { ex.printStackTrace(System.err); }
@@ -90,23 +72,20 @@ public class BidListBoardDaoImpl implements BidListBoardDao {
 
 		}
 
-		return boardList;
+		return replyList;
 	}
 
 	/**
-	 * 조건에 맞는 모든 게시글 개수를 조회한다.
+	 * 해당 게시글 내 모든 댓글 개수를 조회한다.
 	 * 
 	 * @return 검색된 모든 게시글의 개수
 	 */
 	@Override
-	public int selectBoardCount(Map<String, Object> searchInfo) {
-
-		String memberID = (String) searchInfo.get("memberID");
-
+	public int selectReplyCount(int boardNum) {
 		int boardCount = 0;
 
 		// 4. SELECT 문에 생성된 WHERE 절을 붙인다.
-		String query = "SELECT count(bidnum) FROM BidListBoard WHERE memberID = ?";
+		String query = "SELECT count(replynum) FROM QnABoardReply WHERE QnABoardNum = ?";
 
 		Connection conn = null;
 		PreparedStatement pstmt = null;
@@ -115,7 +94,7 @@ public class BidListBoardDaoImpl implements BidListBoardDao {
 		try{
 			conn = obtainConnection();
 			pstmt = conn.prepareStatement(query);
-			pstmt.setString(1, memberID);
+			pstmt.setInt(1, boardNum);
 			rs = pstmt.executeQuery();
 
 			//boardCount = rs.getInt("count(num)");			
@@ -125,7 +104,7 @@ public class BidListBoardDaoImpl implements BidListBoardDao {
 			}
 
 		}catch(SQLException se){
-			System.err.println("BidListBoardDaoImpl selectBoardCount() Error :" + se.getMessage());
+			System.err.println("QnABoardReplyDaoImpl selectReplyCount() Error :" + se.getMessage());
 		}finally{
 			try { if (rs != null) rs.close(); } catch(SQLException ex) { ex.printStackTrace(System.err); }
 			try { if (pstmt != null) pstmt.close(); } catch(SQLException ex) { ex.printStackTrace(System.err); }
@@ -141,10 +120,10 @@ public class BidListBoardDaoImpl implements BidListBoardDao {
 	 * @return
 	 */
 	@Override
-	public BidListBoard selectBoard(int num) {
-		BidListBoard board = null;
+	public QnABoardReply selectReply(int replynum) {
+		QnABoardReply reply = null;
 
-		String query = "SELECT * FROM BidListBoard WHERE bidnum = ?";
+		String query = "SELECT * FROM QnABoardReply WHERE replynum = ?";
 
 		Connection conn = null;
 		PreparedStatement pstmt = null;
@@ -153,17 +132,20 @@ public class BidListBoardDaoImpl implements BidListBoardDao {
 		try{
 			conn = obtainConnection();
 			pstmt = conn.prepareStatement(query);
-			pstmt.setInt(1, num);
+			pstmt.setInt(1, replynum);
 			rs = pstmt.executeQuery();
 
 			if(rs.next()){
-				board = new BidListBoard(rs.getInt("bidnum"),
-						rs.getInt("boardnum"),
+				reply = new QnABoardReply(rs.getInt("replynum"),
 						rs.getString("memberID"),
-						rs.getInt("price"));
+						rs.getString("replyContent"),
+						rs.getInt("masterNum"),
+						rs.getInt("replyOrder"),						
+						rs.getInt("replyStep"),
+						rs.getInt("qnaBoardNum"));
 			}
 		}catch(SQLException se){
-			System.err.println("BidListBoardDaoImpl selectBoard() Error :" + se.getMessage());
+			System.err.println("QnABoardReplyDaoImpl selectReply() Error :" + se.getMessage());
 			se.printStackTrace(System.err);
 		}finally{
 			try { if (rs != null) rs.close(); } catch(SQLException ex) { ex.printStackTrace(System.err); }
@@ -172,10 +154,10 @@ public class BidListBoardDaoImpl implements BidListBoardDao {
 
 		}
 
-		return board;
+		return reply;
 	}
 
-
+	
 	/**
 	 * 인수로 주어진 번호에 해당하는 게시글이 있는지 확인한다.
 	 * 
@@ -183,10 +165,10 @@ public class BidListBoardDaoImpl implements BidListBoardDao {
 	 * @return 해당하는 게시글이 존재하면 true, 존재하지 않으면 false
 	 */
 	@Override
-	public boolean boardNumExists(int num) {
+	public boolean isReplyExists(int replyNum) {
 		boolean isExist = false;
 
-		String query="SELECT * FROM BidListBoard WHERE bidnum = ?";
+		String query="SELECT * FROM QnABoardReply WHERE replyNum = ?";
 
 		Connection conn = null;
 		PreparedStatement pstmt = null;
@@ -195,61 +177,14 @@ public class BidListBoardDaoImpl implements BidListBoardDao {
 		try{
 			conn = obtainConnection();
 			pstmt = conn.prepareStatement(query);
-			pstmt.setInt(1, num);
+			pstmt.setInt(1, replyNum);
 			rs = pstmt.executeQuery();
 
 			isExist = rs.next();
 
 
 		}catch(SQLException se){
-			System.err.println("BidListBoardDaoImpl boardNumExists() Error :" + se.getMessage());
-			se.printStackTrace(System.err);
-		}finally{
-			try { 
-				if (rs != null) rs.close(); 
-			} catch (SQLException se) { se.printStackTrace(System.err); }
-			try { 
-				if (pstmt != null) pstmt.close(); 
-			} catch (SQLException se) { se.printStackTrace(System.err); }
-			try { 
-				if (conn != null) conn.close(); 
-			} catch (SQLException se) { se.printStackTrace(System.err); }
-
-		}
-
-		return isExist;
-	}
-	
-	/**
-	 * 입찰가 갱신을 위하여 사용.
-	 * 주어진 번호의 게시글에 입력된 사용자가 입찰을 했는지 여부를 알려줌
-	 * 
-	 * @param num 존재여부를 확인하려는 게시글의 번호
-	 * @param memberID 입찰 회원을 검색하기 위한 회원ID
-	 * @return 해당하는 게시글이 존재하면 true, 존재하지 않으면 false
-	 */
-	@Override
-	public boolean boardNumExists(BidListBoard board) {
-		boolean isExist = false;
-
-		String query="SELECT * FROM BidListBoard WHERE boardnum = ? AND memberID = ?";
-
-		Connection conn = null;
-		PreparedStatement pstmt = null;
-		ResultSet rs = null;
-
-		try{
-			conn = obtainConnection();
-			pstmt = conn.prepareStatement(query);
-			pstmt.setInt(1, board.getBoardNum());
-			pstmt.setString(2, board.getMemberID());
-			rs = pstmt.executeQuery();
-
-			isExist = rs.next();
-
-
-		}catch(SQLException se){
-			System.err.println("BidListBoardDaoImpl boardNumExists() Error :" + se.getMessage());
+			System.err.println("QnABoardReplyDaoImpl isReplyExists() Error :" + se.getMessage());
 			se.printStackTrace(System.err);
 		}finally{
 			try { 
@@ -273,9 +208,50 @@ public class BidListBoardDaoImpl implements BidListBoardDao {
 	 * @param board 등록할 게시글 정보를 담고 있는 Board 객체
 	 */
 	@Override
-	public void insertBoard(BidListBoard board) {
-		String query = "INSERT INTO BidListBoard (bidnum, boardnum, memberID, price) "
-				+ "VALUES (board_num_seq.NEXTVAL, ?, ?, ?)";
+	public void insertReply(QnABoardReply reply) {
+		String query = "INSERT INTO QnABoardReply (replyNum, qnaBoardNum, memberID, "
+				+ "replyContent, masterNum "
+				+ "VALUES (board_num_seq.NEXTVAL, ?, ?, ?, board_num_seq.CURRVAL)";
+
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+
+		try{
+			conn = obtainConnection();
+			pstmt = conn.prepareStatement(query);
+			
+			pstmt.setInt(1, reply.getQnaBoardNum());
+			pstmt.setString(2, reply.getMemberID());
+			pstmt.setString(3, reply.getReplyContent());
+
+			pstmt.executeUpdate();
+
+		}catch(SQLException se){
+			System.err.println("QnABoardReplyDaoImpl insertReply() Error :" + se.getMessage());
+			se.printStackTrace(System.err);
+		}finally{
+			try { 
+				if (pstmt != null) pstmt.close(); 
+			} catch (SQLException se) { se.printStackTrace(System.err); }
+			try { 
+				if (conn != null) conn.close(); 
+			} catch (SQLException se) { se.printStackTrace(System.err); }
+		}
+
+	}	
+	
+	/**
+	 * 인수로 주어진 reply 객체의 정보로 새로운 답글을 등록한다.
+	 * 
+	 * @param reply 등록할 답글 정보를 담고 있는 reply 객체
+	 */
+	public void InsertReplyOnReply(QnABoardReply reply){
+		String query = "UPDATE QnABoardReply SET replyOrder = replyOrder + 1 "
+				+ "WHERE masterNum = ? AND replyOrder > ?";
+		
+		String query2 = "INSERT INTO QnABoardReply (replyNum, qnaBoardNum, writer, "
+				+ "replyContent, masterNum, replyOrder, replyStep) VALUES "
+				+ "(board_num_seq.NEXTVAL, ?, ?, ?, ?, ?, ?)";
 
 		Connection conn = null;
 		PreparedStatement pstmt = null;
@@ -284,14 +260,59 @@ public class BidListBoardDaoImpl implements BidListBoardDao {
 			conn = obtainConnection();
 			pstmt = conn.prepareStatement(query);
 
-			pstmt.setInt(1, board.getBoardNum());
-			pstmt.setString(2, board.getMemberID());
-			pstmt.setInt(3, board.getPrice());
+			pstmt.setInt(1, reply.getMasterNum());
+			pstmt.setInt(2, reply.getReplyOrder());
+		
+			pstmt.executeUpdate();
+			pstmt.close();
+			
+			pstmt = conn.prepareStatement(query2);
+
+			pstmt.setInt(1, reply.getQnaBoardNum());
+			pstmt.setString(2, reply.getMemberID());
+			pstmt.setString(3, reply.getReplyContent());
+			pstmt.setInt(4, reply.getMasterNum());			
+			pstmt.setInt(5, reply.getReplyOrder() + 1); // 현재 답글 다음에 위치시켜야 하므로 reply_order + 1
+			pstmt.setInt(6, reply.getReplyStep() + 1); // 현재 답글에 대한 답글이므로 reply_step + 1
 
 			pstmt.executeUpdate();
 
 		}catch(SQLException se){
-			System.err.println("BidListBoardDaoImpl insertBoard() Error :" + se.getMessage());
+			System.err.println("QnABoardReplyDaoImpl InsertReplyOnReply() Error :" + se.getMessage());
+			se.printStackTrace(System.err);
+		}finally{
+			try { 
+				if (pstmt != null) pstmt.close(); 
+			} catch (SQLException se) { se.printStackTrace(System.err); }
+			try { 
+				if (conn != null) conn.close(); 
+			} catch (SQLException se) { se.printStackTrace(System.err); }
+		}
+	}
+	
+
+	/**
+	 * 인수로 주어진 Board 객체의 정보로 기존 게시글을 수정한다.
+	 * 
+	 * @param board 수정할 게시글 정보를 담고 있는 Board 객체
+	 */
+	@Override
+	public void updateReply(QnABoardReply reply) {
+		String query="UPDATE QnABoardReply SET replyContent=? WHERE replyNum=?";
+
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+
+		try{
+			conn = obtainConnection();
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, reply.getReplyContent());			
+			pstmt.setInt(2, reply.getReplyNum());			
+
+			pstmt.executeUpdate();			
+
+		}catch(SQLException se){
+			System.err.println("QnABoardReplyDaoImpl updateReply() Error :" + se.getMessage());
 			se.printStackTrace(System.err);
 		}finally{
 			try { 
@@ -304,45 +325,14 @@ public class BidListBoardDaoImpl implements BidListBoardDao {
 
 	}
 
-	@Override
-	public void updatePrice(BidListBoard board) {
-		String query="UPDATE BidListBoard SET price = ? WHERE boardnum = ? AND memberID = ?";
-
-		Connection conn = null;
-		PreparedStatement pstmt = null;
-
-		try{
-			conn = obtainConnection();
-			pstmt = conn.prepareStatement(query);
-			
-			pstmt.setInt(1, board.getPrice());
-			pstmt.setInt(2, board.getBoardNum());			
-			pstmt.setString(3, board.getMemberID());
-
-			pstmt.executeUpdate();			
-
-		}catch(SQLException se){
-			System.err.println("BidListBoardDaoImpl updatePrice() Error :" + se.getMessage());
-			se.printStackTrace(System.err);
-		}finally{
-			try { 
-				if (pstmt != null) pstmt.close(); 
-			} catch (SQLException se) { se.printStackTrace(System.err); }
-			try { 
-				if (conn != null) conn.close(); 
-			} catch (SQLException se) { se.printStackTrace(System.err); }
-		}
-
-	}	
-
 	/**
 	 * 인수로 주어진 번호에 해당하는 게시글을 삭제한다.
 	 * 
 	 * @param num 삭제하려는 게시글의 번호
 	 */
 	@Override
-	public void deleteBoard(int num) {
-		String query=" DELETE FROM BidListBoard WHERE boardnum = ?";
+	public void deleteReply(int replyNum) {
+		String query=" DELETE FROM QnABoardReply WHERE replyNum = ?";
 
 		Connection conn = null;
 		PreparedStatement pstmt = null;
@@ -351,12 +341,12 @@ public class BidListBoardDaoImpl implements BidListBoardDao {
 			conn = obtainConnection();
 			pstmt = conn.prepareStatement(query);
 
-			pstmt.setInt(1, num);
+			pstmt.setInt(1, replyNum);
 
 			pstmt.executeUpdate();			
 
 		}catch(SQLException se){
-			System.err.println("BidListBoardDaoImpl deleteBoard() Error :" + se.getMessage());
+			System.err.println("QnABoardReplyDaoImpl deleteReply() Error :" + se.getMessage());
 			se.printStackTrace(System.err);
 		}finally{
 			try { 
@@ -368,7 +358,5 @@ public class BidListBoardDaoImpl implements BidListBoardDao {
 		}
 
 	}	
-	
-	
 
 }

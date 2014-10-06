@@ -2,20 +2,27 @@ package action.business.domain.reply;
 
 public class QnABoardReply extends Reply {
 	
-	private int qnaBoradNum;
+	private int qnaBoardNum;
 
-	public QnABoardReply(int replyNum, int masterNum, int replyOrder,
-			int replyStep, String replyContent, int qnaBoradNum) {
-		super(replyNum, masterNum, replyOrder, replyStep, replyContent);
-		this.qnaBoradNum = qnaBoradNum;
+	public QnABoardReply(int replyNum, String memberID, String replyContent, int masterNum, int replyOrder,
+			int replyStep,  int qnaBoardNum) {
+		super(replyNum, memberID, replyContent, masterNum, replyOrder, replyStep);
+		this.qnaBoardNum = qnaBoardNum;
+	}
+	
+	
+
+	public QnABoardReply(int replyNum, String memberID, String replyContent, int replyStep) {
+		super(replyNum, memberID, replyContent, replyStep);
+	
 	}
 
-	public int getQnaBoradNum() {
-		return qnaBoradNum;
+	public int getQnaBoardNum() {
+		return qnaBoardNum;
 	}
 
-	public void setQnaBoradNum(int qnaBoradNum) {
-		this.qnaBoradNum = qnaBoradNum;
+	public void setQnaBoardNum(int qnaBoardNum) {
+		this.qnaBoardNum = qnaBoardNum;
 	}
 	
 	

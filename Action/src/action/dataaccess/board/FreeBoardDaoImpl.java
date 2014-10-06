@@ -25,7 +25,7 @@ public class FreeBoardDaoImpl implements FreeBoardDao {
 		try {
 			//Class.forName("oracle.jdbc.OracleDriver");
 			Context context = new InitialContext();
-			dataSource = (DataSource) context.lookup("java:comp/env/jdbc/dukeshopDB");
+			dataSource = (DataSource) context.lookup("java:comp/env/jdbc/actionDB");
 		} catch(NamingException ne) {
 			System.err.println("JNDI error occured");
 			ne.printStackTrace(System.err);
@@ -122,7 +122,7 @@ public class FreeBoardDaoImpl implements FreeBoardDao {
 			}
 
 		}catch(SQLException se){
-			System.err.println("BoardDAOImpl selectBoardList() Error :" + se.getMessage());
+			System.err.println("FreeBoardDaoImpl selectBoardList() Error :" + se.getMessage());
 		}finally{
 			try { if (rs != null) rs.close(); } catch(SQLException ex) { ex.printStackTrace(System.err); }
 			try { if (pstmt != null) pstmt.close(); } catch(SQLException ex) { ex.printStackTrace(System.err); }
@@ -194,7 +194,7 @@ public class FreeBoardDaoImpl implements FreeBoardDao {
 			}
 
 		}catch(SQLException se){
-			System.err.println("BoardDAOImpl selectBoardCount() Error :" + se.getMessage());
+			System.err.println("FreeBoardDaoImpl selectBoardCount() Error :" + se.getMessage());
 		}finally{
 			try { if (rs != null) rs.close(); } catch(SQLException ex) { ex.printStackTrace(System.err); }
 			try { if (pstmt != null) pstmt.close(); } catch(SQLException ex) { ex.printStackTrace(System.err); }
@@ -233,7 +233,7 @@ public class FreeBoardDaoImpl implements FreeBoardDao {
 						rs.getInt("isnotice"));
 			}
 		}catch(SQLException se){
-			System.err.println("BoardDaoImpl selectBoard() Error :" + se.getMessage());
+			System.err.println("FreeBoardDaoImpl selectBoard() Error :" + se.getMessage());
 			se.printStackTrace(System.err);
 		}finally{
 			try { if (rs != null) rs.close(); } catch(SQLException ex) { ex.printStackTrace(System.err); }
@@ -272,7 +272,7 @@ public class FreeBoardDaoImpl implements FreeBoardDao {
 
 
 		}catch(SQLException se){
-			System.err.println("BoardDaoImpl boardNumExists() Error :" + se.getMessage());
+			System.err.println("FreeBoardDaoImpl boardNumExists() Error :" + se.getMessage());
 			se.printStackTrace(System.err);
 		}finally{
 			try { 
@@ -316,7 +316,7 @@ public class FreeBoardDaoImpl implements FreeBoardDao {
 			pstmt.executeUpdate();
 
 		}catch(SQLException se){
-			System.err.println("BoardDaoImpl insertBoard() Error :" + se.getMessage());
+			System.err.println("FreeBoardDaoImpl insertBoard() Error :" + se.getMessage());
 			se.printStackTrace(System.err);
 		}finally{
 			try { 
@@ -352,7 +352,7 @@ public class FreeBoardDaoImpl implements FreeBoardDao {
 			pstmt.executeUpdate();			
 
 		}catch(SQLException se){
-			System.err.println("BoardDaoImpl addReadCount() Error :" + se.getMessage());
+			System.err.println("FreeBoardDaoImpl addReadCount() Error :" + se.getMessage());
 			se.printStackTrace(System.err);
 		}finally{
 			try { 
@@ -386,7 +386,7 @@ public class FreeBoardDaoImpl implements FreeBoardDao {
 			pstmt.executeUpdate();			
 
 		}catch(SQLException se){
-			System.err.println("BoardDaoImpl deleteBoard() Error :" + se.getMessage());
+			System.err.println("FreeBoardDaoImpl deleteBoard() Error :" + se.getMessage());
 			se.printStackTrace(System.err);
 		}finally{
 			try { 

@@ -92,7 +92,7 @@ public class AuctionListBoardDaoImpl implements AuctionListBoardDao{
 			}
 
 		}catch(SQLException se){
-			System.err.println("BoardDAOImpl selectBoardList() Error :" + se.getMessage());
+			System.err.println("AuctionListBoardDaoImpl selectBoardList() Error :" + se.getMessage());
 		}finally{
 			try { if (rs != null) rs.close(); } catch(SQLException ex) { ex.printStackTrace(System.err); }
 			try { if (pstmt != null) pstmt.close(); } catch(SQLException ex) { ex.printStackTrace(System.err); }
@@ -134,7 +134,7 @@ public class AuctionListBoardDaoImpl implements AuctionListBoardDao{
 			}
 
 		}catch(SQLException se){
-			System.err.println("BoardDAOImpl selectBoardCount() Error :" + se.getMessage());
+			System.err.println("AuctionListBoardDaoImpl selectBoardCount() Error :" + se.getMessage());
 		}finally{
 			try { if (rs != null) rs.close(); } catch(SQLException ex) { ex.printStackTrace(System.err); }
 			try { if (pstmt != null) pstmt.close(); } catch(SQLException ex) { ex.printStackTrace(System.err); }
@@ -171,7 +171,7 @@ public class AuctionListBoardDaoImpl implements AuctionListBoardDao{
 						rs.getInt("listnum"));
 			}
 		}catch(SQLException se){
-			System.err.println("BoardDaoImpl selectBoard() Error :" + se.getMessage());
+			System.err.println("AuctionListBoardDaoImpl selectBoard() Error :" + se.getMessage());
 			se.printStackTrace(System.err);
 		}finally{
 			try { if (rs != null) rs.close(); } catch(SQLException ex) { ex.printStackTrace(System.err); }
@@ -210,7 +210,7 @@ public class AuctionListBoardDaoImpl implements AuctionListBoardDao{
 
 
 		}catch(SQLException se){
-			System.err.println("BoardDaoImpl boardNumExists() Error :" + se.getMessage());
+			System.err.println("AuctionListBoardDaoImpl boardNumExists() Error :" + se.getMessage());
 			se.printStackTrace(System.err);
 		}finally{
 			try { 
@@ -251,7 +251,7 @@ public class AuctionListBoardDaoImpl implements AuctionListBoardDao{
 			pstmt.executeUpdate();
 
 		}catch(SQLException se){
-			System.err.println("BoardDaoImpl insertBoard() Error :" + se.getMessage());
+			System.err.println("AuctionListBoardDaoImpl insertBoard() Error :" + se.getMessage());
 			se.printStackTrace(System.err);
 		}finally{
 			try { 
@@ -285,7 +285,7 @@ public class AuctionListBoardDaoImpl implements AuctionListBoardDao{
 			pstmt.executeUpdate();			
 
 		}catch(SQLException se){
-			System.err.println("BoardDaoImpl deleteBoard() Error :" + se.getMessage());
+			System.err.println("AuctionListBoardDaoImpl deleteBoard() Error :" + se.getMessage());
 			se.printStackTrace(System.err);
 		}finally{
 			try { 

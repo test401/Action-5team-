@@ -120,7 +120,7 @@ public class QnABoardDaoImpl implements QnABoardDao {
 			}
 
 		}catch(SQLException se){
-			System.err.println("BoardDAOImpl selectBoardList() Error :" + se.getMessage());
+			System.err.println("QnABoardDaoImpl selectBoardList() Error :" + se.getMessage());
 		}finally{
 			try { if (rs != null) rs.close(); } catch(SQLException ex) { ex.printStackTrace(System.err); }
 			try { if (pstmt != null) pstmt.close(); } catch(SQLException ex) { ex.printStackTrace(System.err); }
@@ -192,7 +192,7 @@ public class QnABoardDaoImpl implements QnABoardDao {
 			}
 
 		}catch(SQLException se){
-			System.err.println("BoardDAOImpl selectBoardCount() Error :" + se.getMessage());
+			System.err.println("QnABoardDaoImpl selectBoardCount() Error :" + se.getMessage());
 		}finally{
 			try { if (rs != null) rs.close(); } catch(SQLException ex) { ex.printStackTrace(System.err); }
 			try { if (pstmt != null) pstmt.close(); } catch(SQLException ex) { ex.printStackTrace(System.err); }
@@ -230,7 +230,7 @@ public class QnABoardDaoImpl implements QnABoardDao {
 						(BLOB) rs.getBlob("contents"));
 			}
 		}catch(SQLException se){
-			System.err.println("BoardDaoImpl selectBoard() Error :" + se.getMessage());
+			System.err.println("QnABoardDaoImpl selectBoard() Error :" + se.getMessage());
 			se.printStackTrace(System.err);
 		}finally{
 			try { if (rs != null) rs.close(); } catch(SQLException ex) { ex.printStackTrace(System.err); }
@@ -269,7 +269,7 @@ public class QnABoardDaoImpl implements QnABoardDao {
 
 
 		}catch(SQLException se){
-			System.err.println("BoardDaoImpl boardNumExists() Error :" + se.getMessage());
+			System.err.println("QnABoardDaoImpl boardNumExists() Error :" + se.getMessage());
 			se.printStackTrace(System.err);
 		}finally{
 			try { 
@@ -312,7 +312,7 @@ public class QnABoardDaoImpl implements QnABoardDao {
 			pstmt.executeUpdate();
 
 		}catch(SQLException se){
-			System.err.println("BoardDaoImpl insertBoard() Error :" + se.getMessage());
+			System.err.println("QnABoardDaoImpl insertBoard() Error :" + se.getMessage());
 			se.printStackTrace(System.err);
 		}finally{
 			try { 
@@ -348,7 +348,7 @@ public class QnABoardDaoImpl implements QnABoardDao {
 			pstmt.executeUpdate();			
 
 		}catch(SQLException se){
-			System.err.println("BoardDaoImpl updateBoard() Error :" + se.getMessage());
+			System.err.println("QnABoardDaoImpl updateBoard() Error :" + se.getMessage());
 			se.printStackTrace(System.err);
 		}finally{
 			try { 
@@ -382,7 +382,7 @@ public class QnABoardDaoImpl implements QnABoardDao {
 			pstmt.executeUpdate();			
 
 		}catch(SQLException se){
-			System.err.println("BoardDaoImpl deleteBoard() Error :" + se.getMessage());
+			System.err.println("QnABoardDaoImpl deleteBoard() Error :" + se.getMessage());
 			se.printStackTrace(System.err);
 		}finally{
 			try { 
