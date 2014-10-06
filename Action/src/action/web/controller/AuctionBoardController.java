@@ -3,6 +3,7 @@ package action.web.controller;
 import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.io.UnsupportedEncodingException;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -274,13 +275,13 @@ public class AuctionBoardController extends HttpServlet {
 		String image = null;
 		String mainImage = null;
 		
-		String[] images = {mainImage, image};
 		
 		
 		/*String[] names = {title, memberID, contents, endTime, catagoryID,
 				isImm, startPrice, immPrice};*/
 		
-		String[] names = {catagoryID, title, startPrice, immPrice, contents};
+		String[] names = {catagoryID, title, startPrice, immPrice, isImm , endTime,  contents};
+		String[] images = {mainImage, image};
 		
 		// 디스크 기반의 FileItem factory 생성
 		DiskFileItemFactory factory = new DiskFileItemFactory();
@@ -306,14 +307,22 @@ public class AuctionBoardController extends HttpServlet {
 			int count2 = 0;
 			// 업로드된 items 처리
 			Iterator<FileItem> iter = items.iterator();
+			
 			while (iter.hasNext()) {    
 				FileItem item = iter.next();
 				// 일반 폼 필드 처리 (<input type="file">이 아닌 경우)
 				if (item.isFormField()) {
+					//catagoryID = item.getString("categoryID");
+				
+					
 					names[count] = item.getString("UTF-8");
-					System.out.println(names[count]);
+					/*title = item.getString("title");
+					isImm = item.getString("endTime");
+					catagoryID = item.getString(catagoryID);*/
+					
+					System.out.println(count + " : " + names[count] + items.size());
+					out.println(names[count]);
 					count++;
-
 				 // 파일 업로드 처리 (<input type="file">인 경우)
 				} else {
 					
@@ -326,10 +335,12 @@ public class AuctionBoardController extends HttpServlet {
 					}
 					images[count2] = images[count2].substring(index + 1); // 파일명만 추출
 					
-				
 					// 파일 업로드 처리
-					File uploadedFile = new File(uploadDir, images[count2]);
-					item.write(uploadedFile); // 실질적인 저장
+//					File uploadedFile = new File(uploadDir, images[count2]);
+//					item.write(uploadedFile); // 실질적인 저장
+					System.out.println(count2 + " : " + images[count2]);
+					
+					out.println(images[count2]);
 					count2++;
 					
 					//즉시구매여부가 널값이거나 0이면 즉시구매, 즉시구매가격을 0으로 설정
@@ -354,15 +365,16 @@ public class AuctionBoardController extends HttpServlet {
 					System.out.println(board);
 					// 3. BoardService 객체를 통해 해당 게시글을 등록한다.
 					AuctionBoardService service = new AuctionBoardServiceImpl();
-					service.writeBoard(board);	*/
-					out.println(names[0] + " " + names[1]+ " " + names[2]+ " " + names[3]+ " " + " " + images[0] + " "+ images[1] + " "+ startPrice);
-				}		
-			}			
+					service.writeBoard(board);	*/	
+					
+				}
+			}
+			out.println(names[0] + " " + names[1]+ " " + names[2]+ " " + names[3]+ " " + " " + images[0] + " "+ images[1] + " "+ startPrice);
 			out.close();
 		} catch (Exception e) {
 			e.printStackTrace();
 			out.println("파일 업로드 처리에 문제가 있습니다.");	
-		}
+		} 
 		
     //RequestDispatcher 객체를 통해 목록 보기(list)로 요청을 전달한다.
 //		RequestDispatcher dispatcher = request.getRequestDispatcher("list");

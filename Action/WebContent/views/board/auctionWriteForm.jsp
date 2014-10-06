@@ -33,15 +33,15 @@
 		            					<option value="4">리</option>
 		            				</select>
 		            			</td>
-		            		</tr>       	
+		            		</tr>
 		            		<tr>
 		            		    <td><label class="label">제목</label></td>
 		            			<td><input type="text" name="title" placeholder="글제목을 입력하여주세요."></td>
 		            		</tr>
-		            		<!-- <tr>
+		            		<tr>
 		            		    <td><label class="label">대표이미지</label></td>
-		            			<td><input type="file" name="image"></td>
-		            		</tr> -->
+		            			<td><input type="file" name="mainImage"></td>
+		            		</tr>
 		            		<tr>
 		            		    <td><label class="label">시작가</label></td>
 		            			<td><input type="text" name="startPrice"></td>
@@ -57,7 +57,7 @@
 		            		</tr>
 		            		<tr>
 		            		    <td><label class="label">업로드이미지</label></td>
-		            			<td><input type="file" name="" value="3"></td>
+		            			<td><input type="file" name="image"></td>
 		            		</tr>
 		            		<tr>
 		            			<td colspan="10">
