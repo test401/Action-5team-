@@ -6,7 +6,6 @@
 <meta charset="UTF-8">
 <link rel="stylesheet" href="/Action/action.css">
 <script src="/Action/js/board.js">
-
 </script>
 <title>Action List</title>
 </head>
@@ -60,7 +59,7 @@
                             </a>
                         </td>
                         <td class="auctiontitle">
-                            <a href="/Action/AuctionBoard?action=read?pageNumber=${currentPageNumber}&boardNum=${auction.boardNum}">${auction.title}</a>
+                            <a href="/Action/AuctionBoard?action=read&pageNumber=${currentPageNumber}&boardNum=${auction.boardNum}&searchType=${param.searchType}&searchText=${param.searchText}&categoryType=${param.categoryType}">${auction.title}</a>
                         </td>
                         <td class="auctioncurrentPrice">${auction.currentPrice}</td>
                         <td class="auctionimmediatelyPrice">${auction.immediatelyPrice}</td>

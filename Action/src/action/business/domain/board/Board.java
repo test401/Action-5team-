@@ -93,10 +93,10 @@ public abstract class Board {
 	public void setTitle(String title) {
 		this.title = title;
 	}
-	public String getcontents() {
+	public String getContents() {
 		return contents;
 	}
-	public void setcontents(String contents) {
+	public void setContents(String contents) {
 		this.contents = contents;
 	}
 	

@@ -62,8 +62,8 @@ window.onload = displayTime; // 문서가 로딩될 때 수행할 함수 설정
 	            		<tr>
 	            			<td><label class="registerlabel" >경매물품</label></td>
 	            			<c:if test="${auctionBoard.memberID == loginMember.memberID}">
-		            			<td><input type="button" name="update" value="수정"></td>
-		            			<td><input type="button" name="delete" value="삭제"></td>
+		            			<td><input type="button" name="update" value="수정" onclick="goUrl('/Action/AuctionBoard?action=updateForm&pageNumber=${currentPageNumber}&boardNum=${auctionBoard.boardNum}&searchType=${param.searchType}&searchText=${param.searchText}&categoryType=${param.categoryType}')"></td>
+		            			<td><input type="button" name="delete" value="삭제" onclick="deleteCheck('/Action/AuctionBoard?action=remove&boardNum=${auctionBoard.boardNum}')"></td>
 	            			</c:if>
 	            		</tr>
 	            		<tr>
@@ -92,12 +92,13 @@ window.onload = displayTime; // 문서가 로딩될 때 수행할 함수 설정
 	            		</tr>
 	            		<tr>
 	            		    <td><label class="label">마감날짜</label></td>
-	            			<td colspan="4"><textarea hidden="true" rows="" cols="" id="endTime">2014-10-02</textarea>2014-10-02${auctionBoard.endTime}</td>
+	            			<td colspan="4"><textarea hidden="true" rows="" cols="" id="endTime">${auctionBoard.endTime}</textarea>${auctionBoard.endTime}</td>
 	            		</tr>
 	            		<tr>
 	            		    <td><label class="label">남은시간</label></td>
 	            			<td colspan="4"><span id="clock" ></span></td>
 	            		</tr>
+	            		
 	            		<tr>
 	            		    <td><label class="label">입찰가</label></td>
 	            			<td colspan="7">

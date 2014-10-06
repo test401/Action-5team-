@@ -153,7 +153,6 @@ public class AuctionBoardController extends HttpServlet {
             throws ServletException, IOException, DataNotFoundException {
 		// 1. 요청 파라미터(num)로 부터 글 번호를 구한다.
 		String boardNum = request.getParameter("boardNum");
-		System.out.println("boardNum : " + boardNum);
 		//1.2 pageNumber 요청 파라미터 값을 구한다.
 		String pageNumber = request.getParameter("pageNumber");
 		
@@ -164,11 +163,11 @@ public class AuctionBoardController extends HttpServlet {
 		// 2. BoardService 객체로부터 해당 글 번호의 게시글을 구해온다.
 		AuctionBoardService service = new AuctionBoardServiceImpl();
 
-		AuctionBoard board = service.findBoard(Integer.parseInt(boardNum));
+		AuctionBoard auctionBoard = service.findBoard(Integer.parseInt(boardNum));
 
 		
 		// 3. request scope 속성(board)에 게시글을 저장한다.
-        request.setAttribute("board", board);
+        request.setAttribute("auctionBoard", auctionBoard);
 
         // 3.2 request scope 속성으로 currentPageNumber를 저장한다.
 		request.setAttribute("currentPageNumber", currentPageNumber);
@@ -332,19 +331,12 @@ public class AuctionBoardController extends HttpServlet {
 					System.out.println(count2 + " : " + images[count2]);
 		
 					count2++;
-					
-				
-					
-					
-					
+		
 					//names[0] = categoryID
 					//names[1] = title,     names[2] = startPrice
 					//names[3] = immPrice,  names[4] = isImm
 					//names[5] = endTime,   names[6] = contents
-					
-					
 
-					
 				}
 			}
 			/*out.println(names[0] + " " + names[1]+ " " + names[2]+ " " + names[3]+ " " + " " + images[0] + " "+ images[1] + " "+ startPrice);*/
@@ -397,17 +389,17 @@ public class AuctionBoardController extends HttpServlet {
 				}
 		// BoardService 객체를 통해 해당 번호의 게시글을 검색한다.
         AuctionBoardService boardService = new AuctionBoardServiceImpl();
-        Board board = boardService.findBoard(Integer.parseInt(boardNum));
+        Board auctionBoard = boardService.findBoard(Integer.parseInt(boardNum));
         
         // request scope 속성(board)에 검색한 게시글을 저장한다.
-        request.setAttribute("board", board);
+        request.setAttribute("auctionBoard", auctionBoard);
         request.setAttribute("currentPageNumber", currentPageNumber);
 
 		//request.setAttribute("searchType", searchType);
 		//request.setAttribute("searchText", searchText);
         
         // RequestDispatcher 객체를 통해 뷰 페이지(/views/board/updateForm.jsp)로 요청을 전달한다.
-        RequestDispatcher dispatcher = request.getRequestDispatcher("/views/board/updateForm.jsp");
+        RequestDispatcher dispatcher = request.getRequestDispatcher("/views/board/auctionUpdateForm.jsp");
         dispatcher.forward(request, response);
 	}
 	
@@ -432,19 +424,20 @@ public class AuctionBoardController extends HttpServlet {
 		HttpSession session = request.getSession(true);
 		Member member = (Member) session.getAttribute("loginMember");
 		// 요청 파라미터
-		String title = "";
 		String memberID = member.getMemberID();
+		int boardNum = Integer.parseInt(request.getParameter("boardNum"));
+		String title = "";
 		String contents = null;
-		String endTime = null;
 		String categoryID = null;
 		String isImm = null;
 		String startPrice = null;
 		String immPrice = null;
 		String image = null;
 		String mainImage = null;
+		String endTime = null;
 		
 
-		String[] names = {categoryID, title, startPrice, immPrice, isImm , endTime,  contents};
+		String[] names = {categoryID, title, startPrice, immPrice, isImm , endTime,  contents, "button"};
 		String[] images = {mainImage, image};
 		
 		// 디스크 기반의 FileItem factory 생성
@@ -480,13 +473,12 @@ public class AuctionBoardController extends HttpServlet {
 					names[count] = item.getString("UTF-8");
 
 					System.out.println(count + " : " + names[count] + items.size());
-					
+//					out.println(count+"1:"+names[count]);
 					count++;
 					
 				 // 파일 업로드 처리 (<input type="file">인 경우)
 				} else {
-					
-					
+		
 					images[count2] = item.getName();// 경로가 포함된 파일명
 					//if(images[count] != null && images[count])
 					int index = images[count2].lastIndexOf("\\"); // 디렉터리 구분자 위치를 통해
@@ -495,8 +487,8 @@ public class AuctionBoardController extends HttpServlet {
 					}
 					images[count2] = images[count2].substring(index + 1); // 파일명만 추출
 					
-					System.out.println(count2 + " : " + images[count2]);
-		
+					System.out.println(count2 + "2: " + images[count2]);
+//					out.println(count2+":"+images[count2]);
 					count2++;
 					
 					//names[0] = categoryID
@@ -513,30 +505,31 @@ public class AuctionBoardController extends HttpServlet {
 			//즉시 구매 여부에 따라 생성자를 구별
 			if(names[6] != null){		
 				//즉시 구매가 가능 할 때 : 즉시 구매 여부 값 1, 즉시 구매 가격 입력 활성화
-				board = new AuctionBoard(memberID, Integer.parseInt(names[0]),
+				board = new AuctionBoard(boardNum, memberID, Integer.parseInt(names[0]),
 						names[1], Integer.parseInt(names[2]), Integer.parseInt(names[3]),
-						Integer.parseInt(names[4]), names[5], names[6], 0, images[0], images[1]);
+						Integer.parseInt(names[4]), names[5], names[6], images[0], images[1]);
 			}else{
 				//즉시 구매가 불가능 할 때 : 즉시 구매 여부 값 0, 즉수 구매 가격 입력 비활성화
-				board = new AuctionBoard(memberID, Integer.parseInt(names[0]),
+				board = new AuctionBoard(boardNum, memberID, Integer.parseInt(names[0]),
 						names[1], Integer.parseInt(names[2]), 0,
-						0, names[3], names[4], 0, images[0], images[1]);
+						0, names[3], names[4],  images[0], images[1]);
 			}
 			// 구해 온 요청 파라미터 값을 지닌 AuctionBoard 객체를 생성한다.
 			
-			System.out.println(board);
 			// 3. BoardService 객체를 통해 해당 게시글을 등록한다.
 			AuctionBoardService service = new AuctionBoardServiceImpl();
 			service.updateBoard(board);
 			
+			
+			request.setAttribute("auctionBoard", board);
+			
 	        //  RequestDispatcher 객체를 통해 뷰 페이지(/views/board/auctionList.jsp)로 요청을 전달한다.
-	        RequestDispatcher dispatcher = request.getRequestDispatcher("read");
+	        RequestDispatcher dispatcher = request.getRequestDispatcher("/AuctionBoard?action=read");
 	        dispatcher.forward(request, response);
 		} catch (Exception e) {
 			e.printStackTrace();
 			
-		} 
-		        
+		} 	        
 	}
 
 	/* 
@@ -552,7 +545,7 @@ public class AuctionBoardController extends HttpServlet {
 		service.removeBoard(Integer.parseInt(boardNum));
 
         // 3. RequestDispatcher 객체를 통해 목록 보기(list)로 요청을 전달한다.
-		RequestDispatcher dispatcher = request.getRequestDispatcher("list");
+		RequestDispatcher dispatcher = request.getRequestDispatcher("/AuctionBoard?action=list");
 	    dispatcher.forward(request, response);
 		
 	}

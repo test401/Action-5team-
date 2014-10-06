@@ -70,10 +70,12 @@ public class AuctionBoardDaoImpl implements AuctionBoardDao {
 				// 2.2. categorySQL의 유무에 따라 WHERE 혹은 AND절 생성을 결정한다.
 				if(categorySQL.length() != 0){
 					if(whereSQL.length() != 0){
-						whereSQL = "AND " + whereSQL;
+						whereSQL = " AND " + whereSQL;
 					}		
 				} else {
-					whereSQL = " WHERE " + whereSQL;
+					if(whereSQL.length() != 0){						
+						whereSQL = " WHERE " + whereSQL;
+					}
 				}
 
 				// 3. LIKE 절에 포함될 수 있도록 searchText 값 앞 뒤에 % 기호를 붙인다.
@@ -124,14 +126,15 @@ public class AuctionBoardDaoImpl implements AuctionBoardDao {
 					title = title.substring(0, 20) + "...";
 				}
 
-				board = new AuctionBoard(rs.getInt("boardnum"),
+				board = new AuctionBoard(
+						rs.getInt("boardnum"),
 						title,
 						rs.getString("memberID"),
-						rs.getString("mainImage"),
-						rs.getInt("currentPrice"),						
+						rs.getString("endtime"),
 						rs.getInt("categoryID"),
 						rs.getInt("immediatelyPrice"),
-						rs.getString("endtime"));
+						rs.getInt("currentPrice"),						
+						rs.getString("mainImage"));
 				
 				boardList.add(board);
 			}
@@ -144,7 +147,7 @@ public class AuctionBoardDaoImpl implements AuctionBoardDao {
 			try { if (conn != null) conn.close(); } catch(SQLException e) { e.printStackTrace(System.err); }
 
 		}
-		System.out.println("boardNum : " + board.getBoardNum() + "  :   " +boardList);
+		
 		return boardList;
 	}
 
@@ -155,38 +158,36 @@ public class AuctionBoardDaoImpl implements AuctionBoardDao {
 		String searchText = (String) searchInfo.get("searchText");
 		String categoryType = (String) searchInfo.get("categoryType");
 
-		// 2. searchType 값에 따라 사용될 조건절을 생성한다.
+		// 2. categoryType과 일치하는 게시물 목록을 출력하기위한 조건절을 생성한다.
 		String categorySQL = "";
 		String whereSQL = "";
 
 		if((categoryType == null) || (categoryType.length() == 0)){
 			categorySQL = "";
 		}else{
-			categorySQL = "WHERE (" + categoryType.trim() + " LIKE "
-					+ "(SELECT CategoryName FROM AuctionBoard, CategoryBoard "
-					+ "WHERE AuctionBoard.categoryID = CategoryBoard.categoryID))";
-		}		
+			categorySQL = " Where categoryID = " + categoryType.trim();
+		}
 
 		// 2.1. searchType 값에 따라 사용될 조건절을 생성한다.
 		if((searchType == null) || (searchType.length() == 0)){
 			whereSQL = "";
 		} else if (searchType.equals("all")){
-			whereSQL = "(title LIKE ? OR memberID LIKE ? OR contents LIKE ?)";
+			whereSQL = " where (title LIKE ? OR memberID LIKE ? OR contents LIKE ?)";
 		} else if ( (searchType.equals("title")) || (searchType.equals("memberID")) || (searchType.equals("contents")) ){
 			whereSQL = "(" + searchType.trim() + " LIKE ?)";
 		}
 
 		// 2.2. categorySQL의 유무에 따라 WHERE 혹은 AND절 생성을 결정한다.
 		if(categorySQL.length() != 0){
-			if(whereSQL.length() == 0){
-				whereSQL = "";
-			} else {
-				whereSQL = "AND " + whereSQL;
-			}			
+			if(whereSQL.length() != 0){
+				whereSQL = " AND " + whereSQL;
+			}
 		} else {
-			whereSQL = "WHERE " + whereSQL;
+			if(whereSQL.length() != 0){
+				whereSQL = " WHERE " + whereSQL;
+			}
 		}
-
+		
 		// 3. LIKE 절에 포함될 수 있도록 searchText 값 앞 뒤에 % 기호를 붙인다.
 		if(searchText != null){
 			searchText = "%" + searchText + "%";
@@ -200,7 +201,7 @@ public class AuctionBoardDaoImpl implements AuctionBoardDao {
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
-
+		
 		try{
 			conn = obtainConnection();
 			pstmt = conn.prepareStatement(query);
@@ -269,7 +270,7 @@ public class AuctionBoardDaoImpl implements AuctionBoardDao {
 						);
 			}
 		}catch(SQLException se){
-			System.err.println("BoardDaoImpl selectBoard() Error :" + se.getMessage());
+			System.err.println("BoardDaoImpl selectsBoard() Error :" + se.getMessage());
 			se.printStackTrace(System.err);
 		}finally{
 			try { if (rs != null) rs.close(); } catch(SQLException ex) { ex.printStackTrace(System.err); }
@@ -277,7 +278,7 @@ public class AuctionBoardDaoImpl implements AuctionBoardDao {
 			try { if (conn != null) conn.close(); } catch(SQLException e) { e.printStackTrace(System.err); }
 
 		}
-
+		
 		return board;
 	}	
 
@@ -362,27 +363,28 @@ public class AuctionBoardDaoImpl implements AuctionBoardDao {
 
 	@Override
 	public void updateBoard(AuctionBoard board) {
-		String query="UPDATE AuctionBoard SET title = ?, contents = ?, "
-				+ "categoryID = ?, isImmediately = ?, immediatelyPrice = ?, "
-				+ "image =?, mainImage = ?  WHERE boardnum = ?";
+		String query="UPDATE AuctionBoard SET title = ? , contents = ? , "
+				+ " categoryID = ?, startPrice =?, isImmediately = ?, immediatelyPrice = ?, "
+				+ " image = ?, mainImage = ?, endTime = SYSDATE+"+board.getEndTime()+"  WHERE boardnum = ?";
 
 		Connection conn = null;
 		PreparedStatement pstmt = null;
-
+		System.out.println(board);
 		try{
 			conn = obtainConnection();
 			pstmt = conn.prepareStatement(query);
 			pstmt.setString(1, board.getTitle());
 			pstmt.setString(2, board.getContents());
 			pstmt.setInt(3, board.getCategoryID());
-			pstmt.setInt(4, board.getIsImmediately());
-			pstmt.setInt(5, board.getImmediatelyPrice());
-			pstmt.setString(6, board.getImage());
-			pstmt.setString(7, board.getMainImage());
-			pstmt.setInt(8, board.getBoardNum());			
+			pstmt.setInt(4, board.getStartPrice());
+			pstmt.setInt(5, board.getIsImmediately());
+			pstmt.setInt(6, board.getImmediatelyPrice());
+			pstmt.setString(7, board.getImage());
+			pstmt.setString(8, board.getMainImage());
+			pstmt.setInt(9, board.getBoardNum());			
 
 			pstmt.executeUpdate();			
-
+			
 		}catch(SQLException se){
 			System.err.println("BoardDaoImpl updateBoard() Error :" + se.getMessage());
 			se.printStackTrace(System.err);

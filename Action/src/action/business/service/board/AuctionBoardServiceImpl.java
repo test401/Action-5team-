@@ -42,19 +42,35 @@ public class AuctionBoardServiceImpl implements AuctionBoardService {
 
 	@Override
 	public void updateBoard(AuctionBoard board) throws DataNotFoundException {
-		boardDaoAccess.updateBoard(board); 
+		if(boardDaoAccess.boardNumExists(board.getBoardNum())){			
+			boardDaoAccess.updateBoard(board);
+		} else {
+			throw new DataNotFoundException("해당 게시글을 찾을 수 없습니다. ");
+		}
+		
 		
 	}
 	
 	@Override
 	public void updatePrice(AuctionBoard board) throws DataNotFoundException {
-		boardDaoAccess.updatePrice(board);
+		if(boardDaoAccess.boardNumExists(board.getBoardNum())){			
+			boardDaoAccess.updatePrice(board);
+		} else {
+			throw new DataNotFoundException("해당 게시글을 찾을 수 없습니다. ");
+		}
+		
 		
 	}
 
 	@Override
 	public void removeBoard(int num) throws DataNotFoundException {
-		boardDaoAccess.deleteBoard(num);
+		
+		if(boardDaoAccess.boardNumExists(num)){			
+			boardDaoAccess.deleteBoard(num);
+		} else {
+			throw new DataNotFoundException("해당 게시글을 찾을 수 없습니다. ");
+		}
+		
 		
 	}
 

@@ -4,6 +4,9 @@
 <html>
 <head>
 <meta charset="UTF-8">
+<link rel="stylesheet" href="/Action/action.css">
+<script src="/Action/ckeditor/ckeditor.js"></script>
+<script src="/Action/js/board.js"></script>
 <title>Action Edit Form</title>
 </head>
 <body>
@@ -15,7 +18,7 @@
 	        <div class="tableCell">
 	        	<c:import url="/views/side-bar.jsp" />
 	            <div class="main">
-	            	<form action="" method="POST">
+	            	<form action="/Action/AuctionBoard?action=update&pageNumber=${currentPageNumber}&boardNum=${auctionBoard.boardNum}&searchType=${param.searchType}&searchText=${param.searchText}&categoryType=${param.categoryType}" method="POST" enctype="multipart/form-data">
 		            	<table>
 		            		<tr>
 		            			<td><label class="updatelabel" >경매물품수정</label></td>
@@ -24,10 +27,10 @@
 		            			<td><label class="label">카테고리</label></td>
 		            			<td>
 		            				<select name="categoryID">
-		            					<option value=""></option>
-		            					<option value=""></option>
-		            					<option value=""></option>
-		            					<option value=""></option>
+		            					<option value="1">카</option>
+		            					<option value="2">테</option>
+		            					<option value="3">고</option>
+		            					<option value="4">리</option>
 		            				</select>
 		            			</td>
 		            		</tr>       	
@@ -37,11 +40,11 @@
 		            		</tr>
 		            		<tr>
 		            		    <td><label class="label">대표이미지</label></td>
-		            			<td><input type="text" name="image"></td>
+		            			<td><input type="file" name="mainImage"></td>
 		            		</tr>
 		            		<tr>
 		            		    <td><label class="label">시작가</label></td>
-		            			<td><input type="text" name="startPrice">${auctionBoard.startPrice}</td>
+		            			<td><input type="text" name="startPrice" value = "${auctionBoard.startPrice}"></td>
 		            		</tr>
 							<tr>
 		            		    <td><label class="label">즉시구매가</label></td>
@@ -60,12 +63,21 @@
 		            			</td>
 		            		</tr>
 		            		<tr>
-		            			<td>
-		            				<textarea rows="" cols="" name="contents">value="${auctionBoard.contents}"</textarea>
-		            			</td>
+		            		    <td><label class="label">이미지</label></td>
+		            			<td><input type="file" name="image"></td>
 		            		</tr>
 		            		<tr>
-		            		    <td><input type="submit" name="register" value="가입신청"></td>
+		            			
+		            		<td colspan="10">
+		            			<textarea class="contentsinput ckeditor" rows="10" cols="80" name="contents">${auctionBoard.contents}</textarea>
+		            		<script>
+							 	CKEDITOR.replace('contents',{enterMode:'2', shiftEnterMode:'3'});
+							</script>
+		            			</td>
+
+		            		</tr>
+		            		<tr>
+		            		    <td><input type="submit" name="editer" value="수정"></td>
 		            			<td><input type="button" name="cancle" value="취소"></td>
 		            		</tr>
 		            	</table>
