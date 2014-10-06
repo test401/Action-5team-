@@ -59,4 +59,14 @@
     <servlet-name>FreeBoardController</servlet-name>
     <url-pattern>/freeBoard</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>QnABoardController</display-name>
+    <servlet-name>QnABoardController</servlet-name>
+    <servlet-class>action.web.controller.QnABoardController</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>QnABoardController</servlet-name>
+    <url-pattern>/qnaBoard</url-pattern>
+  </servlet-mapping>
 </web-app>

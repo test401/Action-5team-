@@ -2,9 +2,6 @@ package action.business.domain.board;
 
 import java.util.Date;
 
-import oracle.sql.BLOB;
-
-
 /**3. 경매 게시판 테이블
  * 게시글번호(게시판 공통), 글제목(게시판 공통), 작성자(게시판 공통), 대표이미지, 내용,
  * 카테고리ID, 시작일시, 종료일시, 즉시구매여부, 시작가, 
@@ -13,7 +10,7 @@ import oracle.sql.BLOB;
 public class AuctionBoard extends Board {
 
 	private String image;
-	private BLOB contents;
+	private String contents;
 	private Date startTime;
 	private Date endTime;
 	private int catagoryID;
@@ -37,7 +34,7 @@ public class AuctionBoard extends Board {
 	
 	/** 경매 상세 조회용 */
 	public AuctionBoard(int boardNum, String title, String memberID, 
-			String image, BLOB contents, Date startTime,
+			String image, String contents, Date startTime,
 			Date endTime, int catagoryID, int isImmediately, int startPrice,
 			int immediatelyPrice, int currentPrice) {
 		super(boardNum,title,memberID);
@@ -53,7 +50,7 @@ public class AuctionBoard extends Board {
 	}
 	
 	/** 경매 작성용 */
-	public AuctionBoard(String title, String memberID, String image, BLOB contents, Date startTime,
+	public AuctionBoard(String title, String memberID, String image, String contents, Date startTime,
 			Date endTime, int catagoryID, int isImmediately, int startPrice,
 			int immediatelyPrice, int currentPrice) {
 		super(title, memberID);
@@ -69,7 +66,7 @@ public class AuctionBoard extends Board {
 	}
 	
 	/** 경매 수정용 */
-	public AuctionBoard(String title, String image, BLOB contents, int catagoryID,
+	public AuctionBoard(String title, String image, String contents, int catagoryID,
 			int isImmediately, int immediatelyPrice) {
 		super(title);
 		this.image = image;
@@ -89,11 +86,11 @@ public class AuctionBoard extends Board {
 		this.image = image;
 	}
 
-	public BLOB getContents() {
+	public String getContents() {
 		return contents;
 	}
 
-	public void setContents(BLOB contents) {
+	public void setContents(String contents) {
 		this.contents = contents;
 	}
 

@@ -13,7 +13,6 @@ import javax.naming.InitialContext;
 import javax.naming.NamingException;
 import javax.sql.DataSource;
 
-import oracle.sql.BLOB;
 import action.business.domain.board.FreeBoard;
 import action.business.service.board.FreeBoardDao;;
 
@@ -73,11 +72,8 @@ public class FreeBoardDaoImpl implements FreeBoardDao {
 		String query = "SELECT * FROM " 
 				+ "(SELECT ROWNUM r, boardnum, title, memberID, isnotice FROM "
 				+ "(SELECT boardnum, title, memberID, contents, isnotice FROM FreeBoard "
-				+ whereSQL + " ORDER BY boardnum DESC, isnotice)) WHERE r BETWEEN ? and ?";
-
-		//String query = "SELECT num, writer, title, read_count, reg_date FROM board " + whereSQL 
-		//	+ "ORDER BY num DESC";
-
+				+ whereSQL + " ORDER BY isnotice DESC, boardnum DESC)) WHERE r BETWEEN ? and ?";
+		
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
@@ -229,7 +225,7 @@ public class FreeBoardDaoImpl implements FreeBoardDao {
 				board = new FreeBoard(rs.getInt("boardnum"),
 						rs.getString("title"),
 						rs.getString("memberID"),
-						(BLOB) rs.getBlob("contents"),
+						rs.getString("contents"),
 						rs.getInt("isnotice"));
 			}
 		}catch(SQLException se){
@@ -310,7 +306,7 @@ public class FreeBoardDaoImpl implements FreeBoardDao {
 			pstmt.setInt(1, board.getBoardNum());
 			pstmt.setString(2, board.getTitle());
 			pstmt.setString(3, board.getMemberID());
-			pstmt.setBlob(4, board.getcontents());
+			pstmt.setString(4, board.getcontents());
 			pstmt.setInt(5, board.getIsNotice());
 
 			pstmt.executeUpdate();
@@ -346,7 +342,7 @@ public class FreeBoardDaoImpl implements FreeBoardDao {
 			conn = obtainConnection();
 			pstmt = conn.prepareStatement(query);
 			pstmt.setString(1, board.getTitle());
-			pstmt.setBlob(2, board.getcontents());
+			pstmt.setString(2, board.getcontents());
 			pstmt.setInt(3, board.getBoardNum());			
 
 			pstmt.executeUpdate();			

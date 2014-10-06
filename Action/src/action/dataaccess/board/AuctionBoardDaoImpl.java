@@ -14,7 +14,6 @@ import javax.naming.InitialContext;
 import javax.naming.NamingException;
 import javax.sql.DataSource;
 
-import oracle.sql.BLOB;
 import action.business.domain.board.AuctionBoard;
 import action.business.service.board.AuctionBoardDao;
 
@@ -55,9 +54,7 @@ public class AuctionBoardDaoImpl implements AuctionBoardDao {
 		if((categoryType == null) || (categoryType.length() == 0)){
 			categorySQL = "";
 		}else{
-			categorySQL = "WHERE (" + categoryType.trim() + " LIKE "
-					+ "(SELECT CategoryID FROM AuctionBoard, CategoryBoard "
-					+ "WHERE AuctionBoard.categoryID = CategoryBoard.categoryID)) ";
+			categorySQL = "WHERE categoryID = " + categoryType.trim();
 		}		
 
 		// 2.1. searchType 값에 따라 사용될 조건절을 생성한다.
@@ -71,13 +68,11 @@ public class AuctionBoardDaoImpl implements AuctionBoardDao {
 
 		// 2.2. categorySQL의 유무에 따라 WHERE 혹은 AND절 생성을 결정한다.
 		if(categorySQL.length() != 0){
-			if(whereSQL.length() == 0){
-				whereSQL = "";
-			} else {
+			if(whereSQL.length() != 0){
 				whereSQL = "AND " + whereSQL;
-			}			
+			}
 		} else {
-			whereSQL = "WHERE " + whereSQL;
+			whereSQL = " WHERE " + whereSQL;
 		}
 
 		// 3. LIKE 절에 포함될 수 있도록 searchText 값 앞 뒤에 % 기호를 붙인다.
@@ -165,9 +160,7 @@ public class AuctionBoardDaoImpl implements AuctionBoardDao {
 		if((categoryType == null) || (categoryType.length() == 0)){
 			categorySQL = "";
 		}else{
-			categorySQL = "WHERE (" + categoryType.trim() + " LIKE "
-					+ "(SELECT CategoryName FROM AuctionBoard, CategoryBoard "
-					+ "WHERE AuctionBoard.categoryID = CategoryBoard.categoryID))";
+			categorySQL = "WHERE categoryID = " + categoryType.trim();
 		}		
 
 		// 2.1. searchType 값에 따라 사용될 조건절을 생성한다.
@@ -181,13 +174,11 @@ public class AuctionBoardDaoImpl implements AuctionBoardDao {
 
 		// 2.2. categorySQL의 유무에 따라 WHERE 혹은 AND절 생성을 결정한다.
 		if(categorySQL.length() != 0){
-			if(whereSQL.length() == 0){
-				whereSQL = "";
-			} else {
+			if(whereSQL.length() != 0){
 				whereSQL = "AND " + whereSQL;
-			}			
+			}
 		} else {
-			whereSQL = "WHERE " + whereSQL;
+			whereSQL = " WHERE " + whereSQL;
 		}
 
 		// 3. LIKE 절에 포함될 수 있도록 searchText 값 앞 뒤에 % 기호를 붙인다.
@@ -260,7 +251,7 @@ public class AuctionBoardDaoImpl implements AuctionBoardDao {
 						rs.getString("title"),
 						rs.getString("memberID"),
 						rs.getString("image"),
-						(BLOB)rs.getBlob("contents"),
+						rs.getString("contents"),
 						rs.getDate("startTime"),
 						rs.getDate("endTime"),
 						rs.getInt("catagoryID"),
@@ -336,7 +327,7 @@ public class AuctionBoardDaoImpl implements AuctionBoardDao {
 			pstmt.setString(1, board.getTitle());
 			pstmt.setString(2, board.getMemberID());
 			pstmt.setString(3, board.getImage());
-			pstmt.setBlob(4, board.getContents());
+			pstmt.setString(4, board.getContents());
 			pstmt.setDate(5, (Date) board.getEndTime());
 			pstmt.setInt(6, board.getCatagoryID());
 			pstmt.setInt(7, board.getIsImmediately());
@@ -373,7 +364,7 @@ public class AuctionBoardDaoImpl implements AuctionBoardDao {
 			pstmt = conn.prepareStatement(query);
 			pstmt.setString(1, board.getTitle());
 			pstmt.setString(2, board.getImage());
-			pstmt.setBlob(3, board.getContents());
+			pstmt.setString(3, board.getContents());
 			pstmt.setInt(4, board.getCatagoryID());
 			pstmt.setInt(5, board.getBoardNum());			
 
