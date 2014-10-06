@@ -7,6 +7,7 @@
 <link rel="stylesheet" href="/Action/action.css">
 <script src="/Action/ckeditor/ckeditor.js"></script>
 <script src="/Action/js/board.js"></script>
+
 <title>Action Write Form</title>
 </head>
 <body>
@@ -18,7 +19,7 @@
 	        <div class="tableCell">
 	        	<c:import url="/views/side-bar.jsp" />
 	            <div class="main">
-	            	<form action="/Action/AuctionBoard?action=write" method="POST" enctype="multipart/form-data">
+	            	<form name = "form" action="/Action/AuctionBoard?action=write" method="POST" enctype="multipart/form-data">
 		            	<table>
 		            		<tr>
 		            			<td><label class="registerlabel" >경매물품등록</label></td>
@@ -49,7 +50,9 @@
 							<tr>
 		            		    <td><label class="label">즉시구매가</label></td>
 		            			<td><input type="text" name="immediatelyPrice" ></td>
-		            			<td><label class="label">즉시구매허용여부</label><input type="checkbox" name="isImmediately" value="1"></td>
+		            			<td><label class="label">즉시구매허용여부</label>
+		            			<input type="checkbox" name="isImmediately" onclick="checkImm(this.form)" value="1" checked="checked">
+		            			</td>
 		            		</tr>
 		            		<tr>
 		            		    <td><label class="label">기간</label></td>

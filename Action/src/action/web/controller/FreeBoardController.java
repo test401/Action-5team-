@@ -101,10 +101,10 @@ public class FreeBoardController extends HttpServlet {
 			searchInfo.put("endRow", endRow);
 			
 			//3. BoardService 객체로부터 모든 게시글 리스트를 구해온다.
-			Board[] boardlist = service.getBoardList(searchInfo);
+			Board[] freeBoardList = service.getBoardList(searchInfo);
 				
 	        //4.1  request scope 속성(boardList)에 게시글 리스트를 저장한다.
-			request.setAttribute("boardlist", boardlist);
+			request.setAttribute("freeBoardList", freeBoardList);
 			
 			//4.2 request scope 속성으로 
 			request.setAttribute("currentPageNumber", currentPageNumber);
@@ -113,7 +113,7 @@ public class FreeBoardController extends HttpServlet {
 			request.setAttribute("totalPageCount", totalPageCount);
 	        
 	        //  RequestDispatcher 객체를 통해 뷰 페이지(/WEB-INF/views/board/list.jsp)로 요청을 전달한다.
-	        RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/views/board/list.jsp");
+	        RequestDispatcher dispatcher = request.getRequestDispatcher("/views/board/freeList.jsp");
 	        dispatcher.forward(request, response);
 			
 		}
@@ -137,10 +137,10 @@ public class FreeBoardController extends HttpServlet {
 				}
 			// 2. BoardService 객체로부터 해당 글 번호의 게시글을 구해온다.
 			FreeBoardService service = new FreeBoardServiceImpl();
-			FreeBoard board = service.findBoard(Integer.parseInt(boardNum));
+			FreeBoard freeBoard = service.findBoard(Integer.parseInt(boardNum));
 			
 			// 3. request scope 속성(board)에 게시글을 저장한다.
-	        request.setAttribute("board", board);
+	        request.setAttribute("freeBoard", freeBoard);
 
 	        // 3.2 request scope 속성으로 currentPageNumber를 저장한다.
 			request.setAttribute("currentPageNumber", currentPageNumber);
@@ -213,10 +213,10 @@ public class FreeBoardController extends HttpServlet {
 					}
 			// BoardService 객체를 통해 해당 번호의 게시글을 검색한다.
 			FreeBoardService boardService = new FreeBoardServiceImpl();
-	        Board board = boardService.findBoard(Integer.parseInt(boardNum));
+	        Board freeBoard = boardService.findBoard(Integer.parseInt(boardNum));
 	        
 	        // request scope 속성(board)에 검색한 게시글을 저장한다.
-	        request.setAttribute("board", board);
+	        request.setAttribute("freeBoard", freeBoard);
 	        request.setAttribute("currentPageNumber", currentPageNumber);
 
 			//request.setAttribute("searchType", searchType);

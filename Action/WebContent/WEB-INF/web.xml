@@ -109,7 +109,7 @@
   </servlet>
   <servlet-mapping>
     <servlet-name>FreeBoardController</servlet-name>
-    <url-pattern>/Free</url-pattern>
+    <url-pattern>/FreeBoard</url-pattern>
   </servlet-mapping>
   <servlet>
     <description></description>
@@ -119,6 +119,6 @@
   </servlet>
   <servlet-mapping>
     <servlet-name>QnABoardController</servlet-name>
-    <url-pattern>/QnA</url-pattern>
+    <url-pattern>/QnABoard</url-pattern>
   </servlet-mapping>
 </web-app>

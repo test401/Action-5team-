@@ -22,10 +22,10 @@
             <td><a href="/Action/AuctionBoard?action=list">경매상품보기</a></td>
         </tr>
         <tr>
-            <td><a href="">자유게시판</a></td>
+            <td><a href="/Action/FreeBoard?action=list">자유게시판</a></td>
         </tr>
         <tr>
-            <td><a href="">Q&A</a></td>
+            <td><a href="/Action/QnABoard?action=list">Q&A</a></td>
         </tr>
     </table>
 </div>

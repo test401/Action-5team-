@@ -61,6 +61,14 @@ function checkNotEmpty(inputField, errorSpan){
 	}
 }
 
+function checkImm(isImmediately) {
+	if(document.form.isImmediately.checked==true) {
+		document.form.immediatelyPrice.disabled = false;
+	}else if(document.form.isImmediately.checked==false){
+		document.form.immediatelyPrice.disabled = true;
+	}
+}
+
 /*//작성/수정 폼의 공백을 체크하는 기능
 function boardWriteCheck(){
 	var form=document.writeForm;

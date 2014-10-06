@@ -310,7 +310,7 @@ public class FreeBoardDaoImpl implements FreeBoardDao {
 			pstmt.setInt(1, board.getBoardNum());
 			pstmt.setString(2, board.getTitle());
 			pstmt.setString(3, board.getMemberID());
-			pstmt.setString(4, board.getcontents());
+			pstmt.setString(4, board.getContents());
 			pstmt.setInt(5, board.getIsNotice());
 
 			pstmt.executeUpdate();
@@ -346,7 +346,7 @@ public class FreeBoardDaoImpl implements FreeBoardDao {
 			conn = obtainConnection();
 			pstmt = conn.prepareStatement(query);
 			pstmt.setString(1, board.getTitle());
-			pstmt.setString(2, board.getcontents());
+			pstmt.setString(2, board.getContents());
 			pstmt.setInt(3, board.getBoardNum());			
 
 			pstmt.executeUpdate();			

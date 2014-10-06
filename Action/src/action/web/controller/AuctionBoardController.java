@@ -3,8 +3,6 @@ package action.web.controller;
 import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.io.UnsupportedEncodingException;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
@@ -309,7 +307,7 @@ public class AuctionBoardController extends HttpServlet {
 						
 					names[count] = item.getString("UTF-8");
 
-					System.out.println(count + " : " + names[count] + items.size());
+					System.out.println(count + " : " + names[count]);
 					
 					count++;
 					
@@ -358,12 +356,12 @@ public class AuctionBoardController extends HttpServlet {
 			// 구해 온 요청 파라미터 값을 지닌 AuctionBoard 객체를 생성한다.
 			
 			System.out.println(board);
-			// 3. BoardService 객체를 통해 해당 게시글을 등록한다.
+			// 3. AuctionBoardService 객체를 통해 해당 게시글을 등록한다.
 			AuctionBoardService service = new AuctionBoardServiceImpl();
 			service.writeBoard(board);
 			
 	        //  RequestDispatcher 객체를 통해 뷰 페이지(/views/board/auctionList.jsp)로 요청을 전달한다.
-	        RequestDispatcher dispatcher = request.getRequestDispatcher("/views/board/auctionList.jsp");
+	        RequestDispatcher dispatcher = request.getRequestDispatcher("/AuctionBoard?action=list");
 	        dispatcher.forward(request, response);
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -387,7 +385,7 @@ public class AuctionBoardController extends HttpServlet {
 				if(pageNumber != null && pageNumber.length() !=0){
 					currentPageNumber = Integer.parseInt(pageNumber);
 				}
-		// BoardService 객체를 통해 해당 번호의 게시글을 검색한다.
+		// AuctionBoardService 객체를 통해 해당 번호의 게시글을 검색한다.
         AuctionBoardService boardService = new AuctionBoardServiceImpl();
         Board auctionBoard = boardService.findBoard(Integer.parseInt(boardNum));
         
@@ -472,7 +470,7 @@ public class AuctionBoardController extends HttpServlet {
 						
 					names[count] = item.getString("UTF-8");
 
-					System.out.println(count + " : " + names[count] + items.size());
+					System.out.println(count + " : " + names[count]);
 //					out.println(count+"1:"+names[count]);
 					count++;
 					
@@ -503,7 +501,7 @@ public class AuctionBoardController extends HttpServlet {
 			AuctionBoard board;
 			
 			//즉시 구매 여부에 따라 생성자를 구별
-			if(names[6] != null){		
+			if(names[4] != null){		
 				//즉시 구매가 가능 할 때 : 즉시 구매 여부 값 1, 즉시 구매 가격 입력 활성화
 				board = new AuctionBoard(boardNum, memberID, Integer.parseInt(names[0]),
 						names[1], Integer.parseInt(names[2]), Integer.parseInt(names[3]),
