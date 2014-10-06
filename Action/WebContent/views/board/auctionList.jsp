@@ -55,7 +55,7 @@
                     <tr>
                         <td class="auctionno">${auction.boardNum}</td>
                         <td class="auctionimage">
-                            <a href="">
+                            <a href="/Action/AuctionBoard?action=read">
                                 <img src="images/${auction.image}">
                             </a>
                         </td>

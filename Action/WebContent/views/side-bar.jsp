@@ -19,7 +19,7 @@
         <tr><td><hr></td>
         </tr>
         <tr>
-            <td><a href="/Action/views/board/auctionList.jsp">경매상품보기</a></td>
+            <td><a href="/Action/AuctionBoard?action=list">경매상품보기</a></td>
         </tr>
         <tr>
             <td><a href="">자유게시판</a></td>

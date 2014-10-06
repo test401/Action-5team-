@@ -48,7 +48,7 @@
 		            		</tr>
 							<tr>
 		            		    <td><label class="label">즉시구매가</label></td>
-		            			<td><input type="text" name="immediatelyPrice"></td>
+		            			<td><input type="text" name="immediatelyPrice" ></td>
 		            			<td><label class="label">즉시구매허용여부</label><input type="checkbox" name="isImmediately" value="1"></td>
 		            		</tr>
 		            		<tr>

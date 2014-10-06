@@ -58,13 +58,13 @@ public class AuctionBoardDaoImpl implements AuctionBoardDao {
 			categorySQL = "WHERE (" + categoryType.trim() + " LIKE "
 					+ "(SELECT CategoryName FROM AuctionBoard, CategoryBoard "
 					+ "WHERE AuctionBoard.categoryID = CategoryBoard.categoryID))";
-		}		
+		}
 
 		// 2.1. searchType 값에 따라 사용될 조건절을 생성한다.
 		if((searchType == null) || (searchType.length() == 0)){
 			whereSQL = "";
 		} else if (searchType.equals("all")){
-			whereSQL = "(title LIKE ? OR memberID LIKE ? OR contents LIKE ?)";
+			whereSQL = "where (title LIKE ? OR memberID LIKE ? OR contents LIKE ?)";
 		} else if ( (searchType.equals("title")) || (searchType.equals("memberID")) || (searchType.equals("contents")) ){
 			whereSQL = "(" + searchType.trim() + " LIKE ?)";
 		}
@@ -90,7 +90,7 @@ public class AuctionBoardDaoImpl implements AuctionBoardDao {
 		String query = "SELECT * FROM " 
 				+ "(SELECT ROWNUM r, boardnum, title, memberID, mainImage, categoryID, currentprice, immediatelyprice, endtime FROM "
 				+ "(SELECT boardnum, title, memberID, mainImage, categoryID, currentprice, immediatelyprice, endtime FROM AuctionBoard "
-				+ categorySQL + whereSQL + " ORDER BY boardnum DESC)) WHERE r BETWEEN ? and ?";		
+				+ " ORDER BY boardnum DESC)) WHERE r BETWEEN ? and ?";		
 
 		Connection conn = null;
 		PreparedStatement pstmt = null;
@@ -147,7 +147,7 @@ public class AuctionBoardDaoImpl implements AuctionBoardDao {
 			try { if (conn != null) conn.close(); } catch(SQLException e) { e.printStackTrace(System.err); }
 
 		}
-
+		System.out.println(boardList);
 		return boardList;
 	}
 
@@ -262,7 +262,7 @@ public class AuctionBoardDaoImpl implements AuctionBoardDao {
 						rs.getString("contents"),
 						rs.getString("startTime"),
 						rs.getString("endTime"),
-						rs.getInt("catagoryID"),
+						rs.getInt("categoryID"),
 						rs.getInt("isImmediately"),
 						rs.getInt("startPrice"),
 						rs.getInt("immediatelyPrice"),
@@ -325,7 +325,7 @@ public class AuctionBoardDaoImpl implements AuctionBoardDao {
 	@Override
 	public void insertBoard(AuctionBoard board) {
 		String query = "INSERT INTO AuctionBoard (boardNum, title, memberID, contents, "
-				+ "startTime, endTime, catagoryID, isImmediately, startPrice, immediatelyPrice, currentPrice, image, mainImage) "
+				+ "startTime, endTime, categoryID, isImmediately, startPrice, immediatelyPrice, currentPrice, image, mainImage) "
 				+ "VALUES (AUCTIONBOARD_BOARDNUM_SEQ.NEXTVAL, ?, ?, ?, SYSDATE, SYSDATE+"+board.getEndTime()+", ?, ?, ?, ?, ?, ?, ?)";
 
 		Connection conn = null;
@@ -339,7 +339,7 @@ public class AuctionBoardDaoImpl implements AuctionBoardDao {
 			pstmt.setString(2, board.getMemberID());
 			pstmt.setString(3, board.getContents());
 //			pstmt.setString(4, board.getEndTime());
-			pstmt.setInt(4, board.getCatagoryID());
+			pstmt.setInt(4, board.getCategoryID());
 			pstmt.setInt(5, board.getIsImmediately());
 			pstmt.setInt(6, board.getStartPrice());
 			pstmt.setInt(7, board.getImmediatelyPrice());
@@ -366,7 +366,7 @@ public class AuctionBoardDaoImpl implements AuctionBoardDao {
 	@Override
 	public void updateBoard(AuctionBoard board) {
 		String query="UPDATE AuctionBoard SET title = ?, contents = ?, "
-				+ "catagoryID = ?, isImmediately = ?, immediatelyPrice = ?, "
+				+ "categoryID = ?, isImmediately = ?, immediatelyPrice = ?, "
 				+ "image =?, mainImage = ?  WHERE boardnum = ?";
 
 		Connection conn = null;
@@ -377,7 +377,7 @@ public class AuctionBoardDaoImpl implements AuctionBoardDao {
 			pstmt = conn.prepareStatement(query);
 			pstmt.setString(1, board.getTitle());
 			pstmt.setString(2, board.getContents());
-			pstmt.setInt(3, board.getCatagoryID());
+			pstmt.setInt(3, board.getCategoryID());
 			pstmt.setInt(4, board.getIsImmediately());
 			pstmt.setInt(5, board.getImmediatelyPrice());
 			pstmt.setString(6, board.getImage());
