@@ -6,10 +6,10 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<link rel="stylesheet" href="../../action.css">
+<link rel="stylesheet" href="/Action/action.css">
 <script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
-<script src="../../js/auction.js"></script>
-<script src="../../js/board.js"></script>
+<script src="/Action/js/auction.js"></script>
+<script src="/Action/js/board.js"></script>
 <script>
 // 현재 시각을 표시하는 함수 선언
 function displayTime() {

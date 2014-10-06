@@ -49,48 +49,44 @@ public class AuctionBoardDaoImpl implements AuctionBoardDao {
 		int endRow = (Integer) searchInfo.get("endRow");		
 
 		// 2. categoryType과 일치하는 게시물 목록을 출력하기위한 조건절을 생성한다.
-		String categorySQL = "";
-		String whereSQL = "";
+				String categorySQL = "";
+				String whereSQL = "";
 
-		if((categoryType == null) || (categoryType.length() == 0)){
-			categorySQL = "";
-		}else{
-			categorySQL = "WHERE (" + categoryType.trim() + " LIKE "
-					+ "(SELECT CategoryName FROM AuctionBoard, CategoryBoard "
-					+ "WHERE AuctionBoard.categoryID = CategoryBoard.categoryID))";
-		}
+				if((categoryType == null) || (categoryType.length() == 0)){
+					categorySQL = "";
+				}else{
+					categorySQL = "Where categoryID = " + categoryType.trim();
+				}
 
-		// 2.1. searchType 값에 따라 사용될 조건절을 생성한다.
-		if((searchType == null) || (searchType.length() == 0)){
-			whereSQL = "";
-		} else if (searchType.equals("all")){
-			whereSQL = "where (title LIKE ? OR memberID LIKE ? OR contents LIKE ?)";
-		} else if ( (searchType.equals("title")) || (searchType.equals("memberID")) || (searchType.equals("contents")) ){
-			whereSQL = "(" + searchType.trim() + " LIKE ?)";
-		}
+				// 2.1. searchType 값에 따라 사용될 조건절을 생성한다.
+				if((searchType == null) || (searchType.length() == 0)){
+					whereSQL = "";
+				} else if (searchType.equals("all")){
+					whereSQL = "where (title LIKE ? OR memberID LIKE ? OR contents LIKE ?)";
+				} else if ( (searchType.equals("title")) || (searchType.equals("memberID")) || (searchType.equals("contents")) ){
+					whereSQL = "(" + searchType.trim() + " LIKE ?)";
+				}
 
-		// 2.2. categorySQL의 유무에 따라 WHERE 혹은 AND절 생성을 결정한다.
-		if(categorySQL.length() != 0){
-			if(whereSQL.length() == 0){
-				whereSQL = "";
-			} else {
-				whereSQL = "AND " + whereSQL;
-			}			
-		} else {
-			whereSQL = "WHERE " + whereSQL;
-		}
+				// 2.2. categorySQL의 유무에 따라 WHERE 혹은 AND절 생성을 결정한다.
+				if(categorySQL.length() != 0){
+					if(whereSQL.length() != 0){
+						whereSQL = "AND " + whereSQL;
+					}		
+				} else {
+					whereSQL = " WHERE " + whereSQL;
+				}
 
-		// 3. LIKE 절에 포함될 수 있도록 searchText 값 앞 뒤에 % 기호를 붙인다.
-		if(searchText != null){
-			searchText = "%" + searchText + "%";
-		}
+				// 3. LIKE 절에 포함될 수 있도록 searchText 값 앞 뒤에 % 기호를 붙인다.
+				if(searchText != null){
+					searchText = "%" + searchText + "%";
+				}
 
-		AuctionBoard board = null;
+				AuctionBoard board = null;
 
-		String query = "SELECT * FROM " 
-				+ "(SELECT ROWNUM r, boardnum, title, memberID, mainImage, categoryID, currentprice, immediatelyprice, endtime FROM "
-				+ "(SELECT boardnum, title, memberID, mainImage, categoryID, currentprice, immediatelyprice, endtime FROM AuctionBoard "
-				+ " ORDER BY boardnum DESC)) WHERE r BETWEEN ? and ?";		
+				String query = "SELECT * FROM " 
+						+ "(SELECT ROWNUM r, boardnum, title, memberID, mainImage, categoryID, currentprice, immediatelyprice, endtime FROM "
+						+ "(SELECT boardnum, title, memberID, mainImage, categoryID, currentprice, immediatelyprice, endtime FROM AuctionBoard "
+						+ " ORDER BY boardnum DESC)) WHERE r BETWEEN ? and ?";		
 
 		Connection conn = null;
 		PreparedStatement pstmt = null;
@@ -136,6 +132,7 @@ public class AuctionBoardDaoImpl implements AuctionBoardDao {
 						rs.getInt("categoryID"),
 						rs.getInt("immediatelyPrice"),
 						rs.getString("endtime"));
+				
 				boardList.add(board);
 			}
 
@@ -147,7 +144,7 @@ public class AuctionBoardDaoImpl implements AuctionBoardDao {
 			try { if (conn != null) conn.close(); } catch(SQLException e) { e.printStackTrace(System.err); }
 
 		}
-		System.out.println(boardList);
+		System.out.println("boardNum : " + board.getBoardNum() + "  :   " +boardList);
 		return boardList;
 	}
 

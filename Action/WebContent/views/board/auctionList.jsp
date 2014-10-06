@@ -53,14 +53,14 @@
 					<c:otherwise>
 					<c:forEach items='${requestScope["auctionList"]}' var="auction" varStatus="loopStatus">
                     <tr>
-                        <td class="auctionno">${auction.boardNum}</td>
+                        <td class="auctionno">번호 : ${auction.boardNum}</td>
                         <td class="auctionimage">
-                            <a href="/Action/AuctionBoard?action=read">
+                            <a href="">
                                 <img src="images/${auction.image}">
                             </a>
                         </td>
                         <td class="auctiontitle">
-                            <a href="">${auction.title}</a>
+                            <a href="/Action/AuctionBoard?action=read?pageNumber=${currentPageNumber}&boardNum=${auction.boardNum}">${auction.title}</a>
                         </td>
                         <td class="auctioncurrentPrice">${auction.currentPrice}</td>
                         <td class="auctionimmediatelyPrice">${auction.immediatelyPrice}</td>

@@ -153,7 +153,7 @@ public class AuctionBoardController extends HttpServlet {
             throws ServletException, IOException, DataNotFoundException {
 		// 1. 요청 파라미터(num)로 부터 글 번호를 구한다.
 		String boardNum = request.getParameter("boardNum");
-
+		System.out.println("boardNum : " + boardNum);
 		//1.2 pageNumber 요청 파라미터 값을 구한다.
 		String pageNumber = request.getParameter("pageNumber");
 		
