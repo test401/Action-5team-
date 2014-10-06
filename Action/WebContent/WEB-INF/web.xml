@@ -109,7 +109,7 @@
   </servlet>
   <servlet-mapping>
     <servlet-name>FreeBoardController</servlet-name>
-    <url-pattern>/FreeBoard</url-pattern>
+    <url-pattern>/views/board/*</url-pattern>
   </servlet-mapping>
   <servlet>
     <description></description>
