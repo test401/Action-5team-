@@ -28,7 +28,7 @@ public class QnABoardController extends HttpServlet {
 
 	        try {
 		        // action 요청파라미터 값을 확인한다.
-		        String action = request.getPathInfo();
+	        	 String action = request.getParameter("action");
 		
 		        // action 값에 따라 적절한 메소드를 선택하여 호출한다.
 		        if (action.equals("/list")) {

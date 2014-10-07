@@ -298,17 +298,21 @@ public class FreeBoardDaoImpl implements FreeBoardDao {
 	@Override
 	public void insertBoard(FreeBoard board) {
 		String query = "INSERT INTO FreeBoard (boardnum, title, memberID, contents, isnotice "
-				+ "VALUES (board_num_seq.NEXTVAL, ?, ?, ?, ?)";
-
+				+ "VALUES (board_num_seq.NEXTVAL + ?, ?, ?, ?, ?)";
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 
 		try{
 			conn = obtainConnection();
 			pstmt = conn.prepareStatement(query);
-
-			pstmt.setInt(1, board.getBoardNum());
+			
+			if(board.getIsNotice() != 0) {
+			pstmt.setInt(1, 999);
+			pstmt.setString(2, "<b>"+board.getTitle()+"</b>" );
+			} else {
+			pstmt.setInt(1, 0);
 			pstmt.setString(2, board.getTitle());
+			}
 			pstmt.setString(3, board.getMemberID());
 			pstmt.setString(4, board.getContents());
 			pstmt.setInt(5, board.getIsNotice());
@@ -337,7 +341,7 @@ public class FreeBoardDaoImpl implements FreeBoardDao {
 	 */
 	@Override
 	public void updateBoard(FreeBoard board) {
-		String query="UPDATE FreeBoard SET title=?, contents=? WHERE boardnum=?";
+		String query="UPDATE FreeBoard SET boardNum =?, title=?, contents=?, isNotice =? WHERE boardnum=?";
 
 		Connection conn = null;
 		PreparedStatement pstmt = null;
@@ -345,9 +349,16 @@ public class FreeBoardDaoImpl implements FreeBoardDao {
 		try{
 			conn = obtainConnection();
 			pstmt = conn.prepareStatement(query);
-			pstmt.setString(1, board.getTitle());
-			pstmt.setString(2, board.getContents());
-			pstmt.setInt(3, board.getBoardNum());			
+			if(board.getIsNotice() != 0) {
+				pstmt.setInt(1, board.getBoardNum()+999);
+				pstmt.setString(2, "<b>"+board.getTitle()+"</b>" );
+			} else {
+				pstmt.setInt(1, board.getBoardNum());
+				pstmt.setString(2, board.getTitle());
+			}
+			pstmt.setString(3, board.getContents());
+			pstmt.setInt(4, board.getIsNotice());
+			pstmt.setInt(5, board.getBoardNum());			
 
 			pstmt.executeUpdate();			
 

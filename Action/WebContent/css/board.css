@@ -1,0 +1,41 @@
+@charset "utf-8";
+
+* { font-family: 굴림, gulim, tahoma, sans-serif; font-size: 12px; }
+a:link { text-decoration: none; color: #000000; }
+a:visited { text-decoration: none; color: #000000; }
+a:hover, a:active { text-decoration: underline; color: #cc6600; }
+
+.boardpage { width: 600px; }
+.maintable { margin-top: 15px; margin-bottom: 8px; }
+.buttonbar { text-align: right; }
+
+.maintable { caption-side: top; border-collapse: collapse; }
+.maintable > caption { font-weight: bold; text-decoration: underline; margin-bottom: 10px; }
+.maintable th, .maintable td { border: 1px solid black; padding: 2px; height: 21px; }
+/* .maintable th, .maintable td { border-top: 1px solid black; border-bottom: 1px solid black; padding: 2px; height: 21px; } */
+.maintable th { background-color: #cc6600; }
+
+#listtable .num { width: 45px; text-align: center; }
+#listtable .title { width: 300px; }
+#listtable .writer { width: 84px; text-align: center; }
+#listtable .regdate { width: 90px; text-align: center; }
+#listtable .readcount { width: 55px; text-align: center; }
+
+#searchinput { width: 200px; }
+
+#readtable th { width: 75px; }
+#readtable td.title { font-weight: bold; padding-left: 10px;}
+#readtable td.writer { width: 127px; text-align: center; }
+#readtable td.readcount { width: 90px; text-align: center; }		
+#readtable td.regdate { width: 127px; text-align: center; }
+#readtable td.contents { width: 578px; height: 250px; padding: 20px; line-height: 1.5em; vertical-align: top;}
+
+#writetable .titleinput, #updatetable .titleinput, #replytable .titleinput { width: 496px; }
+#writetable .writerinput, #updatetable .writerinput, #replytable .writerinput { width: 150px; }
+#writetable .contentsinput, #updatetable .contentsinput, #replytable .contentsinput { width: 588px; height: 250px; }
+#writetable th, #updatetable th, #replytable th { width: 89px; }
+
+#pagenavigator { text-align: center; }
+#pagenavigator > a.pagenumber { padding: 2px 4px 1px 4px; border-width: 0px; font-weight: bold;}
+#pagenavigator > a.pagenumber:hover { padding: 1px 3px 0px 3px; border-width: 1px; border-style: solid;}
+#pagenavigator > a.currpage { text-decoration: underline; }

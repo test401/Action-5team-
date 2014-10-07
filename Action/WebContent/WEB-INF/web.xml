@@ -35,33 +35,23 @@
   </servlet-mapping>
   <servlet>
     <description></description>
-    <display-name>ReplyController</display-name>
-    <servlet-name>ReplyController</servlet-name>
-    <servlet-class>action.web.controller.ReplyController</servlet-class>
+    <display-name>QnABoardController</display-name>
+    <servlet-name>QnABoardController</servlet-name>
+    <servlet-class>action.web.controller.QnABoardController</servlet-class>
   </servlet>
   <servlet-mapping>
-    <servlet-name>ReplyController</servlet-name>
-    <url-pattern>/ReplyController</url-pattern>
+    <servlet-name>QnABoardController</servlet-name>
+    <url-pattern>/QnABoard</url-pattern>
   </servlet-mapping>
   <servlet>
     <description></description>
-    <display-name>BoardController</display-name>
-    <servlet-name>BoardController</servlet-name>
-    <servlet-class>action.web.controller.BoardController</servlet-class>
+    <display-name>FreeBoardController</display-name>
+    <servlet-name>FreeBoardController</servlet-name>
+    <servlet-class>action.web.controller.FreeBoardController</servlet-class>
   </servlet>
   <servlet-mapping>
-    <servlet-name>BoardController</servlet-name>
-    <url-pattern>/BoardController</url-pattern>
-  </servlet-mapping>
-  <servlet>
-    <description></description>
-    <display-name>ReplyContorller</display-name>
-    <servlet-name>ReplyContorller</servlet-name>
-    <servlet-class>action.web.controller.ReplyContorller</servlet-class>
-  </servlet>
-  <servlet-mapping>
-    <servlet-name>ReplyContorller</servlet-name>
-    <url-pattern>/ReplyContorller</url-pattern>
+    <servlet-name>FreeBoardController</servlet-name>
+    <url-pattern>/FreeBoard</url-pattern>
   </servlet-mapping>
   <error-page>
     <exception-type>java.lang.Exception</exception-type>
@@ -91,34 +81,10 @@
   </filter-mapping>
   <filter-mapping>
     <filter-name>EncodingFilter</filter-name>
-    <servlet-name>ReplyController</servlet-name>
+    <servlet-name>FreeBoardController</servlet-name>
   </filter-mapping>
   <filter-mapping>
     <filter-name>EncodingFilter</filter-name>
-    <servlet-name>BoardController</servlet-name>
-  </filter-mapping>
-  <filter-mapping>
-    <filter-name>EncodingFilter</filter-name>
-    <servlet-name>ReplyContorller</servlet-name>
-  </filter-mapping>
-  <servlet>
-    <description></description>
-    <display-name>FreeBoardController</display-name>
-    <servlet-name>FreeBoardController</servlet-name>
-    <servlet-class>action.web.controller.FreeBoardController</servlet-class>
-  </servlet>
-  <servlet-mapping>
-    <servlet-name>FreeBoardController</servlet-name>
-    <url-pattern>/views/board/*</url-pattern>
-  </servlet-mapping>
-  <servlet>
-    <description></description>
-    <display-name>QnABoardController</display-name>
     <servlet-name>QnABoardController</servlet-name>
-    <servlet-class>action.web.controller.QnABoardController</servlet-class>
-  </servlet>
-  <servlet-mapping>
-    <servlet-name>QnABoardController</servlet-name>
-    <url-pattern>/QnABoard</url-pattern>
-  </servlet-mapping>
+  </filter-mapping>
 </web-app>

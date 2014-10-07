@@ -9,12 +9,14 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
-import action.business.domain.board.AuctionBoard;
 import action.business.domain.board.Board;
 import action.business.domain.board.FreeBoard;
-import action.business.domain.board.QnABoard;
+import action.business.domain.member.Member;
 import action.business.service.DataNotFoundException;
+import action.business.service.board.AuctionBoardService;
+import action.business.service.board.AuctionBoardServiceImpl;
 import action.business.service.board.FreeBoardService;
 import action.business.service.board.FreeBoardServiceImpl;
 import action.util.PageHandler;
@@ -30,7 +32,7 @@ public class FreeBoardController extends HttpServlet {
 
 	        try {
 		        // action 요청파라미터 값을 확인한다.
-		        String action = request.getPathInfo();
+	        	 String action = request.getParameter("action");
 		
 		        // action 값에 따라 적절한 메소드를 선택하여 호출한다.
 		        if (action.equals("/list")) {
@@ -60,7 +62,7 @@ public class FreeBoardController extends HttpServlet {
 	     */
 		private void selectBoardList(HttpServletRequest request, HttpServletResponse response) 
 	            throws ServletException, IOException {
-			//1. searchType, searchText, 요청 파라미터 값을 구한다.
+			//1. searchType, searchText, searchCategory 요청 파라미터 값을 구한다.
 			String searchType = request.getParameter("searchType");
 			String searchText = request.getParameter("searchText");
 					
@@ -77,7 +79,7 @@ public class FreeBoardController extends HttpServlet {
 					Map<String, Object> searchInfo = new HashMap<String, Object>();
 					searchInfo.put("searchType", searchType);
 					searchInfo.put("searchText", searchText); 
-
+					
 			//  BoardService 객체로부터 모든 게시글 리스트를 구해온다.
 			FreeBoardService service = new FreeBoardServiceImpl();
 			
@@ -103,7 +105,7 @@ public class FreeBoardController extends HttpServlet {
 			//3. BoardService 객체로부터 모든 게시글 리스트를 구해온다.
 			Board[] freeBoardList = service.getBoardList(searchInfo);
 				
-	        //4.1  request scope 속성(boardList)에 게시글 리스트를 저장한다.
+	        //4.1  request scope 속성(freeBoardList)에 게시글 리스트를 저장한다.
 			request.setAttribute("freeBoardList", freeBoardList);
 			
 			//4.2 request scope 속성으로 
@@ -112,7 +114,7 @@ public class FreeBoardController extends HttpServlet {
 			request.setAttribute("endPageNumber", endPageNumber);
 			request.setAttribute("totalPageCount", totalPageCount);
 	        
-	        //  RequestDispatcher 객체를 통해 뷰 페이지(/WEB-INF/views/board/list.jsp)로 요청을 전달한다.
+	        //  RequestDispatcher 객체를 통해 뷰 페이지(/views/board/freeList.jsp)로 요청을 전달한다.
 	        RequestDispatcher dispatcher = request.getRequestDispatcher("/views/board/freeList.jsp");
 	        dispatcher.forward(request, response);
 			
@@ -147,7 +149,7 @@ public class FreeBoardController extends HttpServlet {
 			
 	        
 	        // 4. RequestDispatcher 객체를 통해 뷰 페이지(/views/board/read.jsp)로 요청을 전달한다.
-	        RequestDispatcher dispatcher = request.getRequestDispatcher("/views/board/read.jsp");
+	        RequestDispatcher dispatcher = request.getRequestDispatcher("/views/board/freeRead.jsp");
 	        dispatcher.forward(request, response);
 	        
 		}
@@ -161,7 +163,7 @@ public class FreeBoardController extends HttpServlet {
 			
 
 	        // RequestDispatcher 객체를 통해 뷰 페이지(/views/board/writeForm.jsp)로 요청을 전달한다.
-	        RequestDispatcher dispatcher = request.getRequestDispatcher("/views/board/writeForm.jsp");
+	        RequestDispatcher dispatcher = request.getRequestDispatcher("/views/board/freeWriteForm.jsp");
 	        dispatcher.forward(request, response);
 		}
 		
@@ -171,18 +173,21 @@ public class FreeBoardController extends HttpServlet {
 		private void writeBoard(HttpServletRequest request, HttpServletResponse response) 
 	            throws ServletException, IOException, DataNotFoundException {
 			// 1. 요청 파라미터로 부터 작성자(writer), 제목(title), 내용(contents)를 구한다.
-			String title = request.getParameter("title");
-			String memberID = request.getParameter("memberID");
-			String contents = request.getParameter("contents");
-			String notice = request.getParameter("notice");
+			HttpSession session = request.getSession(true);
+			Member member = (Member) session.getAttribute("loginMember");
 			
-			if ((notice == null) || (notice.length() == 0)) {
-				notice="0";
+			String title = request.getParameter("title");
+			String memberID = member.getMemberID();
+			String contents = request.getParameter("contents");
+			String isNotice = request.getParameter("isNotice");
+			
+			if ((isNotice == null) || (isNotice.length() == 0)) {
+				isNotice="0";
 			}
 
 			// 2. 구해 온 요청 파라미터 값을 지닌 AuctionBoard 객체를 생성한다.
 			
-			FreeBoard board = new FreeBoard(title, memberID, contents, Integer.parseInt("notice"));
+			FreeBoard board = new FreeBoard(title, memberID, contents, Integer.parseInt("isNotice"));
 		
 			
 			// 3. BoardService 객체를 통해 해당 게시글을 등록한다.
@@ -223,7 +228,7 @@ public class FreeBoardController extends HttpServlet {
 			//request.setAttribute("searchText", searchText);
 	        
 	        // RequestDispatcher 객체를 통해 뷰 페이지(/views/board/updateForm.jsp)로 요청을 전달한다.
-	        RequestDispatcher dispatcher = request.getRequestDispatcher("/views/board/updateForm.jsp");
+	        RequestDispatcher dispatcher = request.getRequestDispatcher("/views/board/freeUpdateForm.jsp");
 	        dispatcher.forward(request, response);
 		}
 		
@@ -236,11 +241,15 @@ public class FreeBoardController extends HttpServlet {
 			int boardNum = Integer.parseInt(request.getParameter("boardNum"));
 			String title = request.getParameter("title");
 			String contents = request.getParameter("contents");
-			String notice = request.getParameter("notice");
+			String isNotice = request.getParameter("isNotice");
+			
+			if ((isNotice == null) || (isNotice.length() == 0)) {
+				isNotice="0";
+			}
 		
 			// 2. 구해 온 요청 파라미터 값을 지닌 AuctionBoard 객체를 생성한다.
 			
-				FreeBoard board = new FreeBoard(boardNum, title ,contents, Integer.parseInt("notice"));
+			FreeBoard board = new FreeBoard(boardNum, title ,contents, Integer.parseInt("isNotice"));
 			
 			// 3. BoardService 객체를 통해 해당 게시글을 갱신한다.
 			FreeBoardService service = new FreeBoardServiceImpl();
@@ -250,7 +259,7 @@ public class FreeBoardController extends HttpServlet {
 	        request.setAttribute("board", board);
 	   
 	        // 5. RequestDispatcher 객체를 통해 게시물 보기(read)로 요청을 전달한다.
-	        RequestDispatcher dispatcher = request.getRequestDispatcher("read");
+	        RequestDispatcher dispatcher = request.getRequestDispatcher("/FreeBoard?action=read");
 	        dispatcher.forward(request, response);
 	        
 		}
@@ -268,7 +277,7 @@ public class FreeBoardController extends HttpServlet {
 			service.removeBoard(Integer.parseInt(boardNum));
 
 	        // 3. RequestDispatcher 객체를 통해 목록 보기(board?action=list)로 요청을 전달한다.
-			RequestDispatcher dispatcher = request.getRequestDispatcher("list");
+			RequestDispatcher dispatcher = request.getRequestDispatcher("/FreeBoard?action=list");
 		    dispatcher.forward(request, response);
 			
 		}
