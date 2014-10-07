@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.Date;
+import java.util.Enumeration;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
@@ -62,11 +63,11 @@ public class AuctionBoardController extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-
         try {
+        	
 	        // action 요청파라미터 값을 확인한다.
 	        String action = request.getParameter("action");
-	
+	        
 	        // action 값에 따라 적절한 메소드를 선택하여 호출한다.
 	        if (action.equals("list")) {
 	        	selectBoardList(request, response);
@@ -212,6 +213,7 @@ public class AuctionBoardController extends HttpServlet {
 		if(auctionService.updatePrice(auctionBoard)){
 			// 구해 온 요청 파라미터 값을 지닌 BidBoard 객체를 생성한다.
 			BidListBoard bidBoard = new BidListBoard(Integer.parseInt(boardNum), memberID, Integer.parseInt(currentPrice));
+			
 			// BidListBoardService 객체를 통해 입찰목록을 등록한다.
 			BidListBoardService bidService = new BidListBoardServiceImpl();
 			bidService.writeBoard(bidBoard);
@@ -229,7 +231,11 @@ public class AuctionBoardController extends HttpServlet {
 		}else{
 			//안↑되→영↘!
 			AuctionBoard board = auctionService.findBoard(Integer.parseInt(boardNum));
-			sendBoard.put("message","한발 늦었습니다.");
+			if(Integer.parseInt(currentPrice)==board.getCurrentPrice()){
+				sendBoard.put("message","입찰 가격이 같습니다.");
+			}else{
+				sendBoard.put("message","입찰 가격을 확인하세요.");
+			}
 			sendBoard.put("currentPrice", board.getCurrentPrice());
 			
 		}
@@ -443,10 +449,7 @@ public class AuctionBoardController extends HttpServlet {
 			throw new IOException("요청 내용이 multipart/form-data가 아닙니다.");
 			
 			//return;
-		}
-		HttpSession session = request.getSession(true);
-		Member member = (Member) session.getAttribute("loginMember");
-		
+		}		
 		
 		// 디스크 기반의 FileItem factory 생성
 		DiskFileItemFactory factory = new DiskFileItemFactory();
@@ -547,7 +550,6 @@ public class AuctionBoardController extends HttpServlet {
         // request scope 속성(board)에 검색한 게시글을 저장한다.
         request.setAttribute("auctionBoard", auctionBoard);
         request.setAttribute("currentPageNumber", currentPageNumber);
-
 		//request.setAttribute("searchType", searchType);
 		//request.setAttribute("searchText", searchText);
         

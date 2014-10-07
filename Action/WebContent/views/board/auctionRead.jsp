@@ -15,6 +15,9 @@
 function displayTime() {
 	var elt = document.getElementById("clock"); // id="clock"인 요소 찾기
 	var time = document.getElementById("endTime");
+	var currentPriceold = document.getElementById("currentPriceold");
+	var immediatelyPrice = document.getElementById("immediatelyPrice");
+	
 	var now = new Date(); // 현재 시각 얻기
 	var date = new Date(time.value);//마감날짜
 	date.setHours(24, 0, 0, 0);//마감시간
@@ -36,9 +39,17 @@ function displayTime() {
 	var id=setTimeout(displayTime, 1000); // 1초 후에 재 실행
 	//표시
 	elt.innerHTML = "종료시간 : "+hourDisplay+":"+minute+":"+second;
+
+	
+	if(immediatelyPrice.value != 0){
+		if(currentPriceold.value >= immediatelyPrice.value){
+			diff=0;
+		}
+	}
           //만약 남은 시간이 0이하이면 종료
 	if (diff <= 0) {
           	clearTimeout(id);
+          	document.getElementById("bid").setAttribute("disabled","disabled");
           	elt.innerHTML = "마감";
           }
 }
@@ -69,11 +80,13 @@ window.onload = displayTime; // 문서가 로딩될 때 수행할 함수 설정
 	            		</tr>
 	            		<tr>
 	            			<td colspan="2">${auctionBoard.title}</td>
-	            			<td></td>
+	            			<td><img src="/Action/img/${auctionBoard.mainImage}" style="width: 300px; height: 300px;"></td>
 	            		</tr>       	
 	            		<tr>
 	            		    <td><label class="label">현재입찰가</label></td>
 	            			<td id="retruncurrentPrice">${auctionBoard.currentPrice}</td>
+	            			<td><textarea hidden="true" rows="" cols="" id="currentPriceold">${auctionBoard.currentPrice}</textarea></td>
+	            			
 	            		</tr>
 	            		<tr>
 	            		    <td><label class="label">시작가</label></td>
@@ -81,7 +94,8 @@ window.onload = displayTime; // 문서가 로딩될 때 수행할 함수 설정
 	            		</tr>
 						<tr>
 	            		    <td><label class="label">즉시구매가</label></td>
-	            			<td>${auctionBoard.immediatelyPrice}</td>            	
+	            			<td>${auctionBoard.immediatelyPrice}</td>
+	            			<td><textarea hidden="true" rows="" cols="" id="immediatelyPrice">${auctionBoard.immediatelyPrice}</textarea></td>
 	            		</tr>
 	            		<tr>
 	            		    <td><label class="label">입찰수</label></td>
@@ -104,12 +118,12 @@ window.onload = displayTime; // 문서가 로딩될 때 수행할 함수 설정
 	            		    <td><label class="label">입찰가</label></td>
 	            			<td colspan="7">
 	            				<form action="" method="get">
-	            					<input type="number" step="100" name="currentPrice" min="${auctionBoard.currentPrice}" max ="1000000000" autofocus="autofocus">
-	            					<%-- <c:if test="${auctionBoard.endTime >= now }"> --%>
+	            					<input value="${auctionBoard.currentPrice}" type="number" step="100" name="currentPrice" min="${auctionBoard.currentPrice}" max ="${auctionBoard.immediatelyPrice}" autofocus="autofocus">
+	            					<c:if test="${not empty loginMember && loginMember.memberID != auctionBoard.memberID}">
 	            						<input hidden="true" type="text" name="boardNum" value="${auctionBoard.boardNum}">
 		            					<input id="bid" type="button" value="입찰하기">
 		            					<!-- <input type="button" value="입찰취소" onclick=""> -->
-									<%-- </c:if> --%>
+									</c:if>
 	            				</form>
 	            				<%-- <fmt:formatDate value="${now}" pattern="yyyy-MM-dd" var="nyear"/> --%>
 	            			</td>
@@ -120,6 +134,7 @@ window.onload = displayTime; // 문서가 로딩될 때 수행할 함수 설정
 	            	</table>
 	        	</div>
 	        	<div>
+	        	<input type="button" value="목록" onclick="goUrl('/Action/AuctionBoard?action=list&pageNumber=${currentPageNumber}&boardNum=${auction.boardNum}&searchType=${param.searchType}&searchText=${param.searchText}&categoryType=${param.categoryType}');">
 	        		<%-- <c:import url="/views/board/auctionReplyForm.jsp" /> --%>
 	        	</div>
 		    </div>

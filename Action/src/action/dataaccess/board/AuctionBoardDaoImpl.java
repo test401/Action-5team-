@@ -445,7 +445,7 @@ public class AuctionBoardDaoImpl implements AuctionBoardDao {
 			pstmt.setInt(1, board.getBoardNum());
 			rs = pstmt.executeQuery();
 			if(rs.next()){
-				if(rs.getInt("currentPrice")==0 && newCurrentPrice>rs.getInt("startPrice")){
+				if(rs.getInt("currentPrice")==0 && newCurrentPrice>=rs.getInt("startPrice")){
 					result=true;
 				}else if(rs.getInt("currentPrice") != 0 && newCurrentPrice>rs.getInt("currentPrice")){
 					result=true;

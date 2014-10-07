@@ -65,20 +65,19 @@ $(function() {
 	$('#uploadimagefile').click(function() {
  
 		var data = new FormData();
-        $.each($('#inpt_attachFile')[0].files, function(i, file) {
-            data.append('file-' + i, file);
-        });
- 
+        data.append('file', $("#attachFile")[0].files[0]);
+        data.append('action','imageUpload');
+        
 		jQuery.ajax({
 			type: "POST",
-			url: '/Action/AuctionBoard',
+			url: '/Action/AuctionBoard?action=imageUpload',
 			data:
-				'action=imageUpload'+"&"+
-				'image='+encodeURIComponent($("input[name=image]").files),
-			contentType: 'multipart/form-data',
+				data,
+			processData : false,
+			contentType : false,
 			dataType: 'text',
 			success: function(data) {
-				alert(data);
+				CKEDITOR.instances.contents.setData(CKEDITOR.instances.contents.getData()+data);
 				$('textarea[name=contents]').html(data);
 			}
 		});

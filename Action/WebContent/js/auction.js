@@ -58,21 +58,37 @@ function checkNotEmpty(inputField, errorSpan){
 
 $(function() {
 	$('#bid').click(function() {
-		jQuery.ajax({
-			type: "POST",
-			url: '/Action/AuctionBoard',
-			data:
-				'action=bid'+"&"+
-				'currentPrice='+encodeURIComponent($("[name=currentPrice]").val())+"&"+
-				'memberID='+encodeURIComponent($("[name=bidmemberID]").val())+"&"+
-				'boardNum=' + encodeURIComponent($("[name=boardNum]").val()),
-			dataType: 'JSON',
-			success: function(data) {
-				alert(data.message);
-				$('#retruncurrentPrice').empty();
-				$('#retruncurrentPrice').html(data.currentPrice);
-			}
-		});
+		if($("[name=currentPrice]").val()<=$("#currentPriceold").val()){
+			alert("입찰 가격을 다시 확인해 보세요.");
+			return;
+		}
+		
+		if($("#immediatelyPrice").val()<$("[name=currentPrice]").val()){
+			alert("즉시 구매가 보다 높습니다.");
+			return;
+		}
+			jQuery.ajax({
+				type: "POST",
+				url: '/Action/AuctionBoard',
+				data:
+					'action=bid'+"&"+
+					'currentPrice='+encodeURIComponent($("[name=currentPrice]").val())+"&"+
+					'memberID='+encodeURIComponent($("[name=bidmemberID]").val())+"&"+
+					'boardNum=' + encodeURIComponent($("[name=boardNum]").val()),
+					dataType: 'JSON',
+					success: function(data) {
+						alert(data.message);
+						$('#retruncurrentPrice').empty();
+						$('#retruncurrentPrice').html(data.currentPrice);
+						$("[name=currentPrice]").attr("value",data.currentPrice);
+						$("#currentPriceold").attr("value",data.currentPrice);
+						if($("#immediatelyPrice").val()==$("[name=currentPrice]").val()){
+							document.getElementById("clock").innerHTML = "마감";
+				          	document.getElementById("bid").setAttribute("disabled","disabled");
+				          	location.reload();
+						}
+					}
+			});
 	});
 });
 

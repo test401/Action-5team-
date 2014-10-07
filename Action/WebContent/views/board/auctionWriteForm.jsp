@@ -58,8 +58,8 @@
 		            		</tr>
 		            		<tr>
 		            		    <td><label class="label">업로드이미지</label></td>
-		            			<td><input type="file" name="image"></td>
-		            			<td><input id="uploadimagefile" type="button" value="업로드" onclick="upload();"></td>
+		            			<td><input type="file" id="attachFile" name="image"></td>
+		            			<td><input id="uploadimagefile" type="button" value="업로드"></td>
 		            		</tr>
 		            		<tr>
 		            			<td colspan="10">
@@ -71,7 +71,7 @@
 		            		</tr>
 		            		<tr>
 		            		    <td><input type="button" name="register" value="경매등록" onclick="boardWriteCheck(this.form);"></td>
-		            			<td><input type="button" name="cancle" value="취소" onclick="goUrl('list');"></td>
+		            			<td><input type="button" name="cancle" value="취소" onclick="goUrl('/Action/AuctionBoard?action=list&pageNumber=${currentPageNumber}&boardNum=${auction.boardNum}&searchType=${param.searchType}&searchText=${param.searchText}&categoryType=${param.categoryType}');"></td>
 		            		</tr>
 		            	</table>
 		            </form>

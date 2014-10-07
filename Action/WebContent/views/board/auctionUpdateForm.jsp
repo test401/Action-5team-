@@ -78,7 +78,7 @@
 		            		</tr>
 		            		<tr>
 		            		    <td><input type="submit" name="editer" value="수정"></td>
-		            			<td><input type="button" name="cancle" value="취소"></td>
+		            			<td><input type="button" name="cancle" value="취소" onclick="goUrl('/Action/AuctionBoard?action=read&pageNumber=${currentPageNumber}&boardNum=${auctionBoard.boardNum}&searchType=${param.searchType}&searchText=${param.searchText}&categoryType=${param.categoryType}');"></td>
 		            		</tr>
 		            	</table>
 		            </form>
