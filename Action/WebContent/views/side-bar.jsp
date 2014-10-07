@@ -13,12 +13,11 @@
 		
 		<img id="actionTitle" src="/Action/views/images/actionTitle.gif"
 		alt="액션타이틀">
-		<embed id="actionTitle" autoplay="true" autostart="true">
 	</div>
     
     
     
-    <table id="sidebartable">
+<!--     <table id="sidebartable">
         <tr>
             <td id="menulabel">Menu</td>
         </tr>    
@@ -33,7 +32,7 @@
         <tr>
             <td><a href="">Q&A</a></td>
         </tr>
-    </table>
+    </table> -->
 </div>
 
 	

@@ -4,7 +4,6 @@ import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.Date;
-import java.util.Enumeration;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
@@ -70,7 +69,7 @@ public class AuctionBoardController extends HttpServlet {
 	        
 	        // action 값에 따라 적절한 메소드를 선택하여 호출한다.
 	        if (action.equals("main")) {
-	        	selectBoardList(request, response);
+	        	mainList(request, response);
 	        }else if (action.equals("list")) {
 	        	selectBoardList(request, response);
 	        } else if (action.equals("read")) {
@@ -97,6 +96,69 @@ public class AuctionBoardController extends HttpServlet {
         }
     }
     
+	private void mainList(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException{
+		//1. searchType, searchText, searchCategory 요청 파라미터 값을 구한다.
+				String searchType = request.getParameter("searchType");
+				String searchText = request.getParameter("searchText");
+				String categoryType = request.getParameter("categoryType");
+				
+				//1.2 pageNumber 요청 파라미터 값을 구한다.
+				String pageNumber = request.getParameter("pageNumber");
+				
+				//(1) 현재 페이지 번호
+				int currentPageNumber = 1;
+					if(pageNumber != null && pageNumber.length() !=0){
+						currentPageNumber = Integer.parseInt(pageNumber);
+					}
+			
+				//2. 검색 옵션을 담고 있는 MAP 객체를 생성하여 searchType, searchText, searchCategory 값을 저장한다.
+						Map<String, Object> searchInfo = new HashMap<String, Object>();
+						searchInfo.put("searchType", searchType);
+						searchInfo.put("searchText", searchText); 
+						searchInfo.put("categoryType", categoryType);
+						
+				//  BoardService 객체로부터 모든 게시글 리스트를 구해온다.
+				AuctionBoardService service = new AuctionBoardServiceImpl();
+				
+				// 전체 게시글 개수
+				int totalBoardCount = service.getBoardCount(searchInfo);
+				// 전체 페이지 개수
+				int totalPageCount = PageHandler.getTotalPageCount(totalBoardCount);
+
+				// 페이지 선택 바에 표시될 시작 페이지 번호
+				int startPageNumber = PageHandler.getStartPageNumber(currentPageNumber);
+				// 페이지 선택 바에 표시될 끝 페이지 번호
+				int endPageNumber = PageHandler.getEndPageNumber(currentPageNumber, totalBoardCount);
+				
+				// 현재 페이지의 게시글 목록에서 처음 보여질 게시글의 행 번호
+				int startRow = PageHandler.getStartRow(currentPageNumber);
+				// 현재 페이지의 게시글 목록에서 마지막에 보여질 게시글의 행 번호
+				int endRow = PageHandler.getEndRow(currentPageNumber);
+						
+				// 검색 옵션  Map 객체(searchInfo)에 startRow와 endRow 값을 저장한다.
+				searchInfo.put("startRow", startRow);
+				searchInfo.put("endRow", endRow);
+				
+				//3. BoardService 객체로부터 모든 게시글 리스트를 구해온다.
+				Board[] auctionList = service.getBoardList(searchInfo);
+					
+		        //4.1  request scope 속성(auctionList)에 게시글 리스트를 저장한다.
+				request.setAttribute("auctionList", auctionList);
+				
+				//4.2 request scope 속성으로 
+				request.setAttribute("currentPageNumber", currentPageNumber);
+				request.setAttribute("startPageNumber", startPageNumber);
+				request.setAttribute("endPageNumber", endPageNumber);
+				request.setAttribute("totalPageCount", totalPageCount);
+		        
+		        //  RequestDispatcher 객체를 통해 뷰 페이지(/views/board/auctionList.jsp)로 요청을 전달한다.
+		        RequestDispatcher dispatcher = request.getRequestDispatcher("/views/main.jsp");
+		        dispatcher.forward(request, response);
+		
+	}
+
+
 	/* 
      * 조건에 맞는 모든 경매 게시물 목록을 보여주는 요청을 처리한다.
      */
