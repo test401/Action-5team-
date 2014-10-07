@@ -124,10 +124,10 @@ public class AuctionBoardController extends HttpServlet {
 		searchInfo.put("endRow", endRow);
 		
 		//3. BoardService 객체로부터 모든 게시글 리스트를 구해온다.
-		Board[] auctionList = service.getBoardList(searchInfo);
+		Board[] freeBoardList = service.getBoardList(searchInfo);
 			
         //4.1  request scope 속성(auctionList)에 게시글 리스트를 저장한다.
-		request.setAttribute("auctionList", auctionList);
+		request.setAttribute("freeBoardList", freeBoardList);
 		
 		//4.2 request scope 속성으로 
 		request.setAttribute("currentPageNumber", currentPageNumber);
@@ -136,7 +136,7 @@ public class AuctionBoardController extends HttpServlet {
 		request.setAttribute("totalPageCount", totalPageCount);
         
         //  RequestDispatcher 객체를 통해 뷰 페이지(/views/board/auctionList.jsp)로 요청을 전달한다.
-        RequestDispatcher dispatcher = request.getRequestDispatcher("/views/board/auctionList.jsp");
+        RequestDispatcher dispatcher = request.getRequestDispatcher("/views/fboard/freeList.jsp");
         dispatcher.forward(request, response);
 		
         
@@ -159,19 +159,19 @@ public class AuctionBoardController extends HttpServlet {
 				currentPageNumber = Integer.parseInt(pageNumber);
 			}
 		// 2. BoardService 객체로부터 해당 글 번호의 게시글을 구해온다.
-		AuctionBoardService service = new AuctionBoardServiceImpl();
+		FreeBoardService service = new FreeBoardServiceImpl();
 
-		AuctionBoard auctionBoard = service.findBoard(Integer.parseInt(boardNum));
+		FreeBoard freeBoard = service.findBoard(Integer.parseInt(boardNum));
 
 		
 		// 3. request scope 속성(board)에 게시글을 저장한다.
-        request.setAttribute("auctionBoard", auctionBoard);
+        request.setAttribute("freeBoard", freeBoard);
 
         // 3.2 request scope 속성으로 currentPageNumber를 저장한다.
 		request.setAttribute("currentPageNumber", currentPageNumber);
 		
         // 4. RequestDispatcher 객체를 통해 뷰 페이지(/views/board/auctionRead.jsp)로 요청을 전달한다.
-        RequestDispatcher dispatcher = request.getRequestDispatcher("/views/board/auctionRead.jsp");
+        RequestDispatcher dispatcher = request.getRequestDispatcher("/views/fboard/freeRead.jsp");
         dispatcher.forward(request, response);
         
 	}

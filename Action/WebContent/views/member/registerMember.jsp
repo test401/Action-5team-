@@ -53,10 +53,14 @@
 	            		
 	            		<tr>
 	            		    <td><label class="label">비밀번호확인</label></td>
-	            			<td><input type="password" name="checkPassword" onblur="passwordCheck(this, document.getElementById('pass'));" size="25"><span id="pass"></span></td>
+	            			<td><input type="password" name="checkPassword" onblur="passwordCheck(this, document.getElementById('pass'));" size="25"></td>
 	            		</tr>
 	            		
-	            		<tr><td></td></tr>
+	            		<tr>
+	            		<td></td>
+	            		<td><span id="pass"></span></td>
+	            		
+	            		</tr>
 	            		<tr><td></td></tr>
 	            		
 						<tr>

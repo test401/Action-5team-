@@ -58,7 +58,7 @@ public class FreeBoardDaoImpl implements FreeBoardDao {
 		if((searchType == null) || (searchType.length() == 0)){
 			whereSQL = "";
 		} else if (searchType.equals("all")){
-			whereSQL = "WHERE title LIKE ? OR writer LIKE ? OR contents LIKE ?";
+			whereSQL = "WHERE title LIKE ? OR memberID LIKE ? OR contents LIKE ?";
 		} else if ( (searchType.equals("title")) || (searchType.equals("memberID")) || (searchType.equals("contents")) ){
 			whereSQL = "WHERE " + searchType.trim() + " LIKE ?";
 		}
@@ -99,7 +99,7 @@ public class FreeBoardDaoImpl implements FreeBoardDao {
 				pstmt.setInt(4, startRow);
 				pstmt.setInt(5, endRow);
 
-			} else if ( (searchType.equals("title")) || (searchType.equals("writer")) || (searchType.equals("contents")) ){
+			} else if ( (searchType.equals("title")) || (searchType.equals("memerID")) || (searchType.equals("contents")) ){
 				pstmt.setString(1, searchText);
 				pstmt.setInt(2, startRow);
 				pstmt.setInt(3, endRow);
@@ -114,13 +114,14 @@ public class FreeBoardDaoImpl implements FreeBoardDao {
 					title = title.substring(0, 20) + "...";
 				}
 
-				board = new FreeBoard(rs.getInt("boardnum"),
+				board = new FreeBoard(
+						rs.getInt("boardnum"),
 						title,
 						rs.getString("memberID"),						
 						rs.getInt("isnotice"));
 				boardList.add(board);
 			}
-
+		
 		}catch(SQLException se){
 			System.err.println("BoardDAOImpl selectBoardList() Error :" + se.getMessage());
 		}finally{
@@ -147,12 +148,21 @@ public class FreeBoardDaoImpl implements FreeBoardDao {
 		// 2. searchType 값에 따라 사용될 조건절을 생성한다.
 		String whereSQL = "";
 
-		if((searchType == null) || (searchType.length() == 0)){
+		/*if((searchType == null) || (searchType.length() == 0)){
 			whereSQL = "";
 		} else if (searchType.equals("all")){
 			whereSQL = "WHERE title LIKE ? OR writer LIKE ? OR contents LIKE ?";
 		} else if ( (searchType.equals("title")) || (searchType.equals("memberID")) || (searchType.equals("contents")) ){
 			whereSQL = "WHERE " + searchType.trim() + " LIKE ?";
+		}*/
+		
+		// 2.1. searchType 값에 따라 사용될 조건절을 생성한다.
+		if((searchType == null) || (searchType.length() == 0)){
+			whereSQL = "";
+		} else if (searchType.equals("all")){
+			whereSQL = " where (title LIKE ? OR memberID LIKE ? OR contents LIKE ?)";
+		} else if ( (searchType.equals("title")) || (searchType.equals("memberID")) || (searchType.equals("contents")) ){
+			whereSQL = "(" + searchType.trim() + " LIKE ?)";
 		}
 
 		// 3. LIKE 절에 포함될 수 있도록 searchText 값 앞 뒤에 % 기호를 붙인다.
@@ -297,8 +307,8 @@ public class FreeBoardDaoImpl implements FreeBoardDao {
 	 */
 	@Override
 	public void insertBoard(FreeBoard board) {
-		String query = "INSERT INTO FreeBoard (boardnum, title, memberID, contents, isnotice "
-				+ "VALUES (board_num_seq.NEXTVAL + ?, ?, ?, ?, ?)";
+		String query = "INSERT INTO FreeBoard (boardnum, title, memberID, contents, isnotice) "
+				+ "VALUES (FREEBOARD_BOARDNUM_SEQ.NEXTVAL+?, ?, ?, ?, ?)";
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 
@@ -307,18 +317,23 @@ public class FreeBoardDaoImpl implements FreeBoardDao {
 			pstmt = conn.prepareStatement(query);
 			
 			if(board.getIsNotice() != 0) {
-			pstmt.setInt(1, 999);
-			pstmt.setString(2, "<b>"+board.getTitle()+"</b>" );
+				pstmt.setInt(1, 999);
+				pstmt.setString(2, "<b>"+board.getTitle()+"</b>");
 			} else {
-			pstmt.setInt(1, 0);
-			pstmt.setString(2, board.getTitle());
+				pstmt.setInt(1, 0);
+				pstmt.setString(2, board.getTitle());
 			}
-			pstmt.setString(3, board.getMemberID());
-			pstmt.setString(4, board.getContents());
-			pstmt.setInt(5, board.getIsNotice());
-
-			pstmt.executeUpdate();
-
+				pstmt.setString(3, board.getMemberID());
+				pstmt.setString(4, board.getContents());
+				pstmt.setInt(5, board.getIsNotice());
+				
+				System.out.println(board.getTitle());
+				System.out.println(board.getMemberID());
+				System.out.println(board.getBoardNum());
+				System.out.println(board.getIsNotice());
+				System.out.println(board.getContents());
+				//System.out.println(pstmt.executeUpdate());
+				pstmt.executeUpdate();
 		}catch(SQLException se){
 			System.err.println("BoardDaoImpl insertBoard() Error :" + se.getMessage());
 			se.printStackTrace(System.err);
