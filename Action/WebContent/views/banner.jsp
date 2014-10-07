@@ -9,7 +9,7 @@
 	
 	<div class="headermid">
 		<div class="buttonbar">
-			<form name="searchForm" action="list?pageNumber=${currentPageNumber}">
+			<form name="searchForm" action="/Action/AuctionBoard?action=main" method = "POST">
 				<select name="searchType">
 					<option value="all"
 						<c:if test="${empty param.searchType || param.searchType=='all'}">
@@ -39,7 +39,7 @@
 		<tr><td></td></tr>
 		<tr>
 			<td><label class="category" draggable="true">회사소개</label></td>
-			<td><label class="category" draggable="true">전체 물품 보기</label></td>
+			<td><label class="category" draggable="true"><a href="/Action/AuctionBoard?action=list">전체 물품 보기</a></label></td>
 			<td><label class="category" draggable="true">자유 게시판</label></td>
 			<td><label class="category" draggable="true">Q&A</label></td>
 			

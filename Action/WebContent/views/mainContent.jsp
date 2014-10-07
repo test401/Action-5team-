@@ -45,14 +45,14 @@ window.onload = displayTime; // 문서가 로딩될 때 수행할 함수 설정
 					<table>
 	                    <tr>
 	                        <td class="auctionimage">
-	                            <a href="">
+	                            <a href="/Action/AuctionBoard?action=read&pageNumber=${currentPageNumber}&boardNum=${auction.boardNum}&searchType=${param.searchType}&searchText=${param.searchText}&categoryType=${param.categoryType}">
 	                                <img src="img/tmp/th_${auction.mainImage}">
 	                            </a>
 	                        </td>
 	                   </tr>
 	                   <tr>
 	                        <td class="auctiontitle">
-	                            <a href="">${auction.title}</a>
+	                            <a href="/Action/AuctionBoard?action=read&pageNumber=${currentPageNumber}&boardNum=${auction.boardNum}&searchType=${param.searchType}&searchText=${param.searchText}&categoryType=${param.categoryType}">${auction.title}</a>
 	                        </td>
 	                   </tr>
 	                   <tr>
@@ -74,7 +74,7 @@ window.onload = displayTime; // 문서가 로딩될 때 수행할 함수 설정
 					<tr>
 						<td id="pagenavigator" colspan="5">
 							<c:if test="${startPageNumber > 1}">
-								<a href="list?pageNumber=${startPageNumber - 1}&searchType=${param.searchType}&searchText=${param.searchText}">이전</a>
+								<a href="/Action/AuctionBoard?action=main&pageNumber=${startPageNumber - 1}&searchType=${param.searchType}&searchText=${param.searchText}">이전</a>
 							</c:if>
 							<c:forEach var="pageNumber" begin ="${requestScope.startPageNumber}" end="${requestScope.endPageNumber}">
 								<c:choose>
@@ -82,7 +82,7 @@ window.onload = displayTime; // 문서가 로딩될 때 수행할 함수 설정
 										<a class="pagenumber currpage">${pageNumber}</a>
 									</c:when>
 									<c:otherwise>
-										<a class="pagenumber" href="list?pageNumber=${pageNumber}&searchType=${param.searchType}&searchText=${param.searchText}">${pageNumber}</a>
+										<a class="pagenumber" href="/Action/AuctionBoard?action=main&pageNumber=${pageNumber}&searchType=${param.searchType}&searchText=${param.searchText}">${pageNumber}</a>
 									</c:otherwise>
 								</c:choose>
 							</c:forEach>
