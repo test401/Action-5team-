@@ -69,7 +69,9 @@ public class AuctionBoardController extends HttpServlet {
 	        String action = request.getParameter("action");
 	        
 	        // action 값에 따라 적절한 메소드를 선택하여 호출한다.
-	        if (action.equals("list")) {
+	        if (action.equals("main")) {
+	        	selectBoardList(request, response);
+	        }else if (action.equals("list")) {
 	        	selectBoardList(request, response);
 	        } else if (action.equals("read")) {
 	        	readBoard(request, response);
