@@ -2,7 +2,8 @@ body {
 	background-color: #ffffff;
 	font-family: Georgia, "Times New Roman", Times, serif;
 	font-size: small;
-	margin: 0px;
+	margin: auto;
+	width: 1024px;
 }
 a:link { text-decoration: none; color: #000000; }
 a:visited { text-decoration: none; color: #000000; }
@@ -12,50 +13,105 @@ a:hover, a:active { text-decoration: underline; color: #cc6600; }
 }
 
 .tableCell{
+	display:table-cell;
 	vertical-align: top;
-	float: left;
 }
-
-/* .center{
-	text-align: center;
-	width: 500px;
-	margin-left: 200px;
-	float: inherit;
-} */
-
 
 header{
-	background-color: #E6E6FA;
-	margin: 15px 15px 15px 15px;
+	background-color: #FAFAD2;
+	margin: 15px 15px 10px 10px;
 	height: 110px;
-	width: 1205px;
-	
+	width: 1000px;
 }
+
 
 #actionLogo{
 	background-color: #E6E6FA;
 	margin-left:5px;
 	margin-top: 5px;
+	margin-right:10px;
  	float:left;
 } 
 
-#actionTitle{
-	position :absolute;
-	text-align: left;
-	margin-left:20px;
-	margin-top: 5px;
- 	
+/* 검색창// 카테고리 관련  */
+.headermid{
+	width: 400px;
+	display: table-cell;
+	vertical-align: middle;
 }
+
+.buttonbar{
+	width:350px;
+	height:20px;
+	margin-left:50px;
+	display:table-row;
+}
+
+
+#categorytable{
+	width:350px;
+	height:20px;
+	display: table-row;
+	margin-left: 10px;
+}
+
+
+/* 로그인창 관련 CSS */
+#loginck{
+	display: table-cell;
+	vertical-align:middle;
+	width: 400px;
+	height: 110px;
+}
+
+.loginlabel{
+	display: table-row;
+}
+#findid{
+	display: table-row;
+}
+
+/* 베너 끝 베너 끝  */
+
+/* 회원 가입관련 입력창과 김현중 */
+
+#registermain{
+	display: table-cell;
+	width: 500px;
+	height: 300px;
+
+}
+
+
+
+
+
+/* 미드라인 액션 타이틀 CSS */
+.sidebar{
+	display: table-cell;
+	width: 900px;
+	height: 600px;
+}
+
+#actionTitle{
+	margin-left: 100px;
+	width: 800px;
+	height: 300px;
+}
+
+
+
+
 
 /* 여기부터 footer 주석 */
 footer {
-	width: 1175px;
+	width: 970px;
 	height: 60px;
-	background-color: #E6E6FA;
+	background-color: #FAFAD2;
 	color: #000000;
 	text-align: left;
 	padding: 15px;
-	margin: 15px 15px 15px 15px;
+	margin: 30px 15px 10px 10px;
 	font-size: 100%;
 }
 
@@ -68,158 +124,47 @@ footer {
 
 section#groupName {
 	display:table-cell;
-	vertical-align: top;
-	width: 250px;	
+	vertical-align: middle;
+	width: 300px;	
 }
 
 section#alliance {
 	display:table-cell;
-	vertical-align: top;
-	width: 80px;	
+	vertical-align: middle;
+	width: 90px;	
 }
 
 section#naver {
 	display:table-cell;
-	vertical-align: top;
-	width: 150px;	
+	vertical-align: middle;
+	width: 140px;	
 }
 
 section#google {
 	display:table-cell;
-	vertical-align: top;
-	width: 150px;	
+	vertical-align: middle;
+	width: 140px;	
 }
 
 section#daum {
 	display:table-cell;
 	vertical-align: top;
-	width: 200px;	
+	width: 160px;	
 }
 
 
 section#notAlliance {
 	display:table-cell;
 	vertical-align: top;
-	width: 80px;	
+	width: 90px;	
 }
 
 section#auction {
 	display:table-cell;
 	vertical-align: top;
-	width: 150px;	
+	width: 140px;	
 }
 
 /* 여기까지 footer 주석 */
-
-
-/* 여기부터 sidebar 주석 */
-div.sidebar{
-	background-color: #E6E6FA;
-	color: #000000;
-	float:left;
-	margin-left: 15px;
-	width: 270px;
-	height: 750px;
-}
- #sidebarMargin{
-	background-color: #ffffff;
- 	/* border-style:double;
- 	border-color:blue; */
- 	width:260px;
- 	height:120px;
-	margin: 5px;
-	font-size: 110%;
-} 
-
-#sidebartable{
-	border-spacing: 15px;
-	font-size: 150%;
-}
-
-.loginlabel{
-	font-size: 15px;
-	width: 70px;
-	height: 30px;
-}
-
-#loginButton{
-	height: 40px;
-}
-.memberFontID{
-	float: right;
-}
-/* 여기까지 sidebar 주석 */
-
-
-/* 회원가입 관련 부분 주석 */
-	
-
-.registermain{	
-/*회원가입 [회원가입] 문구  */
-	list-style-position: inside;
-	margin: 40px 30px 45px 30px;
-	height:500px;
-	width: 400px;
-	float: inherit;
-	font-size:large;
-}
-
-#registerbtnin{
-	width: 100px;
-	margin-left: 100px;
-}
-#registerbtncancle{
-	width: 100px;
-}
-
-.registerLabel{
-	font-size: 30px;
-	color: fuchsia;
-	margin: 0px 0px 0px 20px;
-}
-/*회원관리 주석 끝  */
-
-/* 로그인 완료 이미지 주석 */
-#loginokimage{
-	width: 600px;
-	height: 400px;
-	margin-left: 170px;
-	margin-top: 30px;
-}
-#loginokbtn{
-	margin-left: 360px;
-	margin-top: 30px;
-	width: 200px;
-	height: 50px;
-}
-
-/* 로그인 완료 끝 */
-
-
-
-
-/* 여기서 부터 카태고리와 검색바 */
-#categorytable{
-	background-color: #E6E6FA;
-	color: #000000;
-	margin-left: 15px;
-	width:900px;
-	height: 30px;
-}
-
-.category{
-	margin-left: 25px;
-	font-size:100%;
-}
-
-.buttonbar{
-	background-color: #ffffff;
-	text-align:center;
-	/* margin-left: 50px; */
-	color: #000000;
-}
-/*카태고리와 검색바  끝*/
-
-
 
 

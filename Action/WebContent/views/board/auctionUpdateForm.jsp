@@ -18,7 +18,7 @@
 	        <div class="tableCell">
 	        	<c:import url="/views/side-bar.jsp" />
 	            <div class="main">
-	            	<form action="/Action/AuctionBoard?action=update&pageNumber=${currentPageNumber}&boardNum=${auctionBoard.boardNum}&searchType=${param.searchType}&searchText=${param.searchText}&categoryType=${param.categoryType}" method="POST" enctype="multipart/form-data">
+	            	<form name = "form" action="/Action/AuctionBoard?action=update&pageNumber=${currentPageNumber}&boardNum=${auctionBoard.boardNum}&searchType=${param.searchType}&searchText=${param.searchText}&categoryType=${param.categoryType}" method="POST" enctype="multipart/form-data">
 		            	<table>
 		            		<tr>
 		            			<td><label class="updatelabel" >경매물품수정</label></td>
@@ -50,7 +50,7 @@
 		            		    <td><label class="label">즉시구매가</label></td>
 		            			<td><input type="text" name="immediatelyPrice" value="${auctionBoard.immediatelyPrice}"></td>
 		            			<td><label class="label">즉시구매허용여부</label>
-		            				<input type="checkbox" name="isImmediately" value="1" 
+		            				<input type="checkbox" name="isImmediately" value="1" onclick ="checkImm(this.form)"
 		            				<c:if test="${auctionBoard.isImmediately == 1}">checked="checked"</c:if>>
 		            			</td>
 		            		</tr>

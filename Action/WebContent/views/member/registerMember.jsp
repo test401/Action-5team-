@@ -13,20 +13,18 @@
         <div class="tableRow">
             <c:import url="/views/banner.jsp"/>
         </div>
+        
         <div class="tableRow">
-        <div class="tableCell">
-        		<c:import url="/views/side-bar.jsp" />
-
-            <div class="registermain">
-	            <form action="/Action/MemberController?action=register" method="POST">
+        	<div class="tableRow">
+        		<div class="tableCell" style="width: 170px;">
+        			
+        		</div>
+                <div class="registermain">
+	            	<form action="/Action/MemberController?action=register" method="POST">
 	            	<table>
 	            		<tr>
-	            			<td><label class="registerLabel" >회원가입</label></td>
+	            			<td><label class="registerLabel" ><h1>회원가입</h1></label></td>
 	            		</tr>
-	            		
-	            		<tr><td></td></tr>
-	            		<tr><td></td></tr>
-	            		
 	            		<tr>
 	            			<td><label class="label">회원 아이디</label></td>
 	            			<td><input type="text" name="memberID" width="20px" size="25"></td>
@@ -76,16 +74,20 @@
 	            		<tr><td></td></tr>
 	            		
 	            		<tr>
+	            			<td></td>
 	            		    <td colspan="2"><input type="button" name="register" id="registerbtnin" value="가입신청" onclick="boardWriteCheck(this.form);" size="25">
 	            			<input type="button" id="registerbtncancle" name="cancle" value="취소" onclick="goUrl('/Action/views/main.jsp');"></td>
 	            		</tr>
 	            	</table>
 	            </form>
         	</div>
+        		 <div class="tableCell" style="width: 50px;">
+
+	       		</div>
         	
 	            <div class="tableCell">
 	        		<img id="registerimg" alt="" src=""
-	        		style="width: 440px; height: 480px">
+	        		style="width: 400px; height: 300px">
 	       		</div>
 	       		
 	       		</div>

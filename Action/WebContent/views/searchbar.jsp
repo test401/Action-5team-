@@ -1,8 +1,8 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
-<div class="buttonbar" >
-	<form name="searchForm" method="post" action="/Action/AuctionBoard?action=list&pageNumber=${currentPageNumber}">
+<%-- <div class="buttonbar" >
+	<form name="searchForm" action="list?pageNumber=${currentPageNumber}">
 		<select name="searchType" >
 			<option value="all" <c:if test="${empty param.searchType || param.searchType=='all'}">
 			selected="selected"
@@ -21,4 +21,4 @@
 		<input id="searchinput" type="text" name="searchText" size="40" value="${param.searchText}" onfocus="this.select();">
 		<input type="button" value="검색" onclick="searchCheck(this.form);"> 
 	</form>
-</div>
+</div> --%>

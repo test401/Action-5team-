@@ -4,13 +4,19 @@
 <script src="/Action/js/login.js"></script>
 <div class="sidebar">
 	<div id ="sidebarMargin">
-		<c:if test="${empty sessionScope.loginMember}">
+		<%-- <c:if test="${empty sessionScope.loginMember}">
 			<c:import url="/views/member/login.jsp" />
 		</c:if>
 		<c:if test="${not empty sessionScope.loginMember}">
 			<c:import url="/views/member/logout.jsp" />
-		</c:if>
+		</c:if> --%>
+		
+		<img id="actionTitle" src="/Action/views/images/actionTitle.gif"
+		alt="액션타이틀">
+		<embed id="actionTitle" autoplay="true" autostart="true">
 	</div>
+    
+    
     
     <table id="sidebartable">
         <tr>
@@ -19,7 +25,7 @@
         <tr><td><hr></td>
         </tr>
         <tr>
-            <td><a href="/Action/AuctionBoard?action=list">경매상품보기</a></td>
+            <td><a href="/Action/views/board/auctionList.jsp">경매상품보기</a></td>
         </tr>
         <tr>
             <td><a href="">자유게시판</a></td>
