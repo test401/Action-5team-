@@ -7,7 +7,7 @@
 	
 	<div class="headermid">
 		<div class="buttonbar">
-			<form name="searchForm" action="list?pageNumber=${currentPageNumber}">
+			<form name="searchForm" action="/Action/AuctionBoard?action=list&pageNumber=${currentPageNumber}">
 				<select name="searchType">
 					<option value="all"
 						<c:if test="${empty param.searchType || param.searchType=='all'}">
