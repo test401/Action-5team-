@@ -71,12 +71,6 @@ $(function() {
 				alert(data.message);
 				$('#retruncurrentPrice').empty();
 				$('#retruncurrentPrice').html(data.currentPrice);
-//				if(data==0){							
-//					$('#price').html("안돼");
-//				}else{
-//					$('#price').html(text);
-//					$('#pr').attr('value',text);
-//				}
 			}
 		});
 	});

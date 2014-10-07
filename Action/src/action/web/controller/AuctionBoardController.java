@@ -3,6 +3,7 @@ package action.web.controller;
 import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
@@ -21,6 +22,7 @@ import org.apache.commons.fileupload.disk.DiskFileItemFactory;
 import org.apache.commons.fileupload.servlet.ServletFileUpload;
 import org.json.simple.JSONObject;
 
+import action.util.ThumbnailMaker;
 import action.business.domain.board.AuctionBoard;
 import action.business.domain.board.AuctionListBoard;
 import action.business.domain.board.BidListBoard;
@@ -43,11 +45,14 @@ public class AuctionBoardController extends HttpServlet {
 	
 	
 	private File uploadDir;
+	private File uploadDirtmp;
 	
 	@Override
 	public void init() throws ServletException {
 		uploadDir = new File(getInitParameter("uploadDir"));
 		if (!uploadDir.exists()) { uploadDir.mkdir(); }
+		uploadDirtmp = new File(getInitParameter("uploadDirtmp"));
+		if (!uploadDirtmp.exists()) { uploadDirtmp.mkdir(); }
 	}
 	
 
@@ -79,6 +84,8 @@ public class AuctionBoardController extends HttpServlet {
 	            removeBoard(request, response);
 	        } else if (action.equals("bid")) {
 	        	bidAuction(request, response);
+	        } else if(action.equals("imageUpload")){
+	        	imageUpload(request,response);
 	        } else {   	
 	        	response.sendError(HttpServletResponse.SC_NOT_FOUND);
 	        }
@@ -320,6 +327,8 @@ public class AuctionBoardController extends HttpServlet {
 		// 총 request size 제약 설정
 		upload.setSizeMax(1024 * 1024 * 20); // 최대 size (20M까지 가능)
 		
+		File file = null;
+		
 		// 요청 파싱
 		try {
 			List<FileItem> items = upload.parseRequest(request);
@@ -342,7 +351,7 @@ public class AuctionBoardController extends HttpServlet {
 				 // 파일 업로드 처리 (<input type="file">인 경우)
 				} else {
 					
-					
+					String contentType = item.getContentType();
 					images[count2] = item.getName();// 경로가 포함된 파일명
 					//if(images[count] != null && images[count])
 					int index = images[count2].lastIndexOf("\\"); // 디렉터리 구분자 위치를 통해
@@ -354,8 +363,26 @@ public class AuctionBoardController extends HttpServlet {
 					// 파일 업로드 처리
 //					File uploadedFile = new File(uploadDir, images[count2]);
 //					item.write(uploadedFile); // 실질적인 저장
+					
+					String savefile = "img";
+					ServletContext scontext = getServletContext();
+					String realFolder = scontext.getRealPath(savefile);
+					String ThumbnailFolder = scontext.getRealPath("img/tmp");
+					String filename=Math.abs(new Date().hashCode())+images[count2];
+					
+					if(count2==0){
+						File uploadedFile = new File(realFolder, filename);
+						File ThumnailFile = new File(ThumbnailFolder);
+						file=uploadedFile;
+						item.write(uploadedFile); // 실질적인 저장
+						// image 형식이면 thumbnail 이미지를 만들어 파일로 저장
+						if (contentType.startsWith("image")) {
+							ThumbnailMaker.createThumbnail(ThumnailFile, uploadedFile, 50, 50);
+						}
+					}
+					images[count2]=filename;
 					System.out.println(count2 + " : " + images[count2]);
-		
+					
 					count2++;
 		
 					//names[0] = categoryID
@@ -393,11 +420,111 @@ public class AuctionBoardController extends HttpServlet {
 	        dispatcher.forward(request, response);
 		} catch (Exception e) {
 			e.printStackTrace();
+			System.out.println(file);
 			
 		} 
 		
 	}
 
+	
+	/* 
+     * 경매글에 있는 이미지 업로드 처리
+     */
+	private void imageUpload(HttpServletRequest request, HttpServletResponse response) 
+            throws ServletException, IOException, DataNotFoundException {
+
+		request.setCharacterEncoding("UTF-8");
+		response.setContentType("text/html; charset=UTF-8");
+		PrintWriter out= response.getWriter();
+		
+		// multipart 컨텐트 여부 확인
+		boolean isMultipart = ServletFileUpload.isMultipartContent(request);
+		if (!isMultipart) {
+			throw new IOException("요청 내용이 multipart/form-data가 아닙니다.");
+			
+			//return;
+		}
+		HttpSession session = request.getSession(true);
+		Member member = (Member) session.getAttribute("loginMember");
+		
+		
+		// 디스크 기반의 FileItem factory 생성
+		DiskFileItemFactory factory = new DiskFileItemFactory();
+		// repository 생성 (a secure temp location is used)
+		ServletContext servletContext = this.getServletConfig().getServletContext();
+		File repository = (File) servletContext.getAttribute("javax.servlet.context.tempdir");
+		// File repository = new File(uploadDir, "temp");  
+		// if (!repository.exists()) { repository.mkdir(); }
+		
+		// factory 제약 설정
+		factory.setSizeThreshold(1024 * 100); // 메모리에 저장할 최대 size (100K까지는 메모리에 저장)
+		factory.setRepository(repository);	// 파일 임시 저장소 (100K 이상이면 repository에 저장)	
+		
+		// 파일 업로드 핸들러 생성
+		ServletFileUpload upload = new ServletFileUpload(factory);
+		// 총 request size 제약 설정
+		upload.setSizeMax(1024 * 1024 * 20); // 최대 size (20M까지 가능)
+		
+		File file = null;
+		
+		// 요청 파싱
+		try {
+			List<FileItem> items = upload.parseRequest(request);
+
+			// 업로드된 items 처리
+			Iterator<FileItem> iter = items.iterator();
+			
+			while (iter.hasNext()) {    
+				FileItem item = iter.next();
+				// 일반 폼 필드 처리 (<input type="file">이 아닌 경우)
+				if (item.isFormField()) {
+						
+//					names[count] = item.getString("UTF-8");
+//
+//					System.out.println(count + " : " + names[count] + items.size());
+//					
+//					count++;
+					
+				 // 파일 업로드 처리 (<input type="file">인 경우)
+				} else {
+					
+					String fieldName = item.getFieldName(); // 필드 이름
+					String fileName = item.getName(); // 경로가 포함된 파일명
+					String contentType = item.getContentType(); // 컨텐트 유형
+					//boolean isInMemory = item.isInMemory(); // 메모리에 있는지 여부
+					long sizeInBytes = item.getSize(); // 파일 크기
+
+					int index = fileName.lastIndexOf("\\"); // 디렉터리 구분자 위치를 통해
+					if (index == -1) {
+						index = fileName.lastIndexOf("/");
+					}
+					fileName = fileName.substring(index + 1); // 파일명만 추출
+					
+					// 파일 업로드 처리
+//					File uploadedFile = new File(uploadDir, images[count2]);
+//					item.write(uploadedFile); // 실질적인 저장
+					
+					String savefile = "img";
+					ServletContext scontext = getServletContext();
+					String realFolder = scontext.getRealPath(savefile);
+					String filename=Math.abs(new Date().hashCode())+fileName;
+					
+						File uploadedFile = new File(realFolder, filename);
+						file=uploadedFile;
+						item.write(uploadedFile); // 실질적인 저장
+						out.println("<img src='"+uploadDir+"/"+filename+"'>");
+					}
+			}
+			out.close();
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+			System.out.println(file);
+			
+		} 
+		
+	}
+	
 	/* 
      * 경매글 수정을 위해 적절한 내용이 채워진 폼을 응답한다.
      */

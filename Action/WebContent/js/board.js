@@ -61,6 +61,30 @@ function checkNotEmpty(inputField, errorSpan){
 	}
 }
 
+$(function() {
+	$('#uploadimagefile').click(function() {
+ 
+		var data = new FormData();
+        $.each($('#inpt_attachFile')[0].files, function(i, file) {
+            data.append('file-' + i, file);
+        });
+ 
+		jQuery.ajax({
+			type: "POST",
+			url: '/Action/AuctionBoard',
+			data:
+				'action=imageUpload'+"&"+
+				'image='+encodeURIComponent($("input[name=image]").files),
+			contentType: 'multipart/form-data',
+			dataType: 'text',
+			success: function(data) {
+				alert(data);
+				$('textarea[name=contents]').html(data);
+			}
+		});
+	});
+});
+
 /*//작성/수정 폼의 공백을 체크하는 기능
 function boardWriteCheck(){
 	var form=document.writeForm;

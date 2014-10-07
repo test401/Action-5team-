@@ -5,6 +5,7 @@
 <head>
 <meta charset="UTF-8">
 <link rel="stylesheet" href="/Action/action.css">
+<script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
 <script src="/Action/ckeditor/ckeditor.js"></script>
 <script src="/Action/js/board.js"></script>
 <title>Action Write Form</title>
@@ -58,6 +59,7 @@
 		            		<tr>
 		            		    <td><label class="label">업로드이미지</label></td>
 		            			<td><input type="file" name="image"></td>
+		            			<td><input id="uploadimagefile" type="button" value="업로드" onclick="upload();"></td>
 		            		</tr>
 		            		<tr>
 		            			<td colspan="10">

@@ -53,7 +53,7 @@
                         <td class="auctionno">번호 : ${auction.boardNum}</td>
                         <td class="auctionimage">
                             <a href="">
-                                <img src="images/${auction.image}">
+                                <img src="img/tmp/th_${auction.mainImage}">
                             </a>
                         </td>
                         <td class="auctiontitle">

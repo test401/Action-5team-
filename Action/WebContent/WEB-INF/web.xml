@@ -28,6 +28,10 @@
       <param-name>uploadDir</param-name>
       <param-value>img</param-value>
     </init-param>
+     <init-param>
+      <param-name>uploadDirtmp</param-name>
+      <param-value>img</param-value>
+    </init-param>
   </servlet>
   <servlet-mapping>
     <servlet-name>AuctionBoardController</servlet-name>
