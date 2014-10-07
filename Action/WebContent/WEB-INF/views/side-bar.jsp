@@ -24,7 +24,7 @@
             <td><a href="">자유게시판</a></td>
         </tr>
         <tr>
-            <td><a href="">Q&A</a></td>
+            <td><a href="/Action/qnaBoard/list">Q&A</a></td>
         </tr>
     </table>
 </div>

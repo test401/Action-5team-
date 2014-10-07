@@ -13,7 +13,7 @@
 <body>
 	<div class="tableContainer">
 		<div class="tableRow">
-			<c:import url="/side-bar.jsp" />
+			<c:import url="../side-bar.jsp" />
 			<div class="boardpage">
 				<table id="listtable" class="maintable">
 					<caption>게시글 목록</caption>
