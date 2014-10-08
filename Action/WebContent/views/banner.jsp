@@ -2,8 +2,10 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
 <header class="top">
-	<img id="actionLogo" src="/Action/views/images/actionLogo.gif"
+ 	<a href="/Action/AuctionBoard?action=main">
+		<img id="actionLogo" src="/Action/views/images/actionLogo.gif"
 		alt="액션로고 축구공" style="width: 260px; height: 100px">
+	</a>
 	
 	<div class="headermid">
 		<div class="buttonbar">
@@ -37,7 +39,7 @@
 		<tr><td></td></tr>
 		<tr>
 			<td><label class="category" draggable="true">회사소개</label></td>
-			<td><label class="category" draggable="true">전체 물품 보기</label></td>
+			<td><label class="category" draggable="true"><a href="/Action/AuctionBoard?action=list">전체 물품 보기</a></label></td>
 			<td><label class="category" draggable="true">자유 게시판</label></td>
 			<td><label class="category" draggable="true">Q&A</label></td>
 			
