@@ -69,8 +69,9 @@ window.onload = displayTime; // 문서가 로딩될 때 수행할 함수 설정
 	        	<c:import url="/views/side-bar.jsp" />
 	        	<div class="tableCell">
 	            	<img alt="" src="">
-	            </div>  
-	            <div class="main">--%>
+	            </div>  --%>
+	            
+	            <div class="datagrid">
 	            	<table class="border">
 	            		<tr>
 	            			<td><label class="registerlabel" >경매물품</label></td>
@@ -78,42 +79,42 @@ window.onload = displayTime; // 문서가 로딩될 때 수행할 함수 설정
 	            			<td colspan="3">${auctionBoard.title}33</td>
 	            		</tr>
 	            		<tr>
-	            			<td class = "border" rowspan = "9"><img src="/Action/img/${auctionBoard.mainImage}" style="width: 300px; height: 300px;"></td>
+	            			<td align = "center" rowspan = "9"><img src="/Action/img/${auctionBoard.mainImage}" style="width: 300px; height: 300px;"></td>
 	            		</tr>       	
 	            		<tr>
-	            		    <td class = "td"><label class="label">현재입찰가</label></td>
+	            		    <th><label class="label">현재입찰가</label></th>
 	            			<td id="retruncurrentPrice">${auctionBoard.currentPrice}</td>
 	            			<td><textarea hidden="true" rows="" cols="" id="currentPriceold">${auctionBoard.currentPrice}</textarea></td>
 	            			
 	            		</tr>
 	            		<tr>
-	            		    <td class = "td"><label class="label">시작가</label></td>
-	            			<td>${auctionBoard.startPrice}</td>
+	            		    <th><label class="label">시작가</label></th>
+	            			<td class = "alt">${auctionBoard.startPrice}</td>
 	            		</tr>
 						<tr>
-	            		    <td class = "td"><label class="label">즉시구매가</label></td>
+	            		    <th><label class="label">즉시구매가</label></th>
 	            			<td>${auctionBoard.immediatelyPrice}</td>
 	            			<td><textarea hidden="true" rows="" cols="" id="immediatelyPrice">${auctionBoard.immediatelyPrice}</textarea></td>
 	            		</tr>
 	            		<tr>
-	            		    <td class = "td"><label class="label">입찰수</label></td>
+	            		    <th><label class="label">입찰수</label></th>
 	            			<td></td>
 	            		</tr>
 	            		<tr>
-	            		    <td class = "td"><label class="label">시작날짜</label></td>
+	            		    <th><label class="label">시작날짜</label></th>
 	            			<td colspan="4">${auctionBoard.startTime}</td>
 	            		</tr>
 	            		<tr>
-	            		    <td class = "td"><label class="label">마감날짜</label></td>
+	            		    <th><label class="label">마감날짜</label></th>
 	            			<td colspan="4"><textarea hidden="true" rows="" cols="" id="endTime">${auctionBoard.endTime}</textarea>${auctionBoard.endTime}</td>
 	            		</tr>
 	            		<tr>
-	            		    <td class = "td"><label class="label">남은시간</label></td>
+	            		    <th><label class="label">남은시간</label></th>
 	            			<td colspan="4"><span id="clock" ></span></td>
 	            		</tr>
 	            		
 	            		<tr>
-	            		    <td class = "td"><label class="label">입찰가</label></td>
+	            		    <th><label class="label">입찰가</label></th>
 	            			<td>
 	            				<form action="/Action/AuctionBoard?action=bid" method="get">
             						<input value="${auctionBoard.currentPrice}" type="number" step="100" name="currentPrice" min="${auctionBoard.currentPrice}" max ="${auctionBoard.immediatelyPrice}" autofocus="autofocus">
@@ -127,7 +128,7 @@ window.onload = displayTime; // 문서가 로딩될 때 수행할 함수 설정
 	            			</td>
 	            		</tr>
 	            		<tr>
-							<td class="contents" colspan="8">${auctionBoard.contents}test</td>
+							<td name ="content" class="td" colspan="8">${auctionBoard.contents}test</td>
 	            		</tr>
 	            		<tr>
 	            		
@@ -144,8 +145,8 @@ window.onload = displayTime; // 문서가 로딩될 때 수행할 함수 설정
 	        	<div>
 	        		<%-- <c:import url="/views/board/auctionReplyForm.jsp" />   --%>
 	        	</div>
-		    </div>
-        </div>
+	<!-- 	    </div>
+        </div> -->
         
 
    <%--      <div class="tableRow">
