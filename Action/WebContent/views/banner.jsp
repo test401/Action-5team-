@@ -6,7 +6,7 @@
 		<img id="actionLogo" src="/Action/views/images/actionLogo.gif"
 		alt="액션로고 축구공" style="width: 260px; height: 100px">
 	</a>
-	<embed id="actionLogo" autoplay="true" autostart="true">
+	<!-- <embed id="actionLogo" autoplay="true" autostart="true"> -->
 	
 	
 	<div class="headermid">

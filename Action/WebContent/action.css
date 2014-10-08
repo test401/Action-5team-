@@ -1,4 +1,4 @@
-body { 
+/*  body { 
 	background-color: #ffffff;
 	font-family: Georgia, "Times New Roman", Times, serif;
 	font-size: small;
@@ -33,7 +33,7 @@ header{
  	float:left;
 } 
 
-/* °Ë»öÃ¢// Ä«Å×°í¸® °ü·Ã  */
+ï¿½Ë»ï¿½Ã¢// Ä«ï¿½×°? ï¿½ï¿½ï¿½ 
 .headermid{
 	width: 400px;
 	display: table-cell;
@@ -56,7 +56,7 @@ header{
 }
 
 
-/* ·Î±×ÀÎÃ¢ °ü·Ã CSS */
+ï¿½Î±ï¿½ï¿½ï¿½Ã¢ ï¿½ï¿½ï¿½ CSS
 #loginck{
 	display: table-cell;
 	vertical-align:middle;
@@ -71,9 +71,9 @@ header{
 	display: table-row;
 }
 
-/* º£³Ê ³¡ º£³Ê ³¡  */
+ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ 
 
-/* È¸¿ø °¡ÀÔ°ü·Ã ÀÔ·ÂÃ¢°ú ±èÇöÁß */
+È¸ï¿½ï¿½ ï¿½ï¿½ï¿½Ô°ï¿½ï¿½ ï¿½Ô·ï¿½Ã¢ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 
 #registermain{
 	display: table-cell;
@@ -86,7 +86,7 @@ header{
 
 
 
-/* ¹Ìµå¶óÀÎ ¾×¼Ç Å¸ÀÌÆ² CSS */
+ï¿½Ìµï¿½ï¿½ï¿½ï¿½ ï¿½×¼ï¿½ Å¸ï¿½ï¿½Æ² CSS
 .sidebar{
 	display: table-cell;
 	width: 900px;
@@ -103,7 +103,7 @@ header{
 
 
 
-/* ¿©±âºÎÅÍ footer ÁÖ¼® */
+ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ footer ï¿½Ö¼ï¿½
 footer {
 	width: 970px;
 	height: 60px;
@@ -165,6 +165,7 @@ section#auction {
 	width: 140px;	
 }
 
-/* ¿©±â±îÁö footer ÁÖ¼® */
+ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ footer ï¿½Ö¼ï¿½
 
 
+ */

@@ -6,7 +6,8 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<link rel="stylesheet" href="/Action/action.css">
+<!-- <link rel="stylesheet" href="/Action/action.css"> -->
+<link rel="stylesheet" href="/Action/auction.css">
 <script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
 <script src="/Action/js/auction.js"></script>
 <script src="/Action/js/board.js"></script>
@@ -55,11 +56,12 @@ function displayTime() {
 }
 window.onload = displayTime; // 문서가 로딩될 때 수행할 함수 설정
 </script>
+
 <title>Action</title>
 </head>
 <body>
-     <div class="tableContainer">
-        <div class="tableRow">
+    <%--  <div class="tableContainer">
+         <div class="tableRow">
             <c:import url="/views/banner.jsp"/>
         </div>
         <div class="tableRow">
@@ -67,61 +69,57 @@ window.onload = displayTime; // 문서가 로딩될 때 수행할 함수 설정
 	        	<c:import url="/views/side-bar.jsp" />
 	        	<div class="tableCell">
 	            	<img alt="" src="">
-	            </div>
-	            <div class="main">
-	            	<table>
+	            </div>  
+	            <div class="main">--%>
+	            	<table class="border">
 	            		<tr>
 	            			<td><label class="registerlabel" >경매물품</label></td>
-	            			<c:if test="${auctionBoard.memberID == loginMember.memberID}">
-		            			<td><input type="button" name="update" value="수정" onclick="goUrl('/Action/AuctionBoard?action=updateForm&pageNumber=${currentPageNumber}&boardNum=${auctionBoard.boardNum}&searchType=${param.searchType}&searchText=${param.searchText}&categoryType=${param.categoryType}')"></td>
-		            			<td><input type="button" name="delete" value="삭제" onclick="deleteCheck('/Action/AuctionBoard?action=remove&boardNum=${auctionBoard.boardNum}')"></td>
-		            			<td><input hidden="true" type="text" name="bidmemberID" value="${loginMember.memberID}"></td>
-	            			</c:if>
+	            			
+	            			<td colspan="3">${auctionBoard.title}33</td>
 	            		</tr>
 	            		<tr>
-	            			<td colspan="2">${auctionBoard.title}</td>
-	            			<td><img src="/Action/img/${auctionBoard.mainImage}" style="width: 300px; height: 300px;"></td>
+	            			<td class = "border" rowspan = "9"><img src="/Action/img/${auctionBoard.mainImage}" style="width: 300px; height: 300px;"></td>
 	            		</tr>       	
 	            		<tr>
-	            		    <td><label class="label">현재입찰가</label></td>
+	            		    <td class = "td"><label class="label">현재입찰가</label></td>
 	            			<td id="retruncurrentPrice">${auctionBoard.currentPrice}</td>
 	            			<td><textarea hidden="true" rows="" cols="" id="currentPriceold">${auctionBoard.currentPrice}</textarea></td>
 	            			
 	            		</tr>
 	            		<tr>
-	            		    <td><label class="label">시작가</label></td>
+	            		    <td class = "td"><label class="label">시작가</label></td>
 	            			<td>${auctionBoard.startPrice}</td>
 	            		</tr>
 						<tr>
-	            		    <td><label class="label">즉시구매가</label></td>
+	            		    <td class = "td"><label class="label">즉시구매가</label></td>
 	            			<td>${auctionBoard.immediatelyPrice}</td>
 	            			<td><textarea hidden="true" rows="" cols="" id="immediatelyPrice">${auctionBoard.immediatelyPrice}</textarea></td>
 	            		</tr>
 	            		<tr>
-	            		    <td><label class="label">입찰수</label></td>
+	            		    <td class = "td"><label class="label">입찰수</label></td>
 	            			<td></td>
 	            		</tr>
 	            		<tr>
-	            		    <td><label class="label">시작날짜</label></td>
+	            		    <td class = "td"><label class="label">시작날짜</label></td>
 	            			<td colspan="4">${auctionBoard.startTime}</td>
 	            		</tr>
 	            		<tr>
-	            		    <td><label class="label">마감날짜</label></td>
+	            		    <td class = "td"><label class="label">마감날짜</label></td>
 	            			<td colspan="4"><textarea hidden="true" rows="" cols="" id="endTime">${auctionBoard.endTime}</textarea>${auctionBoard.endTime}</td>
 	            		</tr>
 	            		<tr>
-	            		    <td><label class="label">남은시간</label></td>
+	            		    <td class = "td"><label class="label">남은시간</label></td>
 	            			<td colspan="4"><span id="clock" ></span></td>
 	            		</tr>
 	            		
 	            		<tr>
-	            		    <td><label class="label">입찰가</label></td>
-	            			<td colspan="7">
-	            				<form action="" method="get">
-	            					<input value="${auctionBoard.currentPrice}" type="number" step="100" name="currentPrice" min="${auctionBoard.currentPrice}" max ="${auctionBoard.immediatelyPrice}" autofocus="autofocus">
+	            		    <td class = "td"><label class="label">입찰가</label></td>
+	            			<td>
+	            				<form action="/Action/AuctionBoard?action=bid" method="get">
+            						<input value="${auctionBoard.currentPrice}" type="number" step="100" name="currentPrice" min="${auctionBoard.currentPrice}" max ="${auctionBoard.immediatelyPrice}" autofocus="autofocus">
 	            					<c:if test="${not empty loginMember && loginMember.memberID != auctionBoard.memberID}">
 	            						<input hidden="true" type="text" name="boardNum" value="${auctionBoard.boardNum}">
-		            					<input id="bid" type="button" value="입찰하기">
+		            					<td colspan="2"><input id="bid" class = "button" type="button" value="입찰하기"></td>
 		            					<!-- <input type="button" value="입찰취소" onclick=""> -->
 									</c:if>
 	            				</form>
@@ -129,23 +127,32 @@ window.onload = displayTime; // 문서가 로딩될 때 수행할 함수 설정
 	            			</td>
 	            		</tr>
 	            		<tr>
-							<td class="contents" colspan="8">${auctionBoard.contents}</td>
+							<td class="contents" colspan="8">${auctionBoard.contents}test</td>
+	            		</tr>
+	            		<tr>
+	            		
+	            		<td><!-- 공백용 TD --></td>
+	            			<c:if test="${auctionBoard.memberID == loginMember.memberID}">
+		            			<td><input type="button" class = "button" name="update" value="수정" onclick="goUrl('/Action/AuctionBoard?action=updateForm&pageNumber=${currentPageNumber}&boardNum=${auctionBoard.boardNum}&searchType=${param.searchType}&searchText=${param.searchText}&categoryType=${param.categoryType}')"></td>
+		            			<td><input type="button" class = "button" name="delete" value="삭제" onclick="deleteCheck('/Action/AuctionBoard?action=remove&boardNum=${auctionBoard.boardNum}')"></td>	
+		            			<td><input hidden="true" type="text" name="bidmemberID" value="${loginMember.memberID}"></td>
+	            			</c:if>
+		            			<td><input type="button" class = "button" value="목록" onclick="goUrl('/Action/AuctionBoard?action=list&pageNumber=${currentPageNumber}&boardNum=${auction.boardNum}&searchType=${param.searchType}&searchText=${param.searchText}&categoryType=${param.categoryType}');"></td>
 	            		</tr>
 	            	</table>
 	        	</div>
 	        	<div>
-	        	<input type="button" value="목록" onclick="goUrl('/Action/AuctionBoard?action=list&pageNumber=${currentPageNumber}&boardNum=${auction.boardNum}&searchType=${param.searchType}&searchText=${param.searchText}&categoryType=${param.categoryType}');">
-	        		<%-- <c:import url="/views/board/auctionReplyForm.jsp" /> --%>
+	        		<%-- <c:import url="/views/board/auctionReplyForm.jsp" />   --%>
 	        	</div>
 		    </div>
         </div>
         
 
-        <div class="tableRow">
+   <%--      <div class="tableRow">
             <div class="tableCell">
                <c:import url="/views/foter.jsp"/>
             </div>
-        </div>
+        </div> --%>
     </div>
 </body>
 </html>

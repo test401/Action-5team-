@@ -41,7 +41,7 @@ import action.util.PageHandler;
  * Servlet implementation class AuctionBoardController
  */
 public class AuctionBoardController extends HttpServlet {
-	private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 1L;	
 	
 	
 	private File uploadDir;
