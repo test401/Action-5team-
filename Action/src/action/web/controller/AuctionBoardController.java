@@ -486,7 +486,7 @@ public class AuctionBoardController extends HttpServlet {
 			service.writeBoard(board);
 			
 	        //  RequestDispatcher 객체를 통해 뷰 페이지(/views/board/auctionList.jsp)로 요청을 전달한다.
-	        RequestDispatcher dispatcher = request.getRequestDispatcher("/views/board/auctionList.jsp");
+	        RequestDispatcher dispatcher = request.getRequestDispatcher("/AuctionBoard?action=list");
 	        dispatcher.forward(request, response);
 		} catch (Exception e) {
 			e.printStackTrace();

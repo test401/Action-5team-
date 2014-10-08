@@ -29,10 +29,17 @@
 		            			<td><label class="label">카테고리</label></td>
 		            			<td>
 		            				<select name="categoryID">
-		            					<option value="1">카</option>
-		            					<option value="2">테</option>
-		            					<option value="3">고</option>
-		            					<option value="4">리</option>
+		            					<option value="1">패션의류</option>
+		            					<option value="2">패션잡화</option>
+		            					<option value="3">화장품/미용</option>
+		            					<option value="4">디지털/가전</option>
+		            					<option value="5">가구/인테리어</option>
+		            					<option value="6">출산/육아</option>
+		            					<option value="7">식품</option>
+		            					<option value="8">스포츠/레저</option>
+		            					<option value="9">생활/건강</option>
+		            					<option value="10">여행/문화</option>
+		            					<option value="11">기타</option>		            					
 		            				</select>
 		            			</td>
 		            		</tr>

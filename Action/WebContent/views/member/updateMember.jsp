@@ -4,7 +4,8 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<link rel="stylesheet" href="../../action.css">
+<link rel="stylesheet" href="/Action/action.css">
+<link rel="stylesheet" href="/Action/auction.css">
 <script src="/Action/js/member.js"></script>
 <title>Action Update</title>
 </head>
@@ -14,37 +15,36 @@
             <c:import url="/views/banner.jsp"/>
         </div>
         <div class="tableRow">
-            <c:import url="/views/side-bar.jsp" />
-            <div class="main">
+            <div class="datagrid">
 	            <form action="/Action/MemberController?action=update" method="POST">
 	            	<table>
 	            		<tr>
 	            			<td><label class="registerLabel" >회원가입</label></td>
 	            		</tr>
 	            		<tr>
-	            			<td><label class="label">회원 아이디</label></td>
-	            			<td><label>${sessionScope.loginMember.memberID}</label></td>
+	            			<td class="td"><label class="label">회원 아이디</label></td>
+	            			<td class="td"><label>${sessionScope.loginMember.memberID}</label></td>
 	            		</tr>       	
 	            		<tr>
-	            		    <td><label class="label">회원 이름</label></td>
-	            			<td><input type="text" name="name" value="${sessionScope.loginMember.name}"></td>
+	            		    <td class="tdbg"><label class="label">회원 이름</label></td>
+	            			<td class="tdbg"><input type="text" name="name" value="${sessionScope.loginMember.name}"></td>
 	            		</tr>
 	            		<tr>
-	            		    <td><label class="label">비밀번호</label></td>
-	            			<td><input type="password" name="password" value="${sessionScope.loginMember.password}"></td>
+	            		    <td class="td"><label class="label">비밀번호</label></td>
+	            			<td class="td"><input type="password" name="password" value="${sessionScope.loginMember.password}"></td>
 	            		</tr>
 	            		
 						<tr>
-	            		    <td><label class="label">연락처</label></td>
-	            			<td><input type="text" name="tel" value="${sessionScope.loginMember.tel}"></td>
+	            		    <td class="tdbg"><label class="label">연락처</label></td>
+	            			<td class="tdbg"><input type="text" name="tel" value="${sessionScope.loginMember.tel}"></td>
 	            		</tr>
 	            		<tr>
-	            		    <td><label class="label">주소</label></td>
-	            			<td><input type="text" name="address" value="${sessionScope.loginMember.address}"></td>
+	            		    <td class="td"><label class="label">주소</label></td>
+	            			<td class="td"><input type="text" name="address" value="${sessionScope.loginMember.address}"></td>
 	            		</tr>
 	            		<tr>
-	            		    <td><input type="submit" name="update" value="수정"></td>
-	            			<td><input type="button" name="cancle" value="취소" onclick="goUrl('/Action/views/member/infomationMember.jsp');"></td>
+	            		    <td><input type="submit" name="update" class="button" value="수정"></td>
+	            			<td><input type="button" name="cancle" class="button" value="취소" onclick="goUrl('/Action/views/member/infomationMember.jsp');"></td>
 	            		</tr>
 	            		
 	            	</table>
@@ -52,10 +52,10 @@
         	</div>
         </div>
         
-        <div class="tableCell">
+    <!--     <div class="tableCell">
         	<img alt="" src="../images/registerimg.gif">
         </div>
-        
+         -->
         <div class="tableRow">
 
             <div class="tableCell">

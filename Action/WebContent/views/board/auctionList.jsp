@@ -17,7 +17,7 @@
         </div>
         <div class="tableRow">
         <div class="tableCell">
-        		<c:import url="/views/side-bar.jsp" />
+        	<%-- 	<c:import url="/views/side-bar.jsp" /> --%>
         <div class="tableCell">
 				<c:import url="/views/category.jsp"></c:import>
 		</div>
@@ -50,7 +50,7 @@
                     <tr>
                         <td class="auctionno">번호 : ${auction.boardNum}</td>
                         <td class="auctionimage">
-                            <a href="">
+                            <a href="/Action/AuctionBoard?action=read&pageNumber=${currentPageNumber}&boardNum=${auction.boardNum}&searchType=${param.searchType}&searchText=${param.searchText}&categoryType=${param.categoryType}">
                                 <img src="img/tmp/th_${auction.mainImage}">
                             </a>
                         </td>
@@ -108,14 +108,8 @@
 								</c:choose>
 							</td>	
 					</tr>
-						</td>	
-					</tr>
 				</tfoot>
-				<tr>	
-					
-					
-					
-					
+				<tr>				
 				</tr>
            	</table>
        	</div>
@@ -128,7 +122,7 @@
                <c:import url="/views/foter.jsp"/>
             </div>
         </div> 
-
+</div>
 </body>
 </html>
 	

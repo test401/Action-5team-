@@ -4,7 +4,7 @@
 <form id ="logoutck" action="/Action/MemberController?action=logout" method="POST">
     <table id="logouttable">
         <tr>
-            <td class="message">${sessionScope.loginMember.name} 님<br> 환영합니다.</td>
+            <td class="message">${sessionScope.loginMember.name} 님 환영합니다.</td>
             <td><input type="submit" name="logout" value="로그아웃"></td>
         </tr>
         <tr>

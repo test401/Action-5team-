@@ -66,15 +66,15 @@ window.onload = displayTime; // 문서가 로딩될 때 수행할 함수 설정
         </div>
         <div class="tableRow">
 	        <div class="tableCell">
-	        	<c:import url="/views/side-bar.jsp" />
+	
 	        	<div class="tableCell">
 	            	<img alt="" src="">
 	            </div>  
 	            
-	            <div class="datagrid">
+	            <div class="datagrid" style="margin-left: 180px;">
 	            	<table class="border">
 	            		<tr>
-	            			<td><label class="registerlabel" >경매물품</label></td>
+	            			<td><label><font class="Three-Dee">경매물품</font></label></td>
 	            			
 	            			<td colspan="3">${auctionBoard.title}33</td>
 	            		</tr>
@@ -147,7 +147,7 @@ window.onload = displayTime; // 문서가 로딩될 때 수행할 함수 설정
 	        	</div>
 	 	    </div>
         </div>
-
+	</div>
       <div class="tableRow">
             <div class="tableCell">
                <c:import url="/views/foter.jsp"/>

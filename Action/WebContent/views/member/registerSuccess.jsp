@@ -15,15 +15,15 @@
         </div>
         <div class="tableRow">
             <c:import url="/views/side-bar.jsp" />
-            <div class="views/main.jsp">
-	            <form action="/Action/views/main.jsp" method="POST">
+
+        </div>
+                    <div class="tableRow">
+	            <form action="/Action/AuctionBoard?action=main" method="POST" style="margin-left: 250px;">
 					<img alt="" id="loginokimage" src="/Action/views/images/welcome.gif">
 					<br>
-					<input type="submit" id="loginokbtn"value="홈으로">
+					<input type="submit" id="loginokbtn"value="홈으로" style="width: 150px; height:50px; margin-left: 200px;">
 	            </form>
         	</div>
-        </div>
-        
         <div class="tableRow">
 
             <div class="tableCell">

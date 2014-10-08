@@ -49,8 +49,7 @@
 
 	
 	<div id ="sidebarMargin">
-	<form id="loginck" action="/Action/MemberController?action=login"
-		method="POST">
+	<form id="loginck" action="/Action/MemberController?action=logout" method="POST">
 		<c:if test="${empty sessionScope.loginMember}">
 			<c:import url="/views/member/login.jsp" />
 		</c:if>

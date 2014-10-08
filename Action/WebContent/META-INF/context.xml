@@ -3,7 +3,7 @@
        <Resource
          name="jdbc/actionDB"
          type="javax.sql.DataSource"
-         url="jdbc:oracle:thin:@localhost:1521:xe"
+         url="jdbc:oracle:thin:@220.67.115.231:1521:xe"
          driverClassName="oracle.jdbc.OracleDriver"
          username="sku"
          password="sku"
