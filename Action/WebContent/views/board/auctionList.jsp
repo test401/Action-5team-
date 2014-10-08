@@ -39,10 +39,6 @@
             			<th>종료일</th>
             		</tr>
             	</thead>
-            		<tr>
-            			<td id = listHeaderLift><a>경매마감순</a><a>신규등록순</a></td>
-            			
-            		</tr>
             		<c:choose>
 					<c:when test="${empty requestScope.auctionList}">
 						<tr>
@@ -73,39 +69,53 @@
 					<tr>
 						<td id="pagenavigator" colspan="7">
 						<div id="paging">
+						<ul>
 							<c:if test="${startPageNumber > 1}">
-								<a href="list?pageNumber=${startPageNumber - 1}&searchType=${param.searchType}&searchText=${param.searchText}">이전</a>
+								<li><a href="/Action/AuctionBoard?action=list&pageNumber=${startPageNumber - 1}&searchType=${param.searchType}&searchText=${param.searchText}"><span>이전</span></a></li>
 							</c:if>
 							<c:forEach var="pageNumber" begin ="${requestScope.startPageNumber}" end="${requestScope.endPageNumber}">
 								<c:choose>
 									<c:when test="${pageNumber eq currentPageNumber}">
-										<a class="pagenumber currpage">${pageNumber}</a>
+										<li><a class="pagenumber currpage"><span>${pageNumber}</span></a></li>
 									</c:when>
 									<c:otherwise>
-										<a class="pagenumber" href="/Action/AuctionBoard?action=list&pageNumber=${pageNumber}&searchType=${param.searchType}&searchText=${param.searchText}">${pageNumber}</a>
+										<li><a class="pagenumber" href="/Action/AuctionBoard?action=list&pageNumber=${pageNumber}&searchType=${param.searchType}&searchText=${param.searchText}"><span>${pageNumber}</span></a></li>
 									</c:otherwise>
 								</c:choose>
 							</c:forEach>
 							<c:if test="${endPageNumber < totalPageCount}">
-								<a href="list?pageNumber=${endPageNumber + 1}&searchType=${param.searchType}&searchText=${param.searchText}">다음</a>
-							</c:if>			
+								<li><a href="/Action/AuctionBoard?action=list&pageNumber=${endPageNumber + 1}&searchType=${param.searchType}&searchText=${param.searchText}"><span>다음</span></a></li>
+							</c:if>
+							</ul>	
+							
 							</div>
+								<tr>
+								<!-- 공백용 td -->
+								<td></td>
+								<td></td>
+								<td></td>
+								<td></td>
+								<td></td>
+								<td></td>
+							<td align ="right">
+								<c:choose>
+									<c:when test="${empty sessionScope.loginMember}">
+										<input type="button" class = "button" value="경매등록" onclick="writeCheck('<c:url value="/views/member/registerMember.jsp"/>');">
+									</c:when>
+									<c:otherwise>
+										<input type="button" class = "button" value="경매등록" onclick="goUrl('/Action/AuctionBoard?action=writeForm');">
+									</c:otherwise>
+								</c:choose>
+							</td>	
+					</tr>
 						</td>	
 					</tr>
 				</tfoot>
 				<tr>	
-					<td></td>
 					
-					<td>
-						<c:choose>
-							<c:when test="${empty sessionScope.loginMember}">
-								<input type="button" class = "button" value="경매등록" onclick="writeCheck('<c:url value="/views/member/registerMember.jsp"/>');">
-							</c:when>
-							<c:otherwise>
-								<input type="button" class = "button" value="경매등록" onclick="goUrl('/Action/AuctionBoard?action=writeForm');">
-							</c:otherwise>
-						</c:choose>
-					</td>
+					
+					
+					
 				</tr>
            	</table>
        	</div>
