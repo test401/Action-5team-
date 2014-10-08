@@ -3,7 +3,7 @@
 <script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
 <script src="/Action/js/login.js"></script>
 <div class="sidebar">
-	<div id ="sidebarMargin">
+	<div >
 		<%-- <c:if test="${empty sessionScope.loginMember}">
 			<c:import url="/views/member/login.jsp" />
 		</c:if>

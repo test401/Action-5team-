@@ -6,12 +6,10 @@
 		<img id="actionLogo" src="/Action/views/images/actionLogo.gif"
 		alt="액션로고 축구공" style="width: 260px; height: 100px">
 	</a>
-	<!-- <embed id="actionLogo" autoplay="true" autostart="true"> -->
-	
 	
 	<div class="headermid">
 		<div class="buttonbar">
-			<form name="searchForm" action="/Action/AuctionBoard?action=main" method = "POST">
+			<form name="searchForm" action="/Action/AuctionBoard?action=list&pageNumber=${currentPageNumber} method = "POST">
 				<select name="searchType">
 					<option value="all"
 						<c:if test="${empty param.searchType || param.searchType=='all'}">
@@ -49,8 +47,8 @@
 	</table>
 	</div>
 
-
-
+	
+	<div id ="sidebarMargin">
 	<form id="loginck" action="/Action/MemberController?action=login"
 		method="POST">
 		<c:if test="${empty sessionScope.loginMember}">
@@ -60,6 +58,6 @@
 			<c:import url="/views/member/logout.jsp" />
 		</c:if>
 	</form>
-
+	</div>
 
 </header>

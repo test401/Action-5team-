@@ -3,79 +3,15 @@
 
 <script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
 <script src="/Action/js/auction.js"></script>
-<script>
-// 현재 시각을 표시하는 함수 선언
-function displayTime() {
-	var time = $(".endTime").val();
-	var now = new Date(); // 현재 시각 얻기
-	var date = new Date(time);//마감날짜
-	date.setHours(24, 0, 0, 0);//마감시간
-	var endTime = parseInt(date.getTime()/1000);//마감시간 초로만들기
-	var nowTime = parseInt(now.getTime()/1000);//현재시간 초로만들기
-	var diff = parseInt(endTime-nowTime);//시간차 계산
-	
-	//시간을 구하기 위한 일수 계산
-	dayTemp= Math.floor((diff/86400));
-	//시간을 구함
-	hourDisplay=Math.floor((diff)/3600);
-	hour=Math.floor((diff-dayTemp*86400)/3600);
-	//분을 구함
-	minute=Math.floor(((diff-dayTemp*86400)-(hour*3600))/60);
-	//초를 구함
-	second=diff%60;
-	
-	var id=setTimeout(displayTime, 1000); // 1초 후에 재 실행
-	//표시
-	$(".clock").html("남은시간: "+hourDisplay+":"+minute+":"+second);
 
-          //만약 남은 시간이 0이하이면 종료
-	if (diff <= 0) {
-          	clearTimeout(id);
-          	$(".clock").html("마감");
-          }
-}
-window.onload = displayTime; // 문서가 로딩될 때 수행할 함수 설정
-</script>
-
-        <div class="tableRow">
-		</div>
-			<div class="main">
-					<c:forEach items='${requestScope["auctionList"]}' var="auction" varStatus="loopStatus">
-					<div style="float: left;">
-					<table>
-	                    <tr>
-	                        <td class="auctionimage">
-	                            <a href="/Action/AuctionBoard?action=read&pageNumber=${currentPageNumber}&boardNum=${auction.boardNum}&searchType=${param.searchType}&searchText=${param.searchText}&categoryType=${param.categoryType}">
-	                                <img src="img/tmp/th_${auction.mainImage}">
-	                            </a>
-	                        </td>
-	                   </tr>
-	                   <tr>
-	                        <td class="auctiontitle">
-	                            <a href="/Action/AuctionBoard?action=read&pageNumber=${currentPageNumber}&boardNum=${auction.boardNum}&searchType=${param.searchType}&searchText=${param.searchText}&categoryType=${param.categoryType}">${auction.title}</a>
-	                        </td>
-	                   </tr>
-	                   <tr>
-	                        <td class="auctioncurrentPrice">${auction.currentPrice}</td>
-	                   <tr>
-	                        <td class="auctionendTime"><textarea hidden="true" rows="" cols="" class="endTime">${auction.endTime}</textarea>
-	                        	${auction.endTime}까지
-	                        </td>
-	                    </tr>
-	                    <tr>
-		                    <td><span class="clock"></span>
-		                    </td>
-	                    </tr>
-                    </table>
-                    </div>
-                    </c:forEach>
-            	<table id="allauctionlist">
+        <div >
+            	<table id="allauctionlist" style="margin-left: 100px;">
 				<tfoot>
 					<tr>
+					<td style="width: 370px;">
+						<p style="font-size: 17px;">최근등록된 상품</p>
+					</td>
 						<td id="pagenavigator" colspan="5">
-							<c:if test="${startPageNumber > 1}">
-								<a href="/Action/AuctionBoard?action=main&pageNumber=${startPageNumber - 1}&searchType=${param.searchType}&searchText=${param.searchText}">이전</a>
-							</c:if>
 							<c:forEach var="pageNumber" begin ="${requestScope.startPageNumber}" end="${requestScope.endPageNumber}">
 								<c:choose>
 									<c:when test="${pageNumber eq currentPageNumber}">
@@ -86,11 +22,42 @@ window.onload = displayTime; // 문서가 로딩될 때 수행할 함수 설정
 									</c:otherwise>
 								</c:choose>
 							</c:forEach>
-							<c:if test="${endPageNumber < totalPageCount}">
-								<a href="list?pageNumber=${endPageNumber + 1}&searchType=${param.searchType}&searchText=${param.searchText}">다음</a>
-							</c:if>
 						</td>
 					</tr>
 				</tfoot>
-            	</table>
+            	</table>        
+		</div>
+			<div class="main" style="margin-left: 100px; text-align: center;">
+					<c:forEach items='${requestScope["auctionList"]}' var="auction" varStatus="loopStatus">
+					<div style="float: left; ">
+						<table>
+		                    <tr>
+		                        <td class="auctionimage">
+		                            <a href="/Action/AuctionBoard?action=read&pageNumber=${currentPageNumber}&boardNum=${auction.boardNum}&searchType=${param.searchType}&searchText=${param.searchText}&categoryType=${param.categoryType}">
+		                                <c:choose>
+		                                	<c:when test= "${empty auction.mainImage}">
+		                                		<img src="images/noimage.png" style=" width: 150px; height: 150px;">
+		                                	</c:when>
+		                                	<c:otherwise>
+			                                	<img src="img/tmp/th_${auction.mainImage}" style=" width: 150px; height: 150px;">
+		                                	</c:otherwise>
+		                                </c:choose>
+		                            </a>
+		                        </td>
+		                   </tr>
+		                   <tr>
+		                        <td class="auctiontitle">
+		                            <a href="/Action/AuctionBoard?action=read&pageNumber=${currentPageNumber}&boardNum=${auction.boardNum}&searchType=${param.searchType}&searchText=${param.searchText}&categoryType=${param.categoryType}">${auction.title}</a>
+		                        </td>
+		                   </tr>
+		                   <tr>
+		                        <td class="auctioncurrentPrice">현재 입찰가 : ${auction.currentPrice}</td>
+		                   <tr>
+		                        <td class="auctionendTime"><textarea hidden="true" rows="" cols="" name="endTime" class="endTime">${auction.endTime}</textarea>
+		                        	${auction.endTime}까지
+		                        </td>
+		                    </tr>
+	                    </table>
+                    </div>
+                    </c:forEach>
         	</div>

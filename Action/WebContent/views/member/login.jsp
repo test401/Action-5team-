@@ -5,12 +5,12 @@
     <table id="logintable">
         <tr>
             <td class="loginlabel">아이디</td>
-            <td><input type="text" name="loginmemberID" size="13"></td>
+            <td><input type="text" name="loginmemberID" size="13" style="background:url(/Action/images/bgInput.gif) repeat-x;"></td>
             <td rowspan="4"><input type="button" id="loginButton" name="login" value="로그인"></td>
         </tr>
         <tr>
             <td class="loginlabel">패스워드</td>
-            <td><input type="password" name="loginpassword" size="13"></td>
+            <td><input type="password" name="loginpassword" size="13" style="background:url(/Action/images/bgInput.gif) repeat-x;"></td>
             <td></td>
         </tr>
         <tr><td></td></tr>

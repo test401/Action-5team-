@@ -17,6 +17,8 @@
         <div class="tableRow">
             <c:import url="/views/side-bar.jsp" />
         </div>
+         <div class="tableRow">
+		</div>
 		<div class="tableRow">
             <c:import url="/views/mainContent.jsp" />
         </div>

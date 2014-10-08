@@ -4,14 +4,14 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<!-- <link rel="stylesheet" href="/Action/action.css"> -->
+<link rel="stylesheet" href="/Action/action.css">
 <link rel="stylesheet" href="/Action/List.css">
 <script src="/Action/js/board.js">
 </script>
 <title>Action List</title>
 </head>
 <body>
-  <%--    <div class="tableContainer">
+     <div class="tableContainer">
         <div class="tableRow">
             <c:import url="/views/banner.jsp"/>
         </div>
@@ -24,7 +24,7 @@
 		<div class="buttonbar">
 				<c:import url="/views/searchbar.jsp"></c:import>
 		</div>
-		 --%>
+		 
 		
 		<!-- 여기부터 시작 경매상품 보기 -->
             <div class="datagrid">
@@ -119,16 +119,16 @@
 				</tr>
            	</table>
        	</div>
-<!-- 	       		</div>
-        </div> -->
+	       		</div>
+        </div>
 
-      <%--   <div class="tableRow">
+        <div class="tableRow">
 
             <div class="tableCell">
                <c:import url="/views/foter.jsp"/>
             </div>
-        </div> --%>
-    </div>
+        </div> 
+
 </body>
 </html>
 	

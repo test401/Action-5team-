@@ -6,7 +6,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<!-- <link rel="stylesheet" href="/Action/action.css"> -->
+<link rel="stylesheet" href="/Action/action.css">
 <link rel="stylesheet" href="/Action/auction.css">
 <script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
 <script src="/Action/js/auction.js"></script>
@@ -60,7 +60,7 @@ window.onload = displayTime; // 문서가 로딩될 때 수행할 함수 설정
 <title>Action</title>
 </head>
 <body>
-    <%--  <div class="tableContainer">
+     <div class="tableContainer">
          <div class="tableRow">
             <c:import url="/views/banner.jsp"/>
         </div>
@@ -69,7 +69,7 @@ window.onload = displayTime; // 문서가 로딩될 때 수행할 함수 설정
 	        	<c:import url="/views/side-bar.jsp" />
 	        	<div class="tableCell">
 	            	<img alt="" src="">
-	            </div>  --%>
+	            </div>  
 	            
 	            <div class="datagrid">
 	            	<table class="border">
@@ -145,16 +145,15 @@ window.onload = displayTime; // 문서가 로딩될 때 수행할 함수 설정
 	        	<div>
 	        		<%-- <c:import url="/views/board/auctionReplyForm.jsp" />   --%>
 	        	</div>
-	<!-- 	    </div>
-        </div> -->
-        
+	 	    </div>
+        </div>
 
-   <%--      <div class="tableRow">
+      <div class="tableRow">
             <div class="tableCell">
                <c:import url="/views/foter.jsp"/>
             </div>
-        </div> --%>
-    </div>
+        </div> 
+    
 </body>
 </html>
 	

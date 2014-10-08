@@ -1,4 +1,4 @@
-/*  body { 
+body { 
 	background-color: #ffffff;
 	font-family: Georgia, "Times New Roman", Times, serif;
 	font-size: small;
@@ -8,13 +8,24 @@
 a:link { text-decoration: none; color: #000000; }
 a:visited { text-decoration: none; color: #000000; }
 a:hover, a:active { text-decoration: underline; color: #cc6600; }
+
 .tableRow{
 	display:table-row;
+}
+#pagenavigator{
+	font-size: 30px;
 }
 
 .tableCell{
 	display:table-cell;
 	vertical-align: top;
+}
+
+#sidebarMargin{
+	display: table-cell;
+	background-image: url('/Action/images/loginfrom.png');
+	background-size:325px 100px;
+	
 }
 
 header{
@@ -33,7 +44,7 @@ header{
  	float:left;
 } 
 
-ï¿½Ë»ï¿½Ã¢// Ä«ï¿½×°? ï¿½ï¿½ï¿½ 
+/* °Ë»öÃ¢// Ä«Å×°í¸® °ü·Ã  */
 .headermid{
 	width: 400px;
 	display: table-cell;
@@ -51,12 +62,12 @@ header{
 #categorytable{
 	width:350px;
 	height:20px;
-	display: table-row;
+	display: table-cell;
 	margin-left: 10px;
 }
 
 
-ï¿½Î±ï¿½ï¿½ï¿½Ã¢ ï¿½ï¿½ï¿½ CSS
+/* ·Î±×ÀÎÃ¢ °ü·Ã CSS */
 #loginck{
 	display: table-cell;
 	vertical-align:middle;
@@ -71,9 +82,9 @@ header{
 	display: table-row;
 }
 
-ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ 
+/* º£³Ê ³¡ º£³Ê ³¡  */
 
-È¸ï¿½ï¿½ ï¿½ï¿½ï¿½Ô°ï¿½ï¿½ ï¿½Ô·ï¿½Ã¢ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+/* È¸¿ø °¡ÀÔ°ü·Ã ÀÔ·ÂÃ¢°ú ±èÇöÁß */
 
 #registermain{
 	display: table-cell;
@@ -83,10 +94,12 @@ header{
 }
 
 
+#logintable{
+	margin-left: 45px;
+}
 
 
-
-ï¿½Ìµï¿½ï¿½ï¿½ï¿½ ï¿½×¼ï¿½ Å¸ï¿½ï¿½Æ² CSS
+/* ¹Ìµå¶óÀÎ ¾×¼Ç Å¸ÀÌÆ² CSS */
 .sidebar{
 	display: table-cell;
 	width: 900px;
@@ -103,7 +116,7 @@ header{
 
 
 
-ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ footer ï¿½Ö¼ï¿½
+/* ¿©±âºÎÅÍ footer ÁÖ¼® */
 footer {
 	width: 970px;
 	height: 60px;
@@ -165,7 +178,6 @@ section#auction {
 	width: 140px;	
 }
 
-ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ footer ï¿½Ö¼ï¿½
+/* ¿©±â±îÁö footer ÁÖ¼® */
 
 
- */

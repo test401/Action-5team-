@@ -41,7 +41,7 @@ import action.util.PageHandler;
  * Servlet implementation class AuctionBoardController
  */
 public class AuctionBoardController extends HttpServlet {
-	private static final long serialVersionUID = 1L;	
+	private static final long serialVersionUID = 1L;
 	
 	
 	private File uploadDir;
@@ -447,7 +447,7 @@ public class AuctionBoardController extends HttpServlet {
 						item.write(uploadedFile); // 실질적인 저장
 						// image 형식이면 thumbnail 이미지를 만들어 파일로 저장
 						if (contentType.startsWith("image")) {
-							ThumbnailMaker.createThumbnail(ThumnailFile, uploadedFile, 50, 50);
+							ThumbnailMaker.createThumbnail(ThumnailFile, uploadedFile, 150, 150);
 						}
 					}
 					images[count2]=filename;
