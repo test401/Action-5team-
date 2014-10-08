@@ -125,7 +125,7 @@ public class MemberController extends HttpServlet {
 			session.removeAttribute("loginMember");
 		}
 		// index.jsp페이지로 전달한다.(맨처음 페이지 표시하기 위함)
-		RequestDispatcher dispathcer = request.getRequestDispatcher("/views/main.jsp");
+		RequestDispatcher dispathcer = request.getRequestDispatcher("/AuctionBoard?action=main");
 		dispathcer.forward(request, response);
 	}
 

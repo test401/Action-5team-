@@ -47,8 +47,8 @@
 	</table>
 	</div>
 
-
-
+	
+	<div id ="sidebarMargin">
 	<form id="loginck" action="/Action/MemberController?action=login"
 		method="POST">
 		<c:if test="${empty sessionScope.loginMember}">
@@ -58,6 +58,6 @@
 			<c:import url="/views/member/logout.jsp" />
 		</c:if>
 	</form>
-
+	</div>
 
 </header>

@@ -8,13 +8,24 @@ body {
 a:link { text-decoration: none; color: #000000; }
 a:visited { text-decoration: none; color: #000000; }
 a:hover, a:active { text-decoration: underline; color: #cc6600; }
+
 .tableRow{
 	display:table-row;
+}
+#pagenavigator{
+	font-size: 30px;
 }
 
 .tableCell{
 	display:table-cell;
 	vertical-align: top;
+}
+
+#sidebarMargin{
+	display: table-cell;
+	background-image: url('/Action/images/loginfrom.png');
+	background-size:325px 100px;
+	
 }
 
 header{
@@ -51,7 +62,7 @@ header{
 #categorytable{
 	width:350px;
 	height:20px;
-	display: table-row;
+	display: table-cell;
 	margin-left: 10px;
 }
 
@@ -83,7 +94,9 @@ header{
 }
 
 
-
+#logintable{
+	margin-left: 45px;
+}
 
 
 /* 미드라인 액션 타이틀 CSS */
