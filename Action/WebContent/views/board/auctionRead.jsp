@@ -76,7 +76,7 @@ window.onload = displayTime; // 문서가 로딩될 때 수행할 함수 설정
 	            		<tr>
 	            			<td><label><font class="Three-Dee">경매물품</font></label></td>
 	            			
-	            			<td colspan="3">${auctionBoard.title}33</td>
+	            			<td colspan="3">${auctionBoard.title}</td>
 	            		</tr>
 	            		<tr>
 	            			<td align = "center" rowspan = "9"><img src="/Action/img/${auctionBoard.mainImage}" style="width: 300px; height: 300px;"></td>
